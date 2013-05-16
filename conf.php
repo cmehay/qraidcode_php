@@ -27,7 +27,7 @@ $_SESSION['conf'] = array(
 	'js/less.js',
         'js/jquery.js',
         'js/html5slider.js',
-        'js/machins.js'
+        'js/machin.js'
     ),
     'lang' => 'en',
     'title' => 'QRaidCODE',
