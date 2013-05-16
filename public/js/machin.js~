@@ -36,7 +36,7 @@
     $('prev').click(function(){
       machin.prev($(this).parent().parent().attr('id'));
     });
-  }:
+  };
   
   window.machin = machin; 
 })();

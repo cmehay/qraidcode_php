@@ -33,7 +33,7 @@
     $('#decode').click(function(){
       machin.firstslide('decode');
     });
-    $('prev').click(function(){
+    $('.prev').click(function(){
       machin.prev($(this).parent().parent().attr('id'));
     });
   };
