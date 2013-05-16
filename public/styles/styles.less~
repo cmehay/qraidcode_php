@@ -2,12 +2,12 @@
   font-family: monospace;
 }
 
-.title {
+#title {
   text-align: center;
   margin-top: 5em;
 }
 
-.subtitle {
+#subtitle {
   text-align: center;
   margin-top: 2em;
 }
