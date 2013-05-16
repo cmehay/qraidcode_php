@@ -12,6 +12,7 @@
   };
   
   machin.prev = function(from){
+    console.log(from);
     var corresp = {
       'second-step':'first-step',
       'third-step':'second-step',
@@ -34,6 +35,7 @@
       machin.firstslide('decode');
     });
     $('.prev').click(function(){
+      console.log('marche?');
       machin.prev($(this).parent().parent().attr('id'));
     });
   };

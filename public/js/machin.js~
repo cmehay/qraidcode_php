@@ -12,6 +12,7 @@
   };
   
   machin.prev = function(from){
+    console.log(from);
     var corresp = {
       'second-step':'first-step',
       'third-step':'second-step',
@@ -33,7 +34,7 @@
     $('#decode').click(function(){
       machin.firstslide('decode');
     });
-    $('prev').click(function(){
+    $('.prev').click(function(){
       machin.prev($(this).parent().parent().attr('id'));
     });
   };
