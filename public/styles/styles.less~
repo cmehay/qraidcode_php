@@ -18,6 +18,8 @@
   margin:auto;
   margin-top:3em;
   position: relative;
+  border: 1px dashed black;
+  overflow: hidden;
 }
 
 .hidden {
