@@ -5,7 +5,7 @@
   var i;  
   
   machin.firstslide = function(truc){
-    $('#first-step').css('left', '700px');
+    $('#first-step').css('right', '700px');
   }
   
   machin.onready = function(){

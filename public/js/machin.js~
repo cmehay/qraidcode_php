@@ -4,7 +4,7 @@
   var priv = {};
   var i;  
   
-  machin.fistslide = function(truc){
+  machin.firstslide = function(truc){
     $('#first-step').css('left', '700px');
   }
   
