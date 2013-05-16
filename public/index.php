@@ -48,8 +48,8 @@ function index_page(){
   <div id="subtitle">A nice qrcode hack to secure your important data over the years</div>
   <div id="zone">
     <div id="first-step">
-	<div class="left button encode">Encode</div>
-	<div class="right button decode">Decode</div>      
+	<div class="left button" id="encode">Encode</div>
+	<div class="right button" id="decode">Decode</div>      
     </div>
     <div id="second-step">
       <div class="encode">

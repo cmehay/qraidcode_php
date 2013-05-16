@@ -18,3 +18,17 @@
   margin:auto;
   margin-top:3em;
 }
+
+.hidden {
+  display: none;
+}
+
+.button {
+  cursor: pointer;
+}
+
+
+
+#second-step, #third-step, #fourth-step, .encode, .decode {
+  .hidden;
+}

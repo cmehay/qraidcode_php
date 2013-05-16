@@ -17,12 +17,45 @@
   width: 700px;
   margin:auto;
   margin-top:3em;
+  position: relative;
 }
 
 .hidden {
   display: none;
 }
 
-#second-step, #third-step, #fourth-step {
+.button {
+  cursor: pointer;
+}
+
+#first-step {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  div {
+    width: 50%;
+    height: 100%;
+    top: 0px;
+    
+    bottom: 0px;
+    position: absolute;
+    
+    line-height: 300px;
+    text-align: center;
+  }
+  .left{
+    border-right: 1px dashed black;
+    left: 0px;
+  }
+  .right{
+    right: 0px;
+  }
+}
+
+
+
+#second-step, #third-step, #fourth-step, .encode, .decode {
   .hidden;
 }
