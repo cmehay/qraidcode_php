@@ -71,8 +71,28 @@
   .transition(right 1s ease);
 }
 
+#third-step{
+  position: absolute;
+  width:100%;
+  height:100%;
+  right: -700px;
+  
+  
+  .transition(right 1s ease);
+}
+
+#fourth-step{
+  position: absolute;
+  width:100%;
+  height:100%;
+  right: -700px;
+  
+  
+  .transition(right 1s ease);
+}
+
 
 
 #second-step, #third-step, #fourth-step, .encode, .decode {
-  display: none;
+  //display: none;
 }
