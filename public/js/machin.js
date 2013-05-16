@@ -17,8 +17,8 @@
       'third-step':'second-step',
       'fourth-step':'third-step'
     };
-    $('#'.from).css('right', '-700px');
-    $('#'.corresp.from).css('right', '0px');
+    $('#'+from).css('right', '-700px');
+    $('#'+corresp.from).css('right', '0px');
   };
   
   machin.next = function(from){
