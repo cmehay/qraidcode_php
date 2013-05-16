@@ -18,8 +18,8 @@
       'fourth-step':'third-step'
     };
     $('#'+from).css('right', '-700px');
-    console.log(corresp.from);
-    $('#'+corresp.from).css('right', '0px');
+    console.log(corresp[from]);
+    $('#'+corresp[from]).css('right', '0px');
   };
   
   machin.next = function(from){
