@@ -12,7 +12,6 @@
   };
   
   machin.prev = function(from){
-    console.log(from);
     var corresp = {
       'second-step':'first-step',
       'third-step':'second-step',

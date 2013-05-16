@@ -12,14 +12,13 @@
   };
   
   machin.prev = function(from){
-    console.log(from);
     var corresp = {
       'second-step':'first-step',
       'third-step':'second-step',
       'fourth-step':'third-step'
     };
-    $(from).css('right', '-700px');
-    $(corresp.from).css('right', '0px');
+    $('#'.from).css('right', '-700px');
+    $('#'.corresp.from).css('right', '0px');
   };
   
   machin.next = function(from){
@@ -35,7 +34,6 @@
       machin.firstslide('decode');
     });
     $('.prev').click(function(){
-      console.log('marche?');
       machin.prev($(this).parent().parent().attr('id'));
     });
   };
