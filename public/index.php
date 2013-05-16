@@ -55,13 +55,13 @@ function index_page(){
       <div class="encode">
 	<div class="description">First enter your message or your file below</div>
 	<div class="left"><textarea></textarea></div>
-	<div class="right"><input type="file" id="inputsimple" name="inputsimple"></input></div>
+	<div class="right"><input type="file" id="inputsimple" name="inputsimple" /></div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>
 	<div class="next">'.htmlentities('next -->').'</div>
       </div>
       <div class="decode">
 	<div class="description">Select pictures of your qrcodes (they can all be in the same picture as long they are full and legible)</div>
-	<input type="file" id="inputmultiple" name="inputmultiple" multiple></input>
+	<input type="file" id="inputmultiple" name="inputmultiple" multiple />
 	<div class="prev">'.htmlentities('<-- prev').'</div>
 	<div class="next">'.htmlentities('next -->').'</div>
       </div>
@@ -69,14 +69,16 @@ function index_page(){
     <div id="third-step">
       <div class="encode">
 	<div class="description">Select how many data qrcodes and parity qrcodes you want</div>
-	<input class="chunks" type="range" value="0" max="0" min="0" step="1" />
-	<input class="rs" type="range" value="0" max="0" min="0" step="1" />
+	<div class="option"><input class="range chunks" name="chunks" type="range" value="0" max="0" min="0" step="1" /></div>
+	<div class="option"><input class="range rs" type="range" name="rs" value="0" max="0" min="0" step="1" /></div>
 	<div class="description">You will get <span id="datapartotal"></span> qrcodes and you will need at less <span id="datatotal"></span> qrcodes to decode your data</div>
 	<div class="description">Options:</div>
 	<div class="option"><label><input type="checkbox" name="option" value="count" /> Print the qrcode numerotation</label></div>
 	<div class="option"><label><input type="checkbox" name="option" value="total" /> Print how many qrcodes are required to decode the data</label></div>
 	<div class="option"><label><input type="checkbox" name="option" value="desc" /> Print a description or a title</label></div>
 	<div class="option retrait"><input type="text" name="optiontitle" /></div>	
+	<div class="description">Which size for your qrcodes?</div>
+	<div class="option"><input class="range size" type="range" name="size" value="6" max="20" min="4" step="0.5" /></div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>
 	<div class="next">'.htmlentities('next -->').'</div>
       </div>

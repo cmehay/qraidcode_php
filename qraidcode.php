@@ -989,7 +989,7 @@ function qrdecode($picture){
   return $data;
 }
 
-function pdf_create($qrcodes, $num, $name, $size){
+function pdf_create($qrcodes, $size, $num=null, $name=null){
   
 }
 
