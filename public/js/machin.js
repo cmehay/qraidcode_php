@@ -11,10 +11,10 @@
   machin.onready = function(){
     $('#encode').click(function(){
       machin.firstslide('encode');
-    }
+    });
     $('#decode').click(function(){
       machin.firstslide('decode');
-    }
+    });
   }
   
   window.machin = machin;

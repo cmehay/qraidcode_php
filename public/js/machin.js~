@@ -4,8 +4,8 @@
   var priv = {};
   var i;  
   
-  machin.slide = function(){
-    
+  machin.fistslide = function(truc){
+    $('#first-step').css('left', '700px');
   }
   
   machin.onready = function(){
@@ -16,6 +16,8 @@
       machin.firstslide('decode');
     }
   }
+  
+  window.machin = machin;
 })
 
 
