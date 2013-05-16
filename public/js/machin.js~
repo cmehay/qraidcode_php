@@ -6,7 +6,7 @@
   
   machin.firstslide = function(truc){
     $('#first-step').css('right', '700px');
-    $('#second-step').css('display', 'block');
+    //$('#second-step').css('display', 'block');
     $('.'+truc).css('display', 'block');
     $('#second-step').css('right', '0px');
   }
