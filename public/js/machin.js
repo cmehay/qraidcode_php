@@ -17,7 +17,7 @@
     });
   }
   
-  window.machin = machin;
+  window.machin = machin; 
 })();
 
 
