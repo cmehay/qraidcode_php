@@ -18,7 +18,7 @@
   }
   
   window.machin = machin;
-})
+})();
 
 
 $(document).ready(function(){
