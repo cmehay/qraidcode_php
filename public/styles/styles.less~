@@ -7,3 +7,14 @@
   margin-top: 5em;
 }
 
+.subtitle {
+  text-align: center;
+  margin-top: 2em;
+}
+
+#zone {
+  height: 300px;
+  width: 700px;
+  margin:auto;
+  margin-top:3eù;
+}
