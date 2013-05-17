@@ -46,7 +46,6 @@ function index_page(){
   return render(
  '<div id="title">QRaidCODE</div>
   <div id="subtitle">A nice qrcode hack to secure your important data over the years</div>
-  <div id="subtitle">IMPORTANT: this application is for demonstration purposes only. Do not use it for important or critical data.</div>
   <div id="zone">
     <div id="first-step">
 	<div class="left button" id="encode">Encode</div>
@@ -55,14 +54,15 @@ function index_page(){
     <div id="second-step">
       <div class="encode">
 	<div class="description">First enter your message or your file below</div>
-	<div class="left"><textarea></textarea></div>
-	<div class="right"><input type="file" id="inputsimple" name="inputsimple" /></div>
+	<div class="left input"><textarea></textarea></div>
+	<div class="right input"><input type="file" id="inputsimple" name="inputsimple" /></div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>
 	<div class="next">'.htmlentities('next -->').'</div>
       </div>
       <div class="decode">
 	<div class="description">Select pictures of your qrcodes</div><div class="description">(they can all be in the same picture as long they are full and legible)</div>
 	<div class="input"><input type="file" id="inputmultiple" name="inputmultiple" multiple /></div>
+	<div class="description">(Use CTRL key to select severall files if needed)</div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>
 	<div class="next">'.htmlentities('next -->').'</div>
       </div>
@@ -93,8 +93,9 @@ function index_page(){
 	<div class="display_msg"></div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>	
       </div>
-    </div>
-  </div>    
+    </div>  
+  </div>        
+  <div id="subtitle">IMPORTANT: this application is for demonstration purposes only. Do not use it for important or critical data.</div>
   <div id="footer">
     <div><a href="/?action=about">About</div>
   </div>

@@ -67,6 +67,12 @@
   height:100%;
   right: -700px;
   
+  .decode{
+    .input{
+      text-align: center;
+      margin-top: 90px;
+    }
+  }
   
   .transition(right 1s ease);
 }
@@ -107,4 +113,10 @@
 
 .encode, .decode {
   display: none;
+}
+
+.description{
+  text-align:center;
+  margin:0.5em;
+
 }
