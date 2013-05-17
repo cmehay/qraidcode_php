@@ -75,10 +75,20 @@
   }
   .encode{
     .input{
+      width: 50%;
+      height: 100%;
+      top: 0px;
+      
+      bottom: 0px;
+      position: absolute;
+      
+      line-height: 300px;
+      text-align: center;    
       .description{
 	position: absolute;
 	top: -140px;
 	width: 100%;
+	pointer-events: none;
       }
       textarea{
 	vertical-align: middle;
@@ -89,15 +99,7 @@
   }
   
   .input{
-    width: 50%;
-    height: 100%;
-    top: 0px;
-    
-    bottom: 0px;
-    position: absolute;
-    
-    line-height: 300px;
-    text-align: center;
+
   }
   .left{
     border-right: 1px dashed black;
