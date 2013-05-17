@@ -53,9 +53,14 @@ function index_page(){
     </div>
     <div id="second-step">
       <div class="encode">
-	<div class="description">First enter your message or your file below</div>
-	<div class="left input"><textarea></textarea></div>
-	<div class="right input"><input type="file" id="inputsimple" name="inputsimple" /></div>
+	<div class="left input">
+	  <div class="description">First enter your message</div>
+	  <textarea></textarea>
+	</div>
+	<div class="right input">
+	  <div class="description">or your file below</div>
+	  <input type="file" id="inputsimple" name="inputsimple" />
+	</div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>
 	<div class="next">'.htmlentities('next -->').'</div>
       </div>
