@@ -59,7 +59,7 @@ function index_page(){
 	</div>
 	<div class="right input">
 	  <div class="description">or your file below</div>
-	  <input type="file" id="inputsimple" name="inputsimple" /><br />(300,000 bytes max) 
+	  <input type="file" id="inputsimple" name="inputsimple" /><div class="description2">(300,000 bytes max)</div> 
 	</div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>
 	<div class="next">'.htmlentities('next -->').'</div>
