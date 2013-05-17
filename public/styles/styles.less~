@@ -101,6 +101,7 @@
   .input{
 
   }
+  
   .left{
     border-right: 1px dashed black;
     left: 0px;
