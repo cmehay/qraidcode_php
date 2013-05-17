@@ -62,7 +62,7 @@ function index_page(){
       </div>
       <div class="decode">
 	<div class="description">Select pictures of your qrcodes</div><div class="description">(they can all be in the same picture as long they are full and legible)</div>
-	<div class="input><input type="file" id="inputmultiple" name="inputmultiple" multiple /></div>
+	<div class="input"><input type="file" id="inputmultiple" name="inputmultiple" multiple /></div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>
 	<div class="next">'.htmlentities('next -->').'</div>
       </div>
