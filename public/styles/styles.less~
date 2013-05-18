@@ -109,11 +109,12 @@
   }
   
   .left{
-    border-right: 1px dashed black;
+    
     left: 0px;
   }
   
   .right{
+/*     border-left: 1px dashed black; */
     right: 0px;
   }
   
