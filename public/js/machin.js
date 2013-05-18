@@ -52,10 +52,10 @@
     $('.prev').click(function(){
       machin.prev($(this).parent().parent().attr('id'));
     });
-    $('.text-encode').click(function(){
+    $('#second-step .encode .left').click(function(){
       machin.selectactive('.text-encode');
     });
-    $('.file-encode').click(function(){
+    $('#second-step .encode .right').click(function(){
       machin.selectactive('.file-encode');
     });
   };
