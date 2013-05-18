@@ -24,6 +24,8 @@
     };    
     $(corresp[from]).prop("disabled", true);
     $(from).prop("disabled", false);
+    $(corresp[from]).parent().css('background-color', 'light-grey');
+    $(from).parent().css('background-color', 'white');
   };
   
   machin.prev = function(from){
