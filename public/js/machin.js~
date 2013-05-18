@@ -5,9 +5,15 @@
   var i;  
   
   machin.firstslide = function(truc){
+    var corresp = {
+      'encode':'decode',
+      'decode':'encode'
+    };
+    
     $('#first-step').css('right', '700px');
     //$('#second-step').css('display', 'block');
     $('.'+truc).css('display', 'block');
+    $('.'+corresp[truc]).css('display', 'none');
     $('#second-step').css('right', '0px');
   };
   

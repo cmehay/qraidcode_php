@@ -55,11 +55,11 @@ function index_page(){
       <div class="encode">
 	<div class="left input">
 	  <div class="description">First enter your message</div>
-	  <textarea></textarea>
+	  <textarea class="text-encode"></textarea>
 	</div>
 	<div class="right input">
 	  <div class="description">or your file below</div>
-	  <input type="file" id="inputsimple" name="inputsimple" /><div class="description2">(300,000 bytes max)</div> 
+	  <input class="file-encode" type="file" id="inputsimple" name="inputsimple" /><div class="description2">(300,000 bytes max)</div> 
 	</div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>
 	<div class="next">'.htmlentities('next -->').'</div>
