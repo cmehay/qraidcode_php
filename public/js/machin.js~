@@ -24,7 +24,7 @@
     };    
     $(corresp[from]).prop("disabled", true);
     $(from).prop("disabled", false);
-    $(corresp[from]).parent().css('background-color', 'light-grey');
+    $(corresp[from]).parent().css('background-color', 'lightgrey');
     $(from).parent().css('background-color', 'white');
   };
   

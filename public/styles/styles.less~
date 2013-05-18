@@ -94,6 +94,7 @@
 	position: absolute;
 	top: 25px;
 	width: 100%;
+	pointer-events: none;
       }
       textarea{
 	vertical-align: middle;
