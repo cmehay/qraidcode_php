@@ -53,10 +53,10 @@
       machin.prev($(this).parent().parent().attr('id'));
     });
     $('.text-encode').click(function(){
-      machin.prev('.text-encode');
+      machin.selectactive('.text-encode');
     });
     $('.file-encode').click(function(){
-      machin.prev('.file-encode');
+      machin.selectactive('.file-encode');
     });
   };
   

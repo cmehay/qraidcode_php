@@ -17,6 +17,15 @@
     $('#second-step').css('right', '0px');
   };
   
+  machin.selectactive = function(from){
+    var corresp = {
+      '.file-encode':'.text-encode',
+      '.text-encode':'.file-encode'
+    };    
+    $(corresp[from]).prop("disabled", true);
+    $(from).prop("disabled", false);
+  };
+  
   machin.prev = function(from){
     var corresp = {
       'second-step':'first-step',
@@ -42,6 +51,12 @@
     });
     $('.prev').click(function(){
       machin.prev($(this).parent().parent().attr('id'));
+    });
+    $('.text-encode').click(function(){
+      machin.prev('.text-encode');
+    });
+    $('.file-encode').click(function(){
+      machin.prev('.file-encode');
     });
   };
   
