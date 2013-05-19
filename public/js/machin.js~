@@ -167,7 +167,7 @@
       machin.selectactive('.file-encode');
     });
     $('#second-step .encode .next').click(function(){
-      machin.slideencode1('.file-encode');
+      machin.slideencode1();
     });
   };
   

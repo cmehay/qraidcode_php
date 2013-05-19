@@ -141,6 +141,7 @@
   
   machin.slideencode1 = function(){
     var content = priv.checkencode1;
+    console.log(content);
     if(content == false){
       return false;
     }
