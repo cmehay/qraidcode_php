@@ -73,6 +73,7 @@
     for(i=0;i<nb;i++){
       size += files[i].size;
     }
+    console.log(size);
     if((size > maxsize) || (size == 0)){
       return false;
     }
