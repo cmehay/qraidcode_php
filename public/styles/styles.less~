@@ -167,7 +167,7 @@
 
 }
 
-.wait{
+#wait{
   pointer-events: none;
   .millieu;
   opacity:0;
