@@ -3,14 +3,14 @@
 //session_start();
 
 //test config
-if(!defined('QRENCODE') && !defined('ZBARIMG') && !defined('MATRIX')) {
-define('QRENCODE', 'qrencode');
-define('ZBARIMG', 'zbar-code/zbarimg/zbarimg');
-}
+// if(!defined('QRENCODE') && !defined('ZBARIMG') && !defined('MATRIX')) {
+// define('QRENCODE', 'qrencode');
+// define('ZBARIMG', 'zbar-code/zbarimg/zbarimg');
+// }
 
 
 //matrix dir
-define('MATRIX', 'matrix/');
+//define('MATRIX', 'matrix/');
 
 
 function base($set = null){

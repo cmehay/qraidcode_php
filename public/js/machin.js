@@ -121,6 +121,7 @@
   };
   
   priv.ajax_encode1 = function(data){
+    console.log(data);
      $.ajax({
         url: "?mod=json&action=get_encode_data",
         type: "POST",
