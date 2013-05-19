@@ -6,26 +6,10 @@ require '../json.php';
 require '../qraidcode.php';
 
 
-
+error_log(print_r($_POST, true));
 
 function parse() {
 
-//   if (isset($_SESSION['user_data']) || $_GET['action'] == 'resetpass' || $_GET['action'] == 'changemail' || $_GET['action'] == 'resetpassmail' ) {
-//     return get_parser();
-//   }
-// 
-//   if (isset($_POST['usr_email'])) {
-//     return user_login(myfilter($_POST['usr_email'], 'user'), myfilter($_POST['password'], 'password'), myfilter($_POST['remember_me'], 'bool'));
-//   }
-// 
-//   if (isset($_COOKIE['cookie']['user']) && isset($_COOKIE['cookie']['pass'])){
-//     return cookie_login(myfilter($_COOKIE['cookie']['user'], '_id'), myfilter($_COOKIE['cookie']['pass'], 'password'));
-//   }
-// 
-//   if(isset($_GET['action'])){
-//     $_SESSION['get'] = $_GET;
-//   }
-  //var_dump($_SESSION['user_data']);
   if(isset($_GET['action'])){
     if (isset($_GET['mod'])){
       $mod=$_GET['mod'];
@@ -47,6 +31,7 @@ function index_page(){
  '<div id="title">QRaidCODE</div>
   <div id="subtitle">A nice qrcode hack to secure your important data over the years</div>
   <div id="zone">
+    <div id="wait">Please wait...</div>
     <div id="first-step">
 	<div class="left button" id="encode">Encode</div>
 	<div class="right button" id="decode">Decode</div>      

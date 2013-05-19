@@ -22,6 +22,14 @@ define('UPLOADDIR', '../upload/');
 //matrix dir
 define('MATRIX', '../matrix/');
 
+
+//max input size
+define('MAXINPUT', 300000);
+
+//max qrcodes
+define('MAXQRCODES', 256);
+
+
 $_SESSION['conf'] = array(
     'scripts' => array(
 	'js/less.js',

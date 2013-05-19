@@ -1,5 +1,10 @@
 @import '3L.less';
 
+@box_height: 300px;
+@box_width: 700px;
+@box_width_inverse: @box_width/-1;
+@slide_duration: 1000ms;
+
 * {
   font-family: monospace;
 }
@@ -15,8 +20,8 @@
 }
 
 #zone {
-  height: 300px;
-  width: 700px;
+  height: @box_height;
+  width: @box_width;
   margin:auto;
   margin-top:3em;
   position: relative;
@@ -32,6 +37,18 @@
   cursor: pointer;
 }
 
+.millieu{
+    width: 50%;
+    height: 100%;
+    top: 0px;
+    
+    bottom: 0px;
+    position: absolute;
+    
+    line-height: @box_height;
+    text-align: center;
+}
+
 #first-step {
   position: absolute;
   //top: 0px;
@@ -41,15 +58,7 @@
   width:100%;
   height:100%;
   div {
-    width: 50%;
-    height: 100%;
-    top: 0px;
-    
-    bottom: 0px;
-    position: absolute;
-    
-    line-height: 300px;
-    text-align: center;
+    .millieu;
   }
   .left{
     border-right: 1px dashed black;
@@ -58,14 +67,14 @@
   .right{
     right: 0px;
   }
-  .transition(right 1s ease);
+  .transition(right @slide_duration ease);
 }
 
 #second-step{
   position: absolute;
   width:100%;
   height:100%;
-  right: -700px;
+  right: @box_width_inverse;
   
   .decode{
     .input{
@@ -75,15 +84,7 @@
   }
   .encode{
     .input{
-      width: 50%;
-      height: 100%;
-      top: 0px;
-      
-      bottom: 0px;
-      position: absolute;
-      
-      line-height: 300px;
-      text-align: center;    
+      .millieu;   
       .description{
 	position: absolute;
 	top: -140px;
@@ -114,32 +115,32 @@
   }
   
   .right{
-    transition(background-color 300ms ease);
+    .transition(background-color 300ms ease);
     border-left: 1px dashed black;
     right: 0px;
   }
   
-  .transition(right 1s ease);
+  .transition(right @slide_duration ease);
 }
 
 #third-step{
   position: absolute;
   width:100%;
   height:100%;
-  right: -700px;
+  right: @box_width_inverse;
   
   
-  .transition(right 1s ease);
+  .transition(right @slide_duration ease);
 }
 
 #fourth-step{
   position: absolute;
   width:100%;
   height:100%;
-  right: -700px;
+  right: @box_width_inverse;
   
   
-  .transition(right 1s ease);
+  .transition(right @slide_duration ease);
 }
 
 .prev{
@@ -165,3 +166,11 @@
   margin:0.5em;
 
 }
+
+.wait{
+  pointer-events: none;
+  .millieu;
+  opacity:0;
+  .transition(opacity 400ms linear);
+}
+
