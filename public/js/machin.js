@@ -65,15 +65,15 @@
   }
   
   priv.filesize = function(files, maxsize){
-    if( typeof files === 'string' ) {
-    return false;
-    }
-    var nb = files.length;
-    var size = 0;
-    for(i=0;i<nb;i++){
-      size += files[i].size;
+//     if( typeof files === 'string' ) {
+//     return false;
+//     }
+//     var nb = files.length;
+//     var size = 0;
+//     for(i=0;i<nb;i++){
+      size = files[0].size;
       //console.log(files[i]);
-    }
+//     }
     //console.log(nb);
     //console.log(size);
     if((size > maxsize) || (size == 0)){
