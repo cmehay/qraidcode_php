@@ -114,7 +114,7 @@
   };
   
   priv.fail = function(msg, prev){
-    $('.wait').html(msg);
+    $('#wait').html(msg);
 	  setTimeout(function(){
 	    machin.prev(prev);
 	  }, 500);

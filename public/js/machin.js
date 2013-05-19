@@ -136,7 +136,7 @@
       }
     ).fail(function(){
       priv.fail('Error occured :(', 'third-step');
-    };
+    });
   }
   
   machin.slideencode1 = function(){
