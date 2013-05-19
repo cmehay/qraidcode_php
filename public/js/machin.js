@@ -60,7 +60,7 @@
       'second-step':'third-step',
       'third-step':'fourth-step',
     };
-    $('.wait').css('opacity', 100);
+    $('.wait').css('opacity', 1);
     setTimeout(function(){$('#'+corresp[from]).css('right', '0px');}, 110);
   }
   
@@ -124,10 +124,10 @@
     console.log(data);
      $.ajax({
         url: "?mod=json&action=get_encode_data",
-        type: "POST",
-        data: data,
-        processData: false,
-	dataType: 'json'
+        type: 'POST',
+        data: new FormData(data),
+        processData: false
+	//dataType: 'json'
     }).done(function(json){
 	if(json.error){
 	  priv.fail(json.msg, 'third-step');

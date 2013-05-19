@@ -121,12 +121,13 @@
   };
   
   priv.ajax_encode1 = function(data){
+    console.log(data);
      $.ajax({
         url: "?mod=json&action=get_encode_data",
-        type: "POST",
-        data: data,
-        processData: false,
-	dataType: 'json'
+        type: 'POST',
+        data: new FormData(data),
+        processData: false
+	//dataType: 'json'
     }).done(function(json){
 	if(json.error){
 	  priv.fail(json.msg, 'third-step');
