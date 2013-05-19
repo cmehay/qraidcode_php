@@ -109,7 +109,7 @@
     }
     else if($('.text-encode').is(':disabled')){
       //fucking vanilla, ça me saoule!
-      var file = document.getElementByClassName('file-encode');
+      var file = document.getElementsByClassName('file-encode');
       console.log(file.files);
       //var file = $(':file')files[0];
       //if(priv.filesize(file, maxlength_encode)){
