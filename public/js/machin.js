@@ -66,16 +66,16 @@
   
   priv.filesize = function(files, maxsize){
     if( typeof files === 'string' ) {
-    files = [ files ];
+    return false;
     }
     var nb = files.length;
     var size = 0;
     for(i=0;i<nb;i++){
       size += files[i].size;
-      console.log(files[i]);
+      //console.log(files[i]);
     }
-    console.log(nb);
-    console.log(size);
+    //console.log(nb);
+    //console.log(size);
     if((size > maxsize) || (size == 0)){
       return false;
     }
