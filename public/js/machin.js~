@@ -147,7 +147,7 @@
     }
     priv.next1('second-step', true);
     setTimeout(function(){
-      
+      priv.ajax_encode1(content);
     },slide_duration);
   }
   

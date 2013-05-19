@@ -124,7 +124,7 @@
      $.ajax({
         url: "?mod=json&action=get_encode_data",
         type: "POST",
-        data: file,
+        data: data,
         processData: false,
 	dataType: 'json'
     }).done(function(json){
