@@ -108,10 +108,13 @@
       }
     }
     else if($('.text-encode').is(':disabled')){
-      var file = $(':file').target.files[0];
-      if(priv.filesize(file, maxlength_encode)){
-	return file;
-      }
+      //fucking vanilla, ça me saoule!
+      var file = document.getElementByClassName('file-encode');
+      console.log(file.files);
+      //var file = $(':file')files[0];
+      //if(priv.filesize(file, maxlength_encode)){
+	//return file;
+      //}
     }
     return false;
   };
