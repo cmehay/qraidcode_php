@@ -65,15 +65,15 @@
   }
   
   priv.filesize = function(files, maxsize){
-//     if( typeof files === 'string' ) {
-//     return false;
-//     }
-//     var nb = files.length;
-//     var size = 0;
-//     for(i=0;i<nb;i++){
-      size = files[0].size;
+    if( typeof files === 'string' ) {
+    return false;
+    }
+    var nb = files.length;
+    var size = 0;
+    for(i=0;i<nb;i++){
+      size += files[i].size;
       //console.log(files[i]);
-//     }
+    }
     //console.log(nb);
     //console.log(size);
     if((size > maxsize) || (size == 0)){
@@ -108,9 +108,9 @@
       }
     }
     else if($('.text-encode').is(':disabled')){
-      var file = $('.file-encode:file');
-      if(priv.filesize(file.files, maxlength_encode)){
-	return file.files[0];
+      var file = $(':file').files[0];
+      if(priv.filesize(file, maxlength_encode)){
+	return file;
       }
     }
     return false;
