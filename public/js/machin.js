@@ -72,6 +72,7 @@
     var size = 0;
     for(i=0;i<nb;i++){
       size += files[i].size;
+      console.log(files[i]);
     }
     console.log(nb);
     console.log(size);
