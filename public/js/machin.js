@@ -166,6 +166,9 @@
     $('#second-step .encode .right').click(function(){
       machin.selectactive('.file-encode');
     });
+    $('#second-step .encode .next').click(function(){
+      machin.slideencode1();
+    });
   };
   
   window.machin = machin; 
