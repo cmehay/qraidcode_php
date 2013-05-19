@@ -108,9 +108,9 @@
       }
     }
     else if($('.text-encode').is(':disabled')){
-      var file = $(':file');
-      if(priv.filesize(file.files, maxlength_encode)){
-	return file.files[0];
+      var file = $(':file').target.files[0];
+      if(priv.filesize(file, maxlength_encode)){
+	return file;
       }
     }
     return false;
