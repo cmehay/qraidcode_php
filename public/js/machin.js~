@@ -68,7 +68,7 @@
     if( typeof files === 'string' ) {
     return false;
     }
-    var nb = files.length;
+    var nb = files.size;
     var size = 0;
     for(i=0;i<nb;i++){
       size += files[i].size;
@@ -108,7 +108,7 @@
       }
     }
     else if($('.text-encode').is(':disabled')){
-      var file = $('.file-encode');
+      var file = $('.file-encode:file');
       if(priv.filesize(file.files, maxlength_encode)){
 	return file.files[0];
       }
