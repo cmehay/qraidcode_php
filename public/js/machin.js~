@@ -113,6 +113,13 @@
     return false;
   };
   
+  priv.fail = function(msg, prev){
+    $('.wait').html(msg);
+	  setTimeout(function(){
+	    machin.prev(prev);
+	  }, 500);
+  };
+  
   priv.ajax_encode1 = function(data){
      $.ajax({
         url: "?mod=json&action=get_encode_data",
@@ -122,15 +129,14 @@
 	dataType: 'json'
     }).done(function(json){
 	if(json.error){
-	  $('.wait').html(json.msg);
-	  setTimeout(function(){
-	    machin.prev('third-step');
-	  }, 500);
+	  priv.fail(json.msg, 'third-step');
 	  return false;
 	}
-	priv.next2()
+	priv.next2('second-step');
       }
-    );
+    ).fail(function(){
+      priv.fail('Error occured :(', 'third-step');
+    };
   }
   
   machin.slideencode1 = function(){
