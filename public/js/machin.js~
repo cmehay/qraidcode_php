@@ -109,7 +109,7 @@
     }
     else if($('.text-encode').is(':disabled')){
       var file = $('.file-encode');
-      if(priv.filesize(file, maxlength_encode)){
+      if(priv.filesize(file.files, maxlength_encode)){
 	return file.files[0];
       }
     }
