@@ -89,6 +89,7 @@
       return false;
     }
     priv.filescontent = filescontent;
+    console.log(priv.filescontent);
     return size;
   };
   
