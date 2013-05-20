@@ -144,7 +144,8 @@
 	//dataType: 'json'
     }).done(function(json){
 	console.log(json);
-	if(json.error){
+	console.log(json.error);
+	if(json.error == true){
 	  priv.fail(json.msg, 'third-step');
 	  return false;
 	}
