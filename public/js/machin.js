@@ -110,7 +110,7 @@
 	return {'data':$('.text-encode').val(), 'type':'text'};
     }
     else if($('.text-encode').is(':disabled') && !$('.file-encode').is('.invalid')){
-	var filereader = new fileReader();
+	var filereader = new FileReader();
 	$('.file-encode').queue(function(){
 	  priv.filemachin = {'data':filereader.readAsDataURL(this.files[0]), 'type':'file'};
 	});

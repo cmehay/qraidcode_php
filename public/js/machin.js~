@@ -107,7 +107,7 @@
   
   priv.checkencode1 = function(){
     if($('.file-encode').is(':disabled') && !$('.text-encode').is('.invalid')){
-	return {'data':$('.text-encode').val, 'type':'text'};
+	return {'data':$('.text-encode').val(), 'type':'text'};
     }
     else if($('.text-encode').is(':disabled') && !$('.file-encode').is('.invalid')){
 	var filereader = new fileReader();
