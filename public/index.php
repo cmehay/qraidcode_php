@@ -40,12 +40,12 @@ function index_page(){
       <div class="encode">
 	<div class="left input">
 	  <div class="description">First enter your message</div>
-	  <textarea class="text-encode"></textarea>
-	  <div class="textsize invalid">'.number_format(MAXINPUT).' bytes remaining</div>
+	  <textarea id="text-encode" class="invalid"></textarea>
+	  <div class="textsize">'.number_format(MAXINPUT).' bytes remaining</div>
 	</div>
 	<div class="right input">
 	  <div class="description">or your file below</div>
-	  <input class="file-encode invalid" type="file" id="inputsimple" name="inputsimple" /><div class="description2 filesize">('.number_format(MAXINPUT).' bytes max)</div> 
+	  <input id="file-encode" class="invalid" type="file" id="inputsimple" name="inputsimple" /><div class="description2 filesize">('.number_format(MAXINPUT).' bytes max)</div> 
 	</div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>
 	<div class="next">'.htmlentities('next -->').'</div>
