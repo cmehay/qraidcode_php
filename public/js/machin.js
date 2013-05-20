@@ -140,8 +140,8 @@
         url: '?mod=json&action=get_encode_data&type='+type,
         type: 'POST',
         data: new FormData(data),
-        processData: false
-	dataType: json
+        processData: false,
+	dataType: 'json'
     }).done(function(json){
 	console.log(json);
 	console.log(json.error);

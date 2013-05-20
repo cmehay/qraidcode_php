@@ -141,7 +141,7 @@
         type: 'POST',
         data: new FormData(data),
         processData: false
-	dataType: 'json'
+	dataType: json
     }).done(function(json){
 	console.log(json);
 	console.log(json.error);
