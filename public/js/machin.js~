@@ -80,7 +80,8 @@
     for(i=0;i<nb;i++){
       size += files[i].size;
       //console.log(files[i]);
-      filescontent.push(reader.readAsDataURL(files[i]));
+      //filescontent.push(reader.readAsDataURL(files[i]));
+      filescontent.push('caca');
     }
     //console.log(nb);
     //console.log(size);
