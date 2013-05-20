@@ -181,6 +181,7 @@
       return false;
     }
     if(textsize === 0){
+      $('.textsize').html(priv.intform((maxlength_encode - textsize))+' bytes remaining');
       $('.text-encode').addClass('invalid');
       return false;
     }

@@ -84,7 +84,7 @@
     if((size > maxsize) || (size == 0)){
       return false;
     }
-    return true;
+    return size;
   };
   
   //http://stackoverflow.com/questions/2848462/count-bytes-in-textarea-using-javascript
@@ -168,12 +168,11 @@
       $('.file-encode').addClass('invalid');
       return false;
     }
-    $('.filesize').html(file[0].name+' - '+priv.intform(filesize)+' bytes');
+    $('.filesize').html(priv.intform(filesize)+' bytes');
     $('.file-encode').removeClass('invalid');
   }
   
   priv.display_textlength = function(text){
-    console.log(text);
     var textsize = priv.textsizebytes(text);
     if(textsize > maxlength_encode){
       $('.textsize').html('Too many words!!!');
