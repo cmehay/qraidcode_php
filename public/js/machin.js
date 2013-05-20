@@ -106,18 +106,15 @@
  }
   
   priv.checkencode1 = function(){
-    if($('.file-encode').is(':disabled')){
-      var textarea = $('.text-encode').val();
-      if(priv.textsizebytes(textarea) < maxlength_encode){
-	return textarea;
-      }
+    if($('.file-encode').is(':disabled') && !$('.text-encode').is('.invalid')){
+	return {'data':textarea, 'type':'text'};
     }
-    else if($('.text-encode').is(':disabled')){
-      
-      //var file = $(':file')files[0];
-      //if(priv.filesize(file, maxlength_encode)){
-	//return file;
-      //}
+    else if($('.text-encode').is(':disabled') && !$('.file-encode').is('.invalid')){
+	var filereader = new fileReader();
+	$('.file-encode').queue(function(){
+	  priv.filemachin = {'data':filereader.readAsDataURL(this.files[0]), 'type':'file'};
+	}
+	return priv.filemachin;
     }
     return false;
   };
@@ -129,10 +126,10 @@
 	  }, 500);
   };
   
-  priv.ajax_encode1 = function(data){
+  priv.ajax_encode1 = function(data, type){
     console.log(data);
      $.ajax({
-        url: "?mod=json&action=get_encode_data",
+        url: '?mod=json&action=get_encode_data&type='+type,
         type: 'POST',
         data: new FormData(data),
         processData: false
@@ -157,7 +154,7 @@
     }
     priv.next1('second-step', true);
     setTimeout(function(){
-      priv.ajax_encode1(content);
+      priv.ajax_encode1(content['data'], content['type']);
     },slide_duration);
   }
   
