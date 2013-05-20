@@ -147,6 +147,7 @@
 	  priv.fail(json.msg, 'third-step');
 	  return false;
 	}
+	console.log(json);
 	priv.next2('second-step');
       }
     ).fail(function(){

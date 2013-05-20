@@ -143,11 +143,11 @@
         processData: false
 	//dataType: 'json'
     }).done(function(json){
+	console.log(json);
 	if(json.error){
 	  priv.fail(json.msg, 'third-step');
 	  return false;
 	}
-	console.log(json);
 	priv.next2('second-step');
       }
     ).fail(function(){
