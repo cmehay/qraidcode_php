@@ -141,10 +141,10 @@
         type: 'POST',
         data: new FormData(data),
         processData: false
-	//dataType: 'json'
+	dataType: 'json'
     }).done(function(json){
 	console.log(json);
-	console.log(json.error);
+	console.log(json);
 	if(json.error == true){
 	  priv.fail(json.msg, 'third-step');
 	  return false;
