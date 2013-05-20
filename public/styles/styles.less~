@@ -96,7 +96,7 @@
       }
       .description2{
 	position: absolute;
-	bottom: 115px;
+	bottom: 38%;
 	width: 100%;
 	pointer-events: none;
 	line-height: initial;
