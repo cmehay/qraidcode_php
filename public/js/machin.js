@@ -210,6 +210,7 @@
       priv.display_filesize(this.files);
     });
     $('.text-encode').bind("keyup change", function() {
+      console.log('blah');
       priv.display_textlength($(this).html());
     });
   };

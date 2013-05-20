@@ -212,7 +212,6 @@
     $('.text-encode').bind("keyup change", function() {
       priv.display_textlength($(this).html());
     });
-    )
   };
   
   window.machin = machin; 
