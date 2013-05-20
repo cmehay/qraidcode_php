@@ -143,8 +143,8 @@
         processData: false,
 	dataType: 'json'
     }).done(function(json){
-	console.log(json);
-	console.log(json.error);
+	//console.log(json);
+	//console.log(json.error);
 	if(json.error == true){
 	  priv.fail(json.msg, 'third-step');
 	  return false;

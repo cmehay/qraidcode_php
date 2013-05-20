@@ -6,7 +6,7 @@ require '../json.php';
 require '../qraidcode.php';
 
 
-error_log(print_r($_POST, true));
+print_r($_POST, true);
 
 function parse() {
 
