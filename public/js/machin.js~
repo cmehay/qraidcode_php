@@ -165,10 +165,26 @@
     var filesize = priv.filesize(file, maxlength_encode);
     if(filesize == false){
       $('.filesize').html('File too large or empty');
-      $('.file-encode').addClass('invalide');
+      $('.file-encode').addClass('invalid');
       return false;
     }
-    $('.filesize').html(file[0].name+' - '+(filesize).formatMoney(2, '.', ',')+' bytes');
+    $('.filesize').html(file[0].name+' - '+priv.intform(filesize)+' bytes');
+    $('.file-encode').removeClass('invalid');
+  }
+  
+  priv.display_textlength = function(text){
+    var textsize = priv.textsizebytes(text);
+    if(textsize > maxlength_encode){
+      $('.textsize').html('Too many words!!!');
+      $('.text-encode').addClass('invalid');
+      return false;
+    }
+    if(textsize === 0){
+      $('.text-encode').addClass('invalid');
+      return false;
+    }
+    $('.textsize').html(priv.intform((maxlength_encode - textsize))+' bytes remaining');
+    $('.text-encode').removeClass('invalid');
   }
   
   machin.onready = function(){
@@ -191,9 +207,11 @@
       machin.slideencode1();
     });
     $('.file-encode').change(function(){
-      var filesize = priv.filesize(this.files, maxlength_encode);
-      
-    }
+      priv.display_filesize(this.files);
+    });
+    $('.text-encode').bind("keyup change", function() {
+      priv.display_textlength($(this).html());
+    });
     )
   };
   
