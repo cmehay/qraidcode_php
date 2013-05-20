@@ -75,7 +75,7 @@
     }
     var nb = files.length;
     var size = 0;
-    var reader = new ReaderFiles();
+    var reader = new FileReader();
     for(i=0;i<nb;i++){
       size += files[i].size;
       //console.log(files[i]);
