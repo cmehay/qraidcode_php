@@ -79,7 +79,7 @@
     for(i=0;i<nb;i++){
       size += files[i].size;
       //console.log(files[i]);
-      priv.filescontent[i] = reader.readAsDataURL(files[i]);
+      priv.filescontent.push(reader.readAsDataURL(files[i]));
     }
     //console.log(nb);
     //console.log(size);
