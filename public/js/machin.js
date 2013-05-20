@@ -139,7 +139,7 @@
      $.ajax({
         url: '?mod=json&action=get_encode_data&type='+type,
         type: 'POST',
-        data: new FormData(data),
+        data: data,
         processData: false,
 	dataType: 'json'
     }).done(function(json){

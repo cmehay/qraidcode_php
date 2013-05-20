@@ -54,7 +54,7 @@
     };
     $('#'+from).css('right', '700px');
     if(wait){
-      setTimeout(function(){$('.wait').css('opacity', 100);}, slide_duration);
+      setTimeout(function(){$('#wait').css('opacity', 100);}, slide_duration);
       return true;
     }
     $('#'+corresp[from]).css('right', '0px');
@@ -65,7 +65,7 @@
       'second-step':'third-step',
       'third-step':'fourth-step',
     };
-    $('.wait').css('opacity', 1);
+    $('#wait').css('opacity', 1);
     setTimeout(function(){$('#'+corresp[from]).css('right', '0px');}, 110);
   }
   
