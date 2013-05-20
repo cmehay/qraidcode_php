@@ -9,6 +9,11 @@
   var maxlength_decode = 20000000;
   var slide_duration = 1000;
   
+
+  priv.intform = function(int){
+    return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
+  }
+  
   machin.firstslide = function(truc){
     var corresp = {
       'encode':'decode',
@@ -108,9 +113,7 @@
       }
     }
     else if($('.text-encode').is(':disabled')){
-      //fucking vanilla, ça me saoule!
-      var file = document.getElementsByClassName('file-encode');
-      console.log(file.files);
+      
       //var file = $(':file')files[0];
       //if(priv.filesize(file, maxlength_encode)){
 	//return file;
@@ -158,6 +161,32 @@
     },slide_duration);
   }
   
+  priv.display_filesize = function(file){
+    var filesize = priv.filesize(file, maxlength_encode);
+    if(filesize == false){
+      $('.filesize').html('File too large or empty');
+      $('.file-encode').addClass('invalid');
+      return false;
+    }
+    $('.filesize').html(file[0].name+' - '+priv.intform(filesize)+' bytes');
+    $('.file-encode').removeClass('invalid');
+  }
+  
+  priv.display_textlength = function(text){
+    var textsize = priv.textsizebytes(text);
+    if(textsize > maxlength_encode){
+      $('.textsize').html('Too many words!!!');
+      $('.text-encode').addClass('invalid');
+      return false;
+    }
+    if(textsize === 0){
+      $('.text-encode').addClass('invalid');
+      return false;
+    }
+    $('.textsize').html(priv.intform((maxlength_encode - textsize))+' bytes remaining');
+    $('.text-encode').removeClass('invalid');
+  }
+  
   machin.onready = function(){
     $('#encode').click(function(){
       machin.firstslide('encode');
@@ -177,6 +206,13 @@
     $('#second-step .encode .next').click(function(){
       machin.slideencode1();
     });
+    $('.file-encode').change(function(){
+      priv.display_filesize(this.files);
+    });
+    $('.text-encode').bind("keyup change", function() {
+      priv.display_textlength($(this).html());
+    });
+    )
   };
   
   window.machin = machin; 
