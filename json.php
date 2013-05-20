@@ -31,7 +31,7 @@ function json_cb_get_encode_data(){
     return json_error('badsize');
   }
   $_SESSION['data'] = $data;
-  json_valid(array(
+  return json_valid(array(
       'maxqr' => MAXQRCODES,
       'minqr' => $min,
       'maxrs' => MAXQRCODES - $min,
