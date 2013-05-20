@@ -76,16 +76,18 @@
     var nb = files.length;
     var size = 0;
     var reader = new FileReader();
+    var filescontent = {};
     for(i=0;i<nb;i++){
       size += files[i].size;
       //console.log(files[i]);
-      priv.filescontent.push(reader.readAsDataURL(files[i]));
+      filescontent.push(reader.readAsDataURL(files[i]));
     }
     //console.log(nb);
     //console.log(size);
     if((size > maxsize) || (size == 0)){
       return false;
     }
+    priv.filescontent = filescontent;
     return size;
   };
   
