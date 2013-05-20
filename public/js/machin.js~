@@ -27,8 +27,8 @@
   
   machin.selectactive = function(from){
     var corresp = {
-      '.file-encode':'.text-encode',
-      '.text-encode':'.file-encode'
+      '#file-encode':'#text-encode',
+      '#text-encode':'#file-encode'
     };    
     $(corresp[from]).prop("disabled", true);
     $(from).prop("disabled", false);
@@ -80,7 +80,7 @@
     for(i=0;i<nb;i++){
       size += files[i].size;
       //console.log(files[i]);
-      filescontent.push(reader.readAsDataURL(files[i]));
+      //filescontent.push(reader.readAsDataURL(files[i]));
       //filescontent.push('caca');
     }
     //console.log(nb);
@@ -88,8 +88,8 @@
     if((size > maxsize) || (size == 0)){
       return false;
     }
-    priv.filescontent = filescontent;
-    console.log(priv.filescontent);
+    //priv.filescontent = filescontent;
+    //console.log(priv.filescontent);
     return size;
   };
   
@@ -112,16 +112,17 @@
  }
   
   priv.checkencode1 = function(){
-    if($('.file-encode').is(':disabled') && !$('.text-encode').is('.invalid')){
-	return {'data':$('.text-encode').val(), 'type':'text'};
+    if($('#file-encode').is(':disabled') && !$('#text-encode').is('.invalid')){
+	return {'data':$('#text-encode').val(), 'type':'text'};
     }
-    else if($('.text-encode').is(':disabled') && !$('.file-encode').is('.invalid')){
+    else if($('#text-encode').is(':disabled') && !$('#file-encode').is('.invalid')){
+      var file = document.getElementById('_testFile').files[0];
 // 	var filereader = new FileReader();
-// 	$('.file-encode').queue(function(){
+// 	$('#file-encode').queue(function(){
 // 	  
 // 	  priv.filemachin = {'data':filereader.readAsDataURL(this.files[0]), 'type':'file'};
 // 	});
-	return {'data':priv.filescontent[0], 'type':'file'};
+	return {'data':file, 'type':'file'};
     }
     return false;
   };
@@ -169,27 +170,27 @@
     var filesize = priv.filesize(file, maxlength_encode);
     if(filesize == false){
       $('.filesize').html('File too large or empty');
-      $('.file-encode').addClass('invalid');
+      $('#file-encode').addClass('invalid');
       return false;
     }
     $('.filesize').html(priv.intform(filesize)+' bytes');
-    $('.file-encode').removeClass('invalid');
+    $('#file-encode').removeClass('invalid');
   }
   
   priv.display_textlength = function(text){
     var textsize = priv.textsizebytes(text);
     if(textsize > maxlength_encode){
       $('.textsize').html('Too many words!!!');
-      $('.text-encode').addClass('invalid');
+      $('#text-encode').addClass('invalid');
       return false;
     }
     if(textsize === 0){
       $('.textsize').html(priv.intform((maxlength_encode - textsize))+' bytes remaining');
-      $('.text-encode').addClass('invalid');
+      $('#text-encode').addClass('invalid');
       return false;
     }
     $('.textsize').html(priv.intform((maxlength_encode - textsize))+' bytes remaining');
-    $('.text-encode').removeClass('invalid');
+    $('#text-encode').removeClass('invalid');
   }
   
   machin.onready = function(){
@@ -203,18 +204,18 @@
       machin.prev($(this).parent().parent().attr('id'));
     });
     $('#second-step .encode .left').click(function(){
-      machin.selectactive('.text-encode');
+      machin.selectactive('#text-encode');
     });
     $('#second-step .encode .right').click(function(){
-      machin.selectactive('.file-encode');
+      machin.selectactive('#file-encode');
     });
     $('#second-step .encode .next').click(function(){
       machin.slideencode1();
     });
-    $('.file-encode').change(function(){
+    $('#file-encode').change(function(){
       priv.display_filesize(this.files);
     });
-    $('.text-encode').bind("keyup change", function() {
+    $('#text-encode').bind("keyup change", function() {
       priv.display_textlength($(this).val());
     });
   };
