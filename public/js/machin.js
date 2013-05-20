@@ -113,7 +113,7 @@
 	var filereader = new fileReader();
 	$('.file-encode').queue(function(){
 	  priv.filemachin = {'data':filereader.readAsDataURL(this.files[0]), 'type':'file'};
-	}
+	});
 	return priv.filemachin;
     }
     return false;
