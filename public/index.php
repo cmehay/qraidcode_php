@@ -4,6 +4,8 @@ require '../conf.php';
 require '../html.php';
 require '../json.php';
 require '../qraidcode.php';
+require '../functions.php';
+
 
 
 trigger_error(print_r($_POST, true));

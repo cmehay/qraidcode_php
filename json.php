@@ -19,13 +19,16 @@ function json_valid($array){
 
 function json_cb_get_encode_data(){
   $data = $_POST['data'];
-  if(is_array($_POST['data'])){
+  if(is_array($data)){
     json_error();
   }
   //décode les données
+  $raw = getencodedata($data, $_GET['type']);
+  if($raw === false){
+    json_error();
+  }
   
-  
-  $length = strlen($_POST['data']);
+  $length = strlen($raw);
   if($length > MAXINPUT || $length == 0){
     return json_error('badsize');  
   }
@@ -33,7 +36,7 @@ function json_cb_get_encode_data(){
   if($min > MAXQRCODES){
     return json_error('badsize');
   }
-  $_SESSION['data'] = $data;
+  $_SESSION['data'] = $raw;
   return json_valid(array(
       'maxqr' => MAXQRCODES,
       'minqr' => $min,
