@@ -64,7 +64,7 @@ function index_page(){
     </div>
     <div id="third-step">
       <div class="encode">
-	<div class="description">Select how many data qrcodes and parity qrcodes you want</div>
+	<div class="description">Set how many qrcodes you want</div>
 	<div class="option"><input class="range chunks" name="chunks" type="range" value="0" max="0" min="0" step="1" /></div>
 	<div class="option"><input class="range rs" type="range" name="rs" value="0" max="0" min="0" step="1" /></div>
 	<div class="description">You will get <span id="datapartotal"></span> qrcodes and you will need at less <span id="datatotal"></span> qrcodes to decode your data</div>
