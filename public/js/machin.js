@@ -158,8 +158,8 @@
   };
   
   priv.setencodevalue = function(json){
-    $('.range.chunk').attr('min', json.minqr);
-    $('.range.chunk').attr('max', json.maxqr);
+    $('.range.chunks').attr('min', json.minqr);
+    $('.range.chunks').attr('max', json.maxqr);
     $('.range.rs').attr('min', json.minrs);
     $('.range.rs').attr('max', json.maxrs);
   }
