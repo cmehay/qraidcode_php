@@ -6,7 +6,7 @@ function getencodedata($data, $type) {
     return base64_decode(str_replace(' ','+',substr($data,strpos($data,",")+1)));  
   }
   if($type === 'text'){
-    return htmlspecialchars_decode($data);
+    return urldecode($data);
   }
   return false;  
 }

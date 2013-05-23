@@ -55,7 +55,7 @@
     };
     $('#'+from).css('right', '700px');
     if(wait){
-      setTimeout(function(){$('#wait').css('opacity', 1);}, slide_duration);
+      setTimeout(function(){$('#wait').css('opacity', 1);}, slide_duration/2);
       return true;
     }
     $('#'+corresp[from]).css('right', '0px');
