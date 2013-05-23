@@ -117,7 +117,7 @@
 	return {'data':'data='+encodeURIComponent($('#text-encode').val()), 'type':'text'};
     }
     else if($('#text-encode').is(':disabled') && !$('#file-encode').is('.invalid')){
-      var file = new FormData($('#file-encode')[0]);
+      var file = new FormData($('#file-encode'));
       //var file = document.getElementById('file-encode').files[0];
 // 	var filereader = new FileReader();
 // 	$('#file-encode').queue(function(){
