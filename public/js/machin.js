@@ -114,7 +114,7 @@
   
   priv.checkencode1 = function(){
     if($('#file-encode').is(':disabled') && !$('#text-encode').is('.invalid')){
-	return {'data':$('#text-encode').val(), 'type':'text'};
+	return {'data':'data='+encodeURIComponent($('#text-encode').val()), 'type':'text'};
     }
     else if($('#text-encode').is(':disabled') && !$('#file-encode').is('.invalid')){
       var file = new FormData($('#file-encode')[0]);
@@ -141,8 +141,10 @@
      $.ajax({
         url: '?mod=json&action=get_encode_data&type='+type,
         type: 'POST',
-        data: 'data='+data,
+        data: data,
         processData: false,
+	cache: false,
+        contentType: false,
 	dataType: 'json'
     }).done(function(json){
 	console.log(json);
