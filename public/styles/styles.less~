@@ -177,14 +177,16 @@
       position:relative;
       margin-left: 5px;
       margin-right: 5px;
-      height:1.5em;
+      height:1em;
       *{
 	position:absolute;
       }
       label{
 	left: 85px;
+	line-height: 150%;
 	input{
 	  left:-15px;
+	  height: 100%;
 	}
       }
     }
