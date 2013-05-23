@@ -22,6 +22,9 @@ function json_cb_get_encode_data(){
   if(is_array($_POST['data'])){
     json_error();
   }
+  //décode les données
+  
+  
   $length = strlen($_POST['data']);
   if($length > MAXINPUT || $length == 0){
     return json_error('badsize');  
