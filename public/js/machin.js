@@ -113,6 +113,7 @@
  }
  
   priv.readsendfile = function(id){
+    console.log('et là');
     var file = document.getElementById(id).files[0];
     var filereader = new FileReader();
     filereader.onload = function (event) {
@@ -122,6 +123,7 @@
     setTimeout(function(){
       $('#'+id).queue(function(){  
 	filereader.readAsDataURL(this.files[0]);
+	console.log('dernier');
       });
     },slide_duration);
   }
