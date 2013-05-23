@@ -170,6 +170,10 @@
 	left:70px;
 	right:70px;
       }
+      
+    }
+    
+    .option2 {
       label{
 	left: 85px;
 	input{
