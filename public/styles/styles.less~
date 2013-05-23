@@ -171,9 +171,9 @@
 	right:70px;
       }
       label{
-	left: 70px;
+	left: 85px;
 	input{
-	  left:0px;
+	  left:-15px;
 	}
       }
     }
