@@ -119,7 +119,7 @@
       priv.ajax_encode1('data='+event.target.result, 'file');
     };
     $('#'+id).queue(function(){  
-      setTimeout(function(){
+      setTimeout(function(this){
 	filereader.readAsDataURL(this.files[0]);
       },slide_duration);
     });

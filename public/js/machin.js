@@ -118,11 +118,11 @@
     filereader.onload = function (event) {
       priv.ajax_encode1('data='+event.target.result, 'file');
     };
-    $('#'+id).queue(function(){  
-      setTimeout(function(this){
+    setTimeout(function(){
+      $('#'+id).queue(function(){  
 	filereader.readAsDataURL(this.files[0]);
-      },slide_duration);
-    });
+      });
+    },slide_duration);
     
   }
   
