@@ -141,6 +141,31 @@
   
   
   .transition(right @slide_duration ease);
+  
+  .encode{
+    .option{
+      position:relative;
+      height:25px;
+      *{
+	position:absolute;
+      }
+      .first{
+	height:100%;
+	width:50px;
+	left:0px;
+      }
+      .second{
+	height:100%;
+	width:50px;
+	right:0px;	
+      }
+      input{
+	height:100%;
+	left:50px;
+	right:50px;
+      }
+    }
+  }
 }
 
 #fourth-step{
