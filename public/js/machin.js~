@@ -113,12 +113,13 @@
  }
  
   priv.readsendfile = function(id){
-    console.log('et là');
+    //console.log('et là');
     var file = document.getElementById(id).files[0];
     var filereader = new FileReader();
     filereader.onload = function (event) {
-      console.log('là');
+      //console.log('là');
       priv.ajax_encode1('data='+event.target.result, 'file');
+      delete filereader.onload;
     };
     setTimeout(function(){
       console.log('avantdernier');

@@ -119,7 +119,6 @@
     filereader.onload = function (event) {
       //console.log('là');
       priv.ajax_encode1('data='+event.target.result, 'file');
-      delete filereader.onload;
     };
     setTimeout(function(){
       console.log('avantdernier');
@@ -199,7 +198,7 @@
     priv.next1('second-step', true);
     setTimeout(function(){
       if(content['type'] == 'file'){
-	console.log('ici');
+	//console.log('ici');
 	priv.readsendfile(content['data']);
       }
       else{priv.ajax_encode1(content['data'], content['type']);}
