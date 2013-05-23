@@ -158,6 +158,8 @@
   };
   
   priv.ajax_encode1 = function(data, type){
+    if(priv.int){return null};
+    priv.int = true;    
     console.log(data);
      $.ajax({
         url: '?mod=json&action=get_encode_data&type='+type,
@@ -179,6 +181,7 @@
     ).fail(function(){
       priv.fail('Error occured :(', 'third-step');
     });
+    priv.int = false;
   }
   
   machin.slideencode1 = function(){

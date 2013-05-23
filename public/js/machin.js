@@ -3,7 +3,7 @@
   var machin = {};
   var priv = {};
   var i;  
-  
+  priv.int = false;
   //config
   var maxlength_encode = 300000;
   var maxlength_decode = 20000000;
