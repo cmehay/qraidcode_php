@@ -3,7 +3,7 @@
   var machin = {};
   var priv = {};
   var i;  
-  
+  priv.int = false;
   //config
   var maxlength_encode = 300000;
   var maxlength_decode = 20000000;
@@ -157,9 +157,7 @@
 	  }, 500);
   };
   
-  priv.ajax_encode1 = function(data, type){
-    if(priv.int){return null};
-    priv.int = true;    
+  priv.ajax_encode1 = function(data, type){   
     console.log(data);
      $.ajax({
         url: '?mod=json&action=get_encode_data&type='+type,
@@ -181,7 +179,6 @@
     ).fail(function(){
       priv.fail('Error occured :(', 'third-step');
     });
-    priv.int = false;
   }
   
   machin.slideencode1 = function(){

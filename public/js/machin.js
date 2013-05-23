@@ -152,16 +152,21 @@
   
   priv.fail = function(msg, prev){
     $('#wait').html(msg);
-	  setTimeout(function(){
-	    machin.prev(prev);
-	  }, 500);
+    setTimeout(function(){
+      machin.prev(prev);
+    }, 500);
   };
   
-  priv.ajax_encode1 = function(data, type){
-    if(priv.int){return null};
-    priv.int = true;    
+  priv.setencodevalue = function(json){
+    $('.range.chunk').attr('min', json.minqr);
+    $('.range.chunk').attr('max', json.maxqr);
+    $('.range.rs').attr('min', json.minrs);
+    $('.range.rs').attr('max', json.maxrs);
+  }
+  
+  priv.ajax_encode1 = function(data, type){   
     console.log(data);
-     $.ajax({
+    $.ajax({
         url: '?mod=json&action=get_encode_data&type='+type,
         type: 'POST',
         data: data,
@@ -176,12 +181,12 @@
 	  priv.fail(json.msg, 'third-step');
 	  return false;
 	}
+	priv.setencodevalue(json);
 	priv.next2('second-step');
       }
     ).fail(function(){
       priv.fail('Error occured :(', 'third-step');
     });
-    priv.int = false;
   }
   
   machin.slideencode1 = function(){
