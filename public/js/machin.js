@@ -138,7 +138,7 @@
 //  	  
 //  	  filereader.readAsDataURL(this.files[0]);
 //  	});
-// 	return false;
+ 	return {'data':'file-encode', 'type':'file'};
     }
     return false;
   };
@@ -182,7 +182,10 @@
     }
     priv.next1('second-step', true);
     setTimeout(function(){
-      priv.ajax_encode1(content['data'], content['type']);
+      if(content['type'] == 'file'){
+	priv.readsendfile(content['data']);
+      }
+      else{priv.ajax_encode1(content['data'], content['type']);}
     },slide_duration);
   }
   
