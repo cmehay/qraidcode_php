@@ -189,6 +189,10 @@
 	  height: 100%;
 	}
       }
+      input{
+	right:70px;
+	left: 50%;
+      }
     }
   }
 }
