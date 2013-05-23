@@ -45,6 +45,7 @@
     $('#'+from).css('right', '-700px');
     console.log(corresp[from]);
     $('#'+corresp[from]).css('right', '0px');
+    $('#wait').css('opacity', 0)
   };
   
   priv.next1 = function(from, wait){
@@ -54,7 +55,7 @@
     };
     $('#'+from).css('right', '700px');
     if(wait){
-      setTimeout(function(){$('#wait').css('opacity', 100);}, slide_duration);
+      setTimeout(function(){$('#wait').css('opacity', 1);}, slide_duration);
       return true;
     }
     $('#'+corresp[from]).css('right', '0px');
@@ -65,7 +66,7 @@
       'second-step':'third-step',
       'third-step':'fourth-step',
     };
-    $('#wait').css('opacity', 1);
+    $('#wait').css('opacity', 0);
     setTimeout(function(){$('#'+corresp[from]).css('right', '0px');}, 110);
   }
   
@@ -116,7 +117,8 @@
 	return {'data':$('#text-encode').val(), 'type':'text'};
     }
     else if($('#text-encode').is(':disabled') && !$('#file-encode').is('.invalid')){
-      var file = document.getElementById('file-encode').files[0];
+      var file = new FormData($('#file-encode')[0]);
+      //var file = document.getElementById('file-encode').files[0];
 // 	var filereader = new FileReader();
 // 	$('#file-encode').queue(function(){
 // 	  
