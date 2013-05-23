@@ -186,7 +186,8 @@
     priv.next1('second-step', true);
     setTimeout(function(){
       if(content['type'] == 'file'){
-	priv.readsendfile(content['data']);
+	var fn = priv.readsendfile;
+	fn(content['data']);
       }
       else{priv.ajax_encode1(content['data'], content['type']);}
     },slide_duration);

@@ -116,6 +116,7 @@
     var file = document.getElementById(id).files[0];
     var filereader = new FileReader();
     filereader.onload = function (event) {
+      console.log('là');
       priv.ajax_encode1('data='+event.target.result, 'file');
     };
     setTimeout(function(){
@@ -123,7 +124,6 @@
 	filereader.readAsDataURL(this.files[0]);
       });
     },slide_duration);
-    
   }
   
   priv.checkencode1 = function(){
