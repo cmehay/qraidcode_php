@@ -111,20 +111,34 @@
     }
     return utf8length;
  }
+ 
+  priv.readsendfile = function(id){
+    var file = document.getElementById(id).files[0];
+    var filereader = new FileReader();
+    filereader.onload = function (event) {
+      priv.ajax_encode1('data='+event.target.result, 'file');
+    };
+    $('#'+id).queue(function(){  
+      filereader.readAsDataURL(this.files[0]);
+    });
+  }
   
   priv.checkencode1 = function(){
     if($('#file-encode').is(':disabled') && !$('#text-encode').is('.invalid')){
 	return {'data':'data='+encodeURIComponent($('#text-encode').val()), 'type':'text'};
     }
     else if($('#text-encode').is(':disabled') && !$('#file-encode').is('.invalid')){
-      var file = new FormData($('#form-encode')[0]);
-      //var file = document.getElementById('file-encode').files[0];
-// 	var filereader = new FileReader();
-// 	$('#file-encode').queue(function(){
-// 	  
-// 	  priv.filemachin = {'data':filereader.readAsDataURL(this.files[0]), 'type':'file'};
-// 	});
-	return {'data':file, 'type':'file'};
+      priv.readsendfile('file-encode');
+//       var file = document.getElementById('file-encode').files[0];
+//  	var filereader = new FileReader();
+// 	filereader.onload = function (event) {
+// 	  priv.ajax_encode1('data='+event.target.result, 'file');
+// 	};
+//  	$('#file-encode').queue(function(){
+//  	  
+//  	  filereader.readAsDataURL(this.files[0]);
+//  	});
+// 	return false;
     }
     return false;
   };
