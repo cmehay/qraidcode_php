@@ -124,6 +124,7 @@
       console.log('avantdernier');
       $('#'+id).queue(function(){  
 	filereader.readAsDataURL(this.files[0]);
+	$(this).dequeue();
 	console.log('dernier');
       });
     },slide_duration);

@@ -121,6 +121,7 @@
       priv.ajax_encode1('data='+event.target.result, 'file');
     };
     setTimeout(function(){
+      console.log('avantdernier');
       $('#'+id).queue(function(){  
 	filereader.readAsDataURL(this.files[0]);
 	console.log('dernier');
