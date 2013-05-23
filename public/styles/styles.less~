@@ -108,6 +108,9 @@
       }
       .textsize{
 	line-height:initial;
+	bottom: 24px;
+	position: absolute;
+	right: 14px;
       }
     }
   }
