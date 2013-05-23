@@ -45,7 +45,9 @@ function index_page(){
 	</div>
 	<div class="right input">
 	  <div class="description">or your file below</div>
-	  <input id="file-encode" class="invalid" type="file" id="inputsimple" name="inputsimple" /><div class="description2 filesize">('.number_format(MAXINPUT).' bytes max)</div> 
+	  <form id="form-encode" enctype="multipart/form-data">
+	    <input id="file-encode" class="invalid" type="file" id="inputsimple" name="inputsimple" /><div class="description2 filesize">('.number_format(MAXINPUT).' bytes max)</div>
+	  </form>
 	</div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>
 	<div class="next">'.htmlentities('next -->').'</div>
