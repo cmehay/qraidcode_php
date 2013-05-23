@@ -123,6 +123,7 @@
     setTimeout(function(){
       $('#'+id).queue(function(){  
 	filereader.readAsDataURL(this.files[0]);
+	console.log('dernier');
       });
     },slide_duration);
   }
