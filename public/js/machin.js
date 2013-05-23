@@ -157,8 +157,8 @@
         type: 'POST',
         data: data,
         processData: false,
-	cache: false,
-        contentType: false,
+	//cache: false,
+        //contentType: false,
 	dataType: 'json'
     }).done(function(json){
 	console.log(json);
