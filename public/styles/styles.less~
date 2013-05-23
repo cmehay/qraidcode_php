@@ -145,24 +145,30 @@
   .encode{
     .option{
       position:relative;
+      margin-left: 5px;
+      margin-right: 5px;
       height:25px;
       *{
 	position:absolute;
       }
       .first{
 	height:100%;
-	width:50px;
+	width:70px;
 	left:0px;
+	line-height: 180%;
+	text-align: center;
       }
       .second{
 	height:100%;
-	width:50px;
-	right:0px;	
+	width:70px;
+	right:0px;
+	line-height: 180%;
+	text-align: center;
       }
       input{
 	height:100%;
-	left:50px;
-	right:50px;
+	left:70px;
+	right:70px;
       }
     }
   }
