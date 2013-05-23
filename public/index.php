@@ -65,8 +65,8 @@ function index_page(){
     <div id="third-step">
       <div class="encode">
 	<div class="description">Set how many qrcodes you want</div>
-	<div class="option"><span class="first">Data:</span><input class="range chunks" name="chunks" type="range" value="0" max="0" min="0" step="1" /><span class="second"></span></div>
-	<div class="option"><span class="first">Parity:</span><input class="range rs" type="range" name="rs" value="0" max="0" min="0" step="1" /><span class="second"></span></div>
+	<div class="option"><div class="first">Data:</div><input class="range chunks" name="chunks" type="range" value="0" max="0" min="0" step="1" /><div class="second"></div></div>
+	<div class="option"><div class="first">Parity:</div><input class="range rs" type="range" name="rs" value="0" max="0" min="0" step="1" /><div class="second"></div></div>
 	<div class="description">You will get <span id="datapartotal"></span> qrcodes and you will need at less <span id="datatotal"></span> qrcodes to decode your data</div>
 	<div class="description">Options:</div>
 	<div class="option"><label><input type="checkbox" name="option" value="count" /> Print the qrcode numerotation</label></div>
@@ -74,7 +74,7 @@ function index_page(){
 	<div class="option"><label><input type="checkbox" name="option" value="desc" /> Print a description or a title</label></div>
 	<div class="option retrait"><input type="text" name="optiontitle" /></div>	
 	<div class="description">Which size for your qrcodes?</div>
-	<div class="option"><span class="first">Size:</span><input class="range size" type="range" name="size" value="6" max="20" min="4" step="0.5" /><span class="second"></span></div>
+	<div class="option"><div class="first">Size:</div><input class="range size" type="range" name="size" value="6" max="20" min="4" step="0.5" /><div class="second"></div></div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>
 	<div class="next">'.htmlentities('next -->').'</div>
       </div>
