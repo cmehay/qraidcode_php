@@ -215,7 +215,7 @@
     $.ajax({
       url:'?mod=json&action=get_'+action+'_status',
       type: 'GET',
-      dataType: json
+      dataType: 'json'
     }).done(function(json){
       $('#wait').html(json.msg);
     })

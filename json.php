@@ -53,6 +53,12 @@ function json_cb_get_encode_option(){
   ));
 }
 
+function json_cb_get_encode_status(){
+  return json_valid(array(
+      'msg' => 'caca :3'
+  ));
+}
+
 
 
 
