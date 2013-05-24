@@ -197,7 +197,7 @@
       url:'?mod=json&action=get_encode_option',
       type: 'POST',
       data: data,
-      dataType: json
+      dataType: 'json'
     }).done(function(json){
       clearInterval(priv.ajaxrefresh);
       if(json.error == true){
