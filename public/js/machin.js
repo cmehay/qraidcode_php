@@ -208,7 +208,7 @@
     }).fail(function(){
       clearInterval(priv.ajaxrefresh);
       priv.fail('Error occured :( try again', 'fourth-step');
-    }
+    });
   }
   
   priv.getstatus = function(action){
