@@ -240,7 +240,7 @@
   priv.slideencode2 = function(){
     priv.next1('third-step', true);
     setTimeout(function(){
-      priv.ajax_encode2($('#third-step .encode form').serialize);
+      priv.ajax_encode2($('#third-step .encode :form').serialize);
       setTimeout(function(){
 	priv.ajaxrefresh=setInterval(function(){priv.getstatus('encode')},1000);
       },1000);

@@ -6,7 +6,7 @@ require '../json.php';
 require '../qraidcode.php';
 require '../functions.php';
 
-
+session_start();
 
 trigger_error(print_r($_POST, true));
 
