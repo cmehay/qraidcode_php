@@ -213,15 +213,17 @@ a {
 
 .prev{
   position: absolute;
-  bottom: 3px;
-  left: 3px;
+  bottom: 0px;
+  left: 0px;
+  padding:7px;
   .button;
 }
 
 .next{
   position: absolute;
-  bottom: 3px;
-  right: 3px;
+  bottom: 0px;
+  right: 0px;
+  padding:7px;
   .button;
 }
 
