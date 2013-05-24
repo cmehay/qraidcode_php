@@ -242,7 +242,7 @@
     $('.range.rs').attr('max', maxqrcodes - data);
     priv.display_rs();
     var rs=$('.range.rs').val();
-    $('#datapartotal').html((data + rs));
+    $('#datapartotal').html((int)data + (int)rs);
     $('#datatotal').html(data);
   }
   
