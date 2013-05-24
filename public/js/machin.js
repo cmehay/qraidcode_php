@@ -239,7 +239,7 @@
     //update rs
     $('.range.rs').attr('max', maxqrcodes - data);
     var rs=$('.range.rs').val();
-    $('#datapartotal').html(data+rs);
+    $('#datapartotal').html((data + rs));
     $('#datatotal').html(data);
   }
   
