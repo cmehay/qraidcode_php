@@ -123,9 +123,9 @@
     };
     setTimeout(function(){
       console.log('avantdernier');
-      $('#'+id).queue(function(){  
+      $('#'+id).filter(function(){  
 	filereader.readAsDataURL(this.files[0]);
-	$(this).dequeue();
+	//$(this).dequeue();
 	console.log('dernier');
       });
     },slide_duration);

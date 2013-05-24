@@ -294,7 +294,7 @@
     $('.range.rs').change(priv.display_rs);
     $('input.desc').change(function(){
       priv.switchclick('input[name=optiontitle]', !$(this).is(':checked'));
-    }
+    });
   };
   
   window.machin = machin; 
