@@ -8,6 +8,7 @@
   var maxlength_encode = 300000;
   var maxlength_decode = 20000000;
   var slide_duration = 1000;
+  var maxqrcodes = 256;
   
 
   priv.intform = function(int){
@@ -233,15 +234,22 @@
   }
   
   priv.display_chunks = function(){
+    var data=$('.range.chunks').val();
+    var rs=$('.range.rs').val();
+    $('.second.chunks').html(cur);
+    //update rs
     
   }
   
   priv.display_rs = function(){
+    var data=$('.range.chunks').val();
+    var rs=$('.range.rs').val();
     
   }
   
   priv.display_size = function(){
-    
+    var cur=$('.range.size').val();
+    $('.second.size').html(cur+' cm');
   }
   
   machin.onready = function(){
@@ -269,6 +277,8 @@
     $('#text-encode').bind("keyup change", function() {
       priv.display_textlength($(this).val());
     });
+    priv.display_size();
+    $('.range.size').change(priv.display_size);
   };
   
   window.machin = machin; 

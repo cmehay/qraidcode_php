@@ -8,6 +8,7 @@
   var maxlength_encode = 300000;
   var maxlength_decode = 20000000;
   var slide_duration = 1000;
+  var maxqrcodes = 256;
   
 
   priv.intform = function(int){
@@ -233,13 +234,21 @@
   }
   
   priv.display_chunks = function(){
-    var cur=$('.range.chunks').val();
-    
+    var data=$('.range.chunks').val();
+    $('.second.chunks').html(data);
+    //update rs
+    $('.range.rs').attr('max', maxqrcodes - data);
+    var rs=$('.range.rs').val();
+    $('#datapartotal').html(data+rs);
+    $('#datatotal').html(data);
   }
   
   priv.display_rs = function(){
-    var cur=$('.range.rs').val();
-    
+    var data=$('.range.chunks').val();
+    var rs=$('.range.rs').val();
+    $('.second.rs').html(rs);
+    $('#datapartotal').html(data+rs);
+    $('#datatotal').html(data);   
   }
   
   priv.display_size = function(){
@@ -272,7 +281,10 @@
     $('#text-encode').bind("keyup change", function() {
       priv.display_textlength($(this).val());
     });
+    priv.display_size();
     $('.range.size').change(priv.display_size);
+    $('.range.chunks').change(priv.display_chunks);
+    $('.range.rs').change(priv.display_rs);
   };
   
   window.machin = machin; 
