@@ -188,8 +188,31 @@
 	priv.next2('second-step');
       }
     ).fail(function(){
-      priv.fail('Error occured :(', 'third-step');
+      priv.fail('Error occured :( try again', 'third-step');
     });
+  }
+  
+  priv.ajax_encode2 = function(data){
+    $.ajax({
+      url:'?mod=json&action=get_encode_option',
+      type: 'POST',
+      data: data,
+      dataType: json
+    }).done(function(json){
+      
+    }).fail(function(){
+      priv.fail('Error occured :( try again', 'fourth-step');
+    }
+  }
+  
+  priv.getencodestatus = function(){
+    $.ajax({
+      url:'?mod=json&action=get_encode_status',
+      type: 'GET',
+      dataType: json
+    }).done(function(json){
+      $('#wait').html(json.msg);
+    })
   }
   
   machin.slideencode1 = function(){
@@ -242,6 +265,7 @@
     $('.range.rs').attr('max', maxqrcodes - parseInt(data));
     priv.display_rs();
     var rs=$('.range.rs').val();
+    $('.range.rs').val(parseInt(rs)-1);
     $('.range.rs').val(rs);
     $('#datapartotal').html(parseInt(data) + parseInt(rs));
     $('#datatotal').html(data);

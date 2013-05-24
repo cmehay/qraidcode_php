@@ -46,6 +46,13 @@ function json_cb_get_encode_data(){
   )); 
 }
 
+function json_cb_get_encode_option(){
+  sleep(10);
+  return json_valid(array(
+      null
+  ));
+}
+
 
 
 

@@ -78,13 +78,13 @@ function index_page(){
 	<div class="next">'.htmlentities('next -->').'</div>
       </div>
       <div class="decode">
-	<div class="display_msg"></div>
+	<div class="display_msg"><a href="?mod=file&action=getdata">Download your data</a></div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>
       </div>
     </div>
     <div id="fourth-step">
       <div class="encode"> 
-	<div class="display_msg"></div>
+	<div class="link"><a href="?mod=file&action=getpdf">Download your qrcodes</a></div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>	
       </div>
     </div>  

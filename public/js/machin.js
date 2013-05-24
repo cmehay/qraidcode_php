@@ -188,11 +188,40 @@
 	priv.next2('second-step');
       }
     ).fail(function(){
-      priv.fail('Error occured :(', 'third-step');
+      priv.fail('Error occured :( try again', 'third-step');
     });
   }
   
-  machin.slideencode1 = function(){
+  priv.ajax_encode2 = function(data){
+    $.ajax({
+      url:'?mod=json&action=get_encode_option',
+      type: 'POST',
+      data: data,
+      dataType: json
+    }).done(function(json){
+      clearInterval(priv.ajaxrefresh);
+      if(json.error == true){
+	priv.fail(json.msg, 'fourth-step');
+	return false;
+      }
+      priv.next2('third-step');
+    }).fail(function(){
+      clearInterval(priv.ajaxrefresh);
+      priv.fail('Error occured :( try again', 'fourth-step');
+    }
+  }
+  
+  priv.getstatus = function(action){
+    $.ajax({
+      url:'?mod=json&action=get_'+action+'_status',
+      type: 'GET',
+      dataType: json
+    }).done(function(json){
+      $('#wait').html(json.msg);
+    })
+  }
+  
+  priv.slideencode1 = function(){
     var content = priv.checkencode1();
     console.log(content);
     if(content == false){
@@ -207,6 +236,17 @@
       else{priv.ajax_encode1(content['data'], content['type']);}
     },slide_duration);
   }
+  
+  priv.slideencode2 = function(){
+    priv.next1('third-step', true);
+    setTimeout(function(){
+      priv.ajax_encode2($('#third-step .encode form').serialize);
+      setTimeout(function(){
+	priv.ajaxrefresh=setInterval(function(){priv.getstatus('encode')},1000);
+      },1000);
+    },slide_duration);
+  }
+  
   
   priv.display_filesize = function(file){
     var filesize = priv.filesize(file, maxlength_encode);
@@ -282,7 +322,10 @@
       machin.selectactive('#file-encode');
     });
     $('#second-step .encode .next').click(function(){
-      machin.slideencode1();
+      priv.slideencode1();
+    });
+    $('#third-step .encode .next').click(function(){
+      priv.slideencode2();
     });
     $('#file-encode').change(function(){
       priv.display_filesize(this.files);
