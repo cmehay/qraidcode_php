@@ -238,8 +238,9 @@
     $('.second.chunks').html(data);
     //update rs
     $('.range.rs').attr('max', maxqrcodes - data);
+    priv.display_rs();
     var rs=$('.range.rs').val();
-    $('#datapartotal').html(data+rs);
+    $('#datapartotal').html((data + rs));
     $('#datatotal').html(data);
   }
   

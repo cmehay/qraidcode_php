@@ -163,6 +163,8 @@
     $('.range.chunks').attr('max', json.maxqr);
     $('.range.rs').attr('min', json.minrs);
     $('.range.rs').attr('max', json.maxrs);
+    priv.display_chunks();
+    priv.display_rs();
   }
   
   priv.ajax_encode1 = function(data, type){   
@@ -238,6 +240,7 @@
     $('.second.chunks').html(data);
     //update rs
     $('.range.rs').attr('max', maxqrcodes - data);
+    priv.display_rs();
     var rs=$('.range.rs').val();
     $('#datapartotal').html((data + rs));
     $('#datatotal').html(data);
