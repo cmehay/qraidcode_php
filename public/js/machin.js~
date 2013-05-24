@@ -259,6 +259,10 @@
     $('.second.size').html(cur+' cm');
   }
   
+  priv.switchclick = function(to, active){
+    $(to).prop("disabled", active);
+  }
+  
   machin.onready = function(){
     $('#encode').click(function(){
       machin.firstslide('encode');
@@ -288,6 +292,9 @@
     $('.range.size').change(priv.display_size);
     $('.range.chunks').change(priv.display_chunks);
     $('.range.rs').change(priv.display_rs);
+    $('input.desc').change(function(){
+      priv.switchclick('input[name=optiontitle]', !$(this).is(':checked'))
+    }
   };
   
   window.machin = machin; 

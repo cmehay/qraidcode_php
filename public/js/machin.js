@@ -293,7 +293,7 @@
     $('.range.chunks').change(priv.display_chunks);
     $('.range.rs').change(priv.display_rs);
     $('input.desc').change(function(){
-      priv.switchclick('input[name=optiontitle]', !$(this).is(':checked'))
+      priv.switchclick('input[name=optiontitle]', !$(this).is(':checked'));
     }
   };
   
