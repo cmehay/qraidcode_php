@@ -239,10 +239,10 @@
     var data=$('.range.chunks').val();
     $('.second.chunks').html(data);
     //update rs
-    $('.range.rs').attr('max', maxqrcodes - data);
+    $('.range.rs').attr('max', maxqrcodes - parseInt(data));
     priv.display_rs();
     var rs=$('.range.rs').val();
-    $('#datapartotal').html((int)data + (int)rs);
+    $('#datapartotal').html(parseInt(data) + parseInt(rs));
     $('#datatotal').html(data);
   }
   
@@ -250,7 +250,7 @@
     var data=$('.range.chunks').val();
     var rs=$('.range.rs').val();
     $('.second.rs').html(rs);
-    $('#datapartotal').html(data+rs);
+    $('#datapartotal').html(parseInt(data)+parseInt(rs));
     $('#datatotal').html(data);   
   }
   
