@@ -232,6 +232,21 @@
     $('#text-encode').removeClass('invalid');
   }
   
+  priv.display_chunks = function(){
+    var cur=$('.range.chunks').val();
+    
+  }
+  
+  priv.display_rs = function(){
+    var cur=$('.range.rs').val();
+    
+  }
+  
+  priv.display_size = function(){
+    var cur=$('.range.size').val();
+    $('.second.size').html(cur+' cm');
+  }
+  
   machin.onready = function(){
     $('#encode').click(function(){
       machin.firstslide('encode');
@@ -257,6 +272,7 @@
     $('#text-encode').bind("keyup change", function() {
       priv.display_textlength($(this).val());
     });
+    $('.range.size').change(priv.display_size);
   };
   
   window.machin = machin; 
