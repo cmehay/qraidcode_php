@@ -71,7 +71,7 @@ function index_page(){
 	<div class="description newblock">Options:</div>
 	<div class="option2"><label><input type="checkbox" name="option" value="count" /> Print the qrcode numerotation</label></div>
 	<div class="option2"><label><input type="checkbox" name="option" value="total" /> Print how many qrcodes are required to decode the data</label></div>
-	<div class="option2"><label><input class="desc" type="checkbox" name="option" value="desc" /> Print a description or a title</label><input type="text" name="optiontitle" disabled /></div>
+	<div class="option2"><label><input class="desc" type="checkbox" name="option" value="desc" /> Print a description or a title</label><input type="text" name="optiontitle" size="150" disabled /></div>
 	<div class="description newblock">Which size for your qrcodes?</div>
 	<div class="option"><div class="first">Size:</div><input class="range size" type="range" name="size" value="6" max="20" min="4" step="0.5" /><div class="second size"></div></div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>
