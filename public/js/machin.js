@@ -207,6 +207,7 @@
       clearInterval(priv.ajaxrefresh);
       if(json.error == true){
 	priv.fail(json.msg, 'fourth-step');
+	clearInterval(priv.ajaxrefresh)
 	return false;
       }
       priv.next2('third-step');
