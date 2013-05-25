@@ -935,7 +935,7 @@ function retreive_data($data){
 }
 
 function qrencode($data){
-  exec('echo "'.base64_encode($data).'" | base64 -d | "'.QRENCODE.'" -8 -o - | base64 -w 0', $qrcode, $return);
+  exec('echo "'.base64_encode($data).'" | base64 -d | "'.QRENCODE.'" -8 -s 16 -o - | base64 -w 0', $qrcode, $return);
   //var_dump(base64_encode($data));
   if($return != 0 && !$qrcode){
     return false;  
@@ -989,8 +989,61 @@ function qrdecode($picture){
   return $data;
 }
 
-function pdf_create($qrcodes, $size, $num=null, $name=null){
-  
+function archive_create($qrcodes, $sha1){
+  try{
+    $zip = new ZipArchive;
+    $zip->open(WORKDIR.$sha1.'.zip', ZipArchive::CREATE);
+    foreach($qrcodes as $key => $value){
+      $zip->addFromString($key.'.png', $value);  
+    }
+    $zip->close();
+  }catch(Exception $e) {
+    trigger_error('Imagick caught exception: ' . $e->getMessage());
+    return false;     
+  }
+  $_SESSION['archive'] = WORKDIR.$sha1.'.zip';
+  return true;
+}
+
+function custom_qrcodes($qrcodes, $nbdata, $num=false, $required=false, $name=null){
+  if(!$num && !$required && is_null($name)){
+    return $qrcodes;
+  }
+  $qrsize = imagesx($qrcodes[0]);
+  if($qrsize === false){
+    return false;
+  }
+  foreach($qrcodes as $key => $value) {
+    try {
+    $img = new Imagick();
+    $draw = new ImagickDraw();
+    $draw->setFont(FONT);
+    $draw->setFontSize( 16 );
+    $img->setFormat('PNG');
+    $img->readImageBlob($value);
+    if($num){
+      $img->annotateImage($draw, 16, 16, 0, $key);
+    }
+    if($required){
+      $str = $nbdata.' are required';
+      $offset = ($qrsize) - ((strlen($str) * 16) + 16);
+      $img->annotateImage($draw, $offset, 16, 0, $str);
+    }
+    if(!is_null($name)){
+      $str = explode( "\n", wordwrap( $name, ($qrsize*16)-16));
+      $offset[0] = (($qrsize) - (strlen($str[0]) * 16) + 16)/2;
+      $offset[1] = (($qrsize) - (strlen($str[1]) * 16) + 16)/2;
+      $img->annotateImage($draw, $offset[0], $qrsize - (16*3), 0, $str[0]);
+      $img->annotateImage($draw, $offset[1], $qrsize - (16 + (16/2)), 0, $str[1]);
+    }
+    $img->setImageCompressionQuality(00);
+    }catch(Exception $e) {
+     trigger_error('Imagick caught exception: ' . $e->getMessage());
+     return false;  
+    }
+    $qrcodes[$key] = $img;
+  }
+  return $qrcodes;
 }
 
 function matrix_gen(){
@@ -1011,7 +1064,56 @@ function matrix_gen(){
 
 }
 
-
+function encode($data, $datachunks, $datars, $printnum=false, $printrequired=false, $name=null){
+  $_SESSION['status'] = 'Compute data checksum';
+  $checksum = hash('crc32', $data, true);
+  $sha1 = hash('sha1', $data, false);
+  $_SESSION['status'] = 'Encrypt data';
+  $enc = encrypt_data($data, gen_key($datachunks));
+  $_SESSION['status'] = 'Split data';
+  $data = split_data($enc['data'], $datachunks, $datars);
+  $key = split_data($enc['key'], $datachunks, $datars);
+  $_SESSION['status'] = 'Compute Galois fields polynomial table';
+  $table = set_table();
+  $_SESSION['status'] = 'Compute Reed Solomon';
+  $reed_solomon_enc = 'reed_solomon_enc_'.base();
+  $rs = $reed_solomon_enc($data, $datars);
+  $rskey = $reed_solomon_enc($key, $rschunks);
+  $lenght_crypt = encrypt_data(pack('L', $data['length']), $enc['key']);
+  $_SESSION['status'] = 'Pack into binary';
+  foreach($data['data'] as $key1 => $value){
+    $qrcode[$key1] = format_enc(base(), 'data', $data['chunks'], $key1, $value, $lenght_crypt['data'], $checksum, $key['data'][$key1]);  
+  }
+  foreach($rs as $key2 => $value) {
+    $qrcode[$key1+$key2+1] = format_enc(base(), 'rs', $data['chunks'], $key2, $value, $lenght_crypt['data'], $checksum, $rskey[$key2]);
+  }
+  //unset variables to free memories
+  unset($data);unset($enc);unset($key);unset($rs);unset($checksum);unset($table);unset($reed_solomon_enc);unset($rskey);unset($lenght_crypt);
+  $_SESSION['status'] = 'Generate Qrcodes';
+  foreach($qrcode as $key => $value) {
+    $qr_image[$key] = qrencode($value);  
+    if($qr_image[$key] === false){
+      return 'Qrcodes generation fail';  
+    }
+  }
+  unset($qrcode);
+  $_SESSION['status'] = 'Custom Qrcodes';
+  $qr_image = custom_qrcodes($qr_image, $datachunks, $printnum, $printrequired, $name);
+  if($qr_image === false){
+    return 'Custom Qrcodes error';  
+  }
+  $_SESSION['status'] = 'Create archive';
+  if(archive_create($qr_image, $sha1) === false){
+    return 'Archive creation fail';
+  }
+  unset($_SESSION['status']);
+  if(!is_null($name)){
+    $_SESSION['filename'] = $name;
+  }else{
+    $_SESSION['filename'] = $sha1;
+  }
+  return true;
+}
 
 //var_dump(4294967296 * 2913);
 // $chunks = 200;

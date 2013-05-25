@@ -90,7 +90,7 @@
     if((size > maxsize) || (size == 0)){
       return false;
     }
-    //priv.filescontent = filescontent;
+    priv.filename = files[0].name;
     //console.log(priv.filescontent);
     return size;
   };
@@ -163,6 +163,10 @@
     $('.range.chunks').attr('max', json.maxqr);
     $('.range.rs').attr('min', json.minrs);
     $('.range.rs').attr('max', json.maxrs);
+    if(typeof priv.filename != 'undefined'){
+      $('input.desc').prop("checked", true);
+      $('input[name=optiontitle]').val(priv.filename);
+    }
     priv.display_chunks();
     priv.display_rs();
   }
@@ -233,7 +237,10 @@
 	//console.log('ici');
 	priv.readsendfile(content['data']);
       }
-      else{priv.ajax_encode1(content['data'], content['type']);}
+      else{
+	delete priv.filename;
+	priv.ajax_encode1(content['data'], content['type']);
+      }
     },slide_duration);
   }
   

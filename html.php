@@ -31,6 +31,18 @@ function html_cb_about(){
   <div id="desciption">Coming soon...</div>') ;
 }
 
+function file_cb_getarchive(){
+  if(!isset($_SESSION['archive'])){
+    return 'File error :(';
+  }
+  $file = file_get_contents(isset($_SESSION['archive']));
+  if($file === false){
+    return 'File error :(';  
+  }
+  header('Content-type: application/zip');
+  header('Content-Disposition: attachment; filename="'.urlencode($_SESSION['filename']).'.pdf"');
+  return $file;
+}
 
 
 

@@ -22,12 +22,22 @@ define('UPLOADDIR', '../upload/');
 //matrix dir
 define('MATRIX', '../matrix/');
 
+//font
+define('FONT', '../font.ttf');
+
 
 //max input size
 define('MAXINPUT', 300000);
 
 //max qrcodes
 define('MAXQRCODES', 256);
+
+//qrcode size
+define('MINSIZE', 40);
+define('MAXSIZE', 200);
+
+//maxdata per qrcodes
+define('MAXDATA', 2891);
 
 
 $_SESSION['conf'] = array(

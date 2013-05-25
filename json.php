@@ -32,11 +32,12 @@ function json_cb_get_encode_data(){
   if($length > MAXINPUT || $length == 0){
     return json_error('badsize');  
   }
-  $min = ceil($length / 2891);
+  $min = ceil($length / MAXDATA);
   if($min > MAXQRCODES){
     return json_error('badsize');
   }
   $_SESSION['data'] = $raw;
+  $_SESSION['datalength'] = $length;
   return json_valid(array(
       'maxqr' => MAXQRCODES,
       'minqr' => $min,
@@ -47,15 +48,46 @@ function json_cb_get_encode_data(){
 }
 
 function json_cb_get_encode_option(){
-  sleep(10);
+  //check inputs
+  if(!isset($_POST['chunks']) || !isset($_POST['rs']) || !isset($_POST['size'])){
+    return json_error();
+  }
+  $nb = (int)($_POST['chunks'] + $_POST['rs']);
+  if($nb > MAXQRCODES || $nb < 1){
+    return json_error();
+  }
+//   $size = (int)($_POST['size'] * 10);
+//   if($size < MINSIZE || $size > MAXSIZE){
+//     return json_error();
+//   }
+  
+  if(($_SESSION['datalength'] / $_POST['chunks']) > MAXDATA){
+    return json_error();
+  }
+  $title = null;
+  if(isset(get_array($_POST, 'checkbox', 'desc')) && isset($_POST['optiontitle'])){
+    $title = (string) $_POST['optiontitle'];
+  }
+  
+  $return = encode($_SESSION['data'], $_POST['chunks'], $_POST['rs'], isset(get_array($_POST, 'checkbox', 'count')), isset(get_array($_POST, 'checkbox', 'total')), $title);
+  
+  if($return !== true){
+    return json_error(array(
+        'msg' => $return
+    ));
+  }
+  
   return json_valid(array(
       null
   ));
 }
 
 function json_cb_get_encode_status(){
+  if(!isset($_SESSION['status'])){
+    $_SESSION['status'] = 'Please wait';
+  }
   return json_valid(array(
-      'msg' => 'caca :3'
+      'msg' => $_SESSION['status']
   ));
 }
 

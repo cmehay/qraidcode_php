@@ -72,12 +72,12 @@ function index_page(){
 	<div class="option"><div class="first">Parity:</div><input class="range rs" type="range" name="rs" value="0" max="0" min="0" step="1" /><div class="second rs"></div></div>
 	<div class="description">You will get <span id="datapartotal"></span> qrcodes and you will need at less <span id="datatotal"></span> qrcodes to decode your data</div>
 	<div class="description newblock">Options:</div>
-	<div class="option2"><label><input type="checkbox" name="checkbox[count]" /> Print the qrcode numerotation</label></div>
+	<div class="option2"><label><input type="checkbox" name="checkbox[count]" /> Print numerotation</label></div>
 	<div class="option2"><label><input type="checkbox" name="checkbox[total]" /> Print how many qrcodes are required to decode the data</label></div>
-	<div class="option2"><label><input class="desc" type="checkbox" name="checkbox[desc]" /> Print a description or a title</label><input type="text" name="optiontitle" maxlength="150" disabled /></div>
-	<div class="description newblock">Which size for your qrcodes?</div>
-	<div class="option"><div class="first">Size:</div><input class="range size" type="range" name="size" value="6" max="20" min="4" step="0.5" /><div class="second size"></div></div>
-	<div class="prev">'.htmlentities('<-- prev').'</div>
+	<div class="option2"><label><input class="desc" type="checkbox" name="checkbox[desc]" /> Print a description or a title</label><input type="text" name="optiontitle" maxlength="50" disabled /></div>'
+	//<div class="description newblock">Which size for your qrcodes?</div>
+	//<div class="option"><div class="first">Size:</div><input class="range size" type="range" name="size" value="6" max="'.(MAXSIZE/10).'" min="'.(MINSIZE/10).'" step="0.5" /><div class="second size"></div></div>
+	.'<div class="prev">'.htmlentities('<-- prev').'</div>
 	<div class="next">'.htmlentities('next -->').'</div>
       </div>
       <div class="decode">
@@ -87,7 +87,7 @@ function index_page(){
     </div>
     <div id="fourth-step">
       <div class="encode"> 
-	<div class="link"><a href="?mod=file&action=getpdf">Download your qrcodes</a></div>
+	<div class="link"><a href="?mod=file&action=getarchive">Download your qrcodes</a></div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>	
       </div>
     </div>  
