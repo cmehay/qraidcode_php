@@ -935,7 +935,7 @@ function retreive_data($data){
 }
 
 function qrencode($data){
-  exec('echo "'.base64_encode($data).'" | base64 -d | "'.QRENCODE.'" -8 -s 16 -o - | base64 -w 0', $qrcode, $return);
+  exec('echo "'.base64_encode($data).'" | base64 -d | "'.QRENCODE.'" -8 -s 8 -o - | base64 -w 0', $qrcode, $return);
   //var_dump(base64_encode($data));
   if($return != 0 && !$qrcode){
     return false;  
