@@ -64,7 +64,7 @@ function set_table() {
 
 function set_table_global() {
   if(!isset($GLOBALS['table'])){
-    $GLOBALS['table'] = set_table;  
+    $GLOBALS['table'] = set_table();  
   }
   return $GLOBALS['table'];
 }
