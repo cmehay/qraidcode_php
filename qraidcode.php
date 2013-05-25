@@ -1009,7 +1009,7 @@ function custom_qrcodes($qrcodes, $nbdata, $num=false, $required=false, $name=nu
   if(!$num && !$required && is_null($name)){
     return $qrcodes;
   }
-  $qrsize = imagesx($qrcodes[0]);
+  $qrsize = imagesx(imagecreatefromstring($qrcodes[0]));
   if($qrsize === false){
     return false;
   }
