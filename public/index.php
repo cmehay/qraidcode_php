@@ -1,5 +1,5 @@
 <?php
-
+set_time_limit(240);
 session_start();
 
 //index
