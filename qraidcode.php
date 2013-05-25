@@ -1049,6 +1049,7 @@ function custom_qrcodes($qrcodes, $nbdata, $num=false, $required=false, $name=nu
      return false;  
     }
     $qrcodes[$key] = $img;
+    unset($img);
   }
   return $qrcodes;
 }
