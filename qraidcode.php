@@ -1028,6 +1028,7 @@ function custom_qrcodes($qrcodes, $nbdata, $num=false, $required=false, $name=nu
       $str = $nbdata.' are required';
       $offset = ($qrsize) - ((strlen($str) * 16) + 16);
       $img->annotateImage($draw, $offset, 16, 0, $str);
+      unset($offset);
     }
     if(!is_null($name)){
       $str = explode( "\n", wordwrap( $name, ($qrsize*16)-16));
