@@ -35,7 +35,7 @@ function file_cb_getarchive(){
   if(!isset($_SESSION['archive'])){
     return 'File error :(';
   }
-  $file = file_get_contents(isset($_SESSION['archive']));
+  $file = file_get_contents($_SESSION['archive']);
   if($file === false){
     return 'File error :(';  
   }
