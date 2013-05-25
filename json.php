@@ -65,11 +65,11 @@ function json_cb_get_encode_option(){
     return json_error();
   }
   $title = null;
-  if(is_null(get_array($_POST, 'checkbox', 'desc')) && isset($_POST['optiontitle'])){
+  if(!is_null(get_array($_POST, 'checkbox', 'desc')) && isset($_POST['optiontitle'])){
     $title = (string) $_POST['optiontitle'];
   }
   
-  $return = encode($_SESSION['data'], $_POST['chunks'], $_POST['rs'], isset(get_array($_POST, 'checkbox', 'count')), isset(get_array($_POST, 'checkbox', 'total')), $title);
+  $return = encode($_SESSION['data'], $_POST['chunks'], $_POST['rs'], !is_null(get_array($_POST, 'checkbox', 'count')), !is_null(get_array($_POST, 'checkbox', 'total')), $title);
   
   if($return !== true){
     return json_error(array(
