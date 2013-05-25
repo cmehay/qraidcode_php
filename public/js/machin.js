@@ -212,6 +212,7 @@
       }
       priv.next2('third-step');
     }).fail(function(){
+      console.log('fail here');
       clearInterval(priv.ajaxrefresh);
       priv.fail('Error occured :( try again', 'fourth-step');
     });
