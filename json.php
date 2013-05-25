@@ -48,7 +48,6 @@ function json_cb_get_encode_data(){
 }
 
 function json_cb_get_encode_option(){
-  trigger_error('bordel');
   //check inputs
   if(!isset($_POST['chunks']) || !isset($_POST['rs'])){
     return json_error();

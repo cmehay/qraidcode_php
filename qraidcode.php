@@ -1073,16 +1073,21 @@ function matrix_gen(){
 
 function encode($data, $datachunks, $datars, $printnum=false, $printrequired=false, $name=null){
   $_SESSION['status'] = 'Compute data checksum';
+  trigger_error($_SESSION['status']);
   $checksum = hash('crc32', $data, true);
   $sha1 = hash('sha1', $data, false);
   $_SESSION['status'] = 'Encrypt data';
+  trigger_error($_SESSION['status']);
   $enc = encrypt_data($data, gen_key($datachunks));
   $_SESSION['status'] = 'Split data';
+  trigger_error($_SESSION['status']);
   $data = split_data($enc['data'], $datachunks, $datars);
   $key = split_data($enc['key'], $datachunks, $datars);
   $_SESSION['status'] = 'Compute Galois fields polynomial table';
+  trigger_error($_SESSION['status']);
   $table = set_table();
   $_SESSION['status'] = 'Compute Reed Solomon';
+  trigger_error($_SESSION['status']);
   $reed_solomon_enc = 'reed_solomon_enc_'.base();
   if($datars > 0){
     $rs = $reed_solomon_enc($data, $datars);
@@ -1090,6 +1095,7 @@ function encode($data, $datachunks, $datars, $printnum=false, $printrequired=fal
   }
   $lenght_crypt = encrypt_data(pack('L', $data['length']), $enc['key']);
   $_SESSION['status'] = 'Pack into binary';
+  trigger_error($_SESSION['status']);
   foreach($data['data'] as $key1 => $value){
     $qrcode[$key1] = format_enc(base(), 'data', $data['chunks'], $key1, $value, $lenght_crypt['data'], $checksum, $key['data'][$key1]);  
   }
@@ -1101,6 +1107,7 @@ function encode($data, $datachunks, $datars, $printnum=false, $printrequired=fal
   //unset variables to free memories
   unset($data);unset($enc);unset($key);unset($rs);unset($checksum);unset($table);unset($reed_solomon_enc);unset($rskey);unset($lenght_crypt);
   $_SESSION['status'] = 'Generate Qrcodes';
+  trigger_error($_SESSION['status']);
   foreach($qrcode as $key => $value) {
     $qr_image[$key] = qrencode($value);  
     if($qr_image[$key] === false){
@@ -1109,11 +1116,13 @@ function encode($data, $datachunks, $datars, $printnum=false, $printrequired=fal
   }
   unset($qrcode);
   $_SESSION['status'] = 'Custom Qrcodes';
+  trigger_error($_SESSION['status']);
   $qr_image = custom_qrcodes($qr_image, $datachunks, $printnum, $printrequired, $name);
   if($qr_image === false){
     return 'Custom Qrcodes error';  
   }
   $_SESSION['status'] = 'Create archive';
+  trigger_error($_SESSION['status']);
   if(archive_create($qr_image, $sha1) === false){
     return 'Archive creation fail';
   }
