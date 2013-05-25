@@ -1021,7 +1021,7 @@ function custom_qrcodes($qrcodes, $nbdata, $num=false, $required=false, $name=nu
     $draw = new ImagickDraw();
     $draw->setFont(FONT);
     $draw->setFontSize( 16 );
-    $img->setFormat('PNG');
+    $img->setFormat('PNG8');
     $img->readImageBlob($value);
     if($num){
       $img->annotateImage($draw, 16, 16, 0, $key);
@@ -1041,7 +1041,8 @@ function custom_qrcodes($qrcodes, $nbdata, $num=false, $required=false, $name=nu
 	$img->annotateImage($draw, $offset[1], $qrsize - (16 + (16/2)), 0, $str[1]);
       }
     }
-    $img->setImageDepth(1);
+    $img->setImageDepth(8);
+    $img->quantizeImage(2, Imagick::COLORSPACE_GRAY, 0, false, false );
     $img->setImageCompressionQuality(00);
     }catch(Exception $e) {
      trigger_error('Imagick caught exception: ' . $e->getMessage());
