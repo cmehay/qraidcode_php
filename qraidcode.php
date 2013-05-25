@@ -1032,9 +1032,11 @@ function custom_qrcodes($qrcodes, $nbdata, $num=false, $required=false, $name=nu
     if(!is_null($name)){
       $str = explode( "\n", wordwrap( $name, ($qrsize*16)-16));
       $offset[0] = (($qrsize) - (strlen($str[0]) * 16) + 16)/2;
-      $offset[1] = (($qrsize) - (strlen($str[1]) * 16) + 16)/2;
       $img->annotateImage($draw, $offset[0], $qrsize - (16*3), 0, $str[0]);
-      $img->annotateImage($draw, $offset[1], $qrsize - (16 + (16/2)), 0, $str[1]);
+      if(isset($str[1])){
+	$offset[1] = (($qrsize) - (strlen($str[1]) * 16) + 16)/2;  
+	$img->annotateImage($draw, $offset[1], $qrsize - (16 + (16/2)), 0, $str[1]);
+      }
     }
     $img->setImageCompressionQuality(00);
     }catch(Exception $e) {
@@ -1078,7 +1080,7 @@ function encode($data, $datachunks, $datars, $printnum=false, $printrequired=fal
   $_SESSION['status'] = 'Compute Reed Solomon';
   $reed_solomon_enc = 'reed_solomon_enc_'.base();
   $rs = $reed_solomon_enc($data, $datars);
-  $rskey = $reed_solomon_enc($key, $rschunks);
+  $rskey = $reed_solomon_enc($key, $datars);
   $lenght_crypt = encrypt_data(pack('L', $data['length']), $enc['key']);
   $_SESSION['status'] = 'Pack into binary';
   foreach($data['data'] as $key1 => $value){
