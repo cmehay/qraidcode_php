@@ -1084,15 +1084,19 @@ function encode($data, $datachunks, $datars, $printnum=false, $printrequired=fal
   $table = set_table();
   $_SESSION['status'] = 'Compute Reed Solomon';
   $reed_solomon_enc = 'reed_solomon_enc_'.base();
-  $rs = $reed_solomon_enc($data, $datars);
-  $rskey = $reed_solomon_enc($key, $datars);
+  if($datars > 0){
+    $rs = $reed_solomon_enc($data, $datars);
+    $rskey = $reed_solomon_enc($key, $datars);  
+  }
   $lenght_crypt = encrypt_data(pack('L', $data['length']), $enc['key']);
   $_SESSION['status'] = 'Pack into binary';
   foreach($data['data'] as $key1 => $value){
     $qrcode[$key1] = format_enc(base(), 'data', $data['chunks'], $key1, $value, $lenght_crypt['data'], $checksum, $key['data'][$key1]);  
   }
-  foreach($rs as $key2 => $value) {
-    $qrcode[$key1+$key2+1] = format_enc(base(), 'rs', $data['chunks'], $key2, $value, $lenght_crypt['data'], $checksum, $rskey[$key2]);
+  if($datars > 0){
+    foreach($rs as $key2 => $value) {
+      $qrcode[$key1+$key2+1] = format_enc(base(), 'rs', $data['chunks'], $key2, $value, $lenght_crypt['data'], $checksum, $rskey[$key2]);
+    } 
   }
   //unset variables to free memories
   unset($data);unset($enc);unset($key);unset($rs);unset($checksum);unset($table);unset($reed_solomon_enc);unset($rskey);unset($lenght_crypt);
