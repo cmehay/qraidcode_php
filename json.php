@@ -65,7 +65,7 @@ function json_cb_get_encode_option(){
     return json_error();
   }
   $title = null;
-  if(isset(get_array($_POST, 'checkbox', 'desc')) && isset($_POST['optiontitle'])){
+  if(is_null(get_array($_POST, 'checkbox', 'desc')) && isset($_POST['optiontitle'])){
     $title = (string) $_POST['optiontitle'];
   }
   
