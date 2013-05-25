@@ -7,7 +7,7 @@ function json_error($error='error'){
   ));
 }
 
-function json_valid($array){
+function json_valid($array=array()){
   $array['error'] = false;
   return json_encode($array);
 }
@@ -77,9 +77,7 @@ function json_cb_get_encode_option(){
     ));
   }
   
-  return json_valid(array(
-      null
-  ));
+  return json_valid();
 }
 
 function json_cb_get_encode_status(){

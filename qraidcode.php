@@ -120,14 +120,14 @@ function set_matrix($c, $l){
   
 
   for($i=0;$i<$c;$i++) {
-    var_dump($i);
+    //var_dump($i);
     for($y=0;$y<$l;$y++) {
       $table[$i][$y]=expon($y, $i);  
     }
   }
 
   for($i=1;$i<$c;$i++) {
-    var_dump($i);
+    //var_dump($i);
     if($i == 1){
       for($row=1;$row<$l;$row++) {
         for($col=0;$col<$c;$col++) {
@@ -438,7 +438,7 @@ function reed_solomon_enc_8($array, $m){
   
   //print_r($table);
   for($i=0;$i<$chunklen;$i++) {
-    var_dump($i);
+    //var_dump($i);
     for($y=0;$y<$m;$y++) {
       if(!isset($rs[$y])){
 	$rs[$y]=null;
@@ -476,7 +476,7 @@ function reed_solomon_dec_8($data, $rs, $chunks, $length=null, $build=false){
   
   //réduit la matrice
   for($row=0;$row<$c;$row++){
-    var_dump($row);
+    //var_dump($row);
     if(isset($data[$row])){
       $data_vector[$row] = $data[$row];
       $newtable[$row] = $tmptable[$row];
@@ -511,7 +511,7 @@ function reed_solomon_dec_8($data, $rs, $chunks, $length=null, $build=false){
   //print_r($newtable);
   //reconstruction
   for($disk=0;$disk<$c;$disk++) {
-    var_dump($disk);
+    //var_dump($disk);
     if(!isset($data[$disk])){
       $data[$disk]=null;
       for($byte=0;$byte<$chunklen;$byte++) {
@@ -571,7 +571,7 @@ function inverse($matrix) {
     if($tmpmatrix[$row_start+$i] == 0){
       for($j=$i+1;$j<$square && $tmpmatrix[$square*$j+$i] == 0;$j++);
       if($j == $square){
-	print_r('pas inversible');
+	//print_r('pas inversible');
         return false;  
       }
       $rs2= $j*$square;
@@ -830,7 +830,7 @@ function format_dec($data) {
       //var_dump(bin2hex($sep));
       $pos = strpos($data, $sep, 5);
       if($pos === false){
-	print_r('not valid');
+	//print_r('not valid');
         return false;  
       }
       //données
@@ -869,7 +869,7 @@ function format_dec($data) {
       //var_dump(bin2hex($sep));
       $pos = strpos($data, $sep, 7);
       if($pos === false){
-	print_r('not valid');
+	//print_r('not valid');
         return false;  
       }
       //données
@@ -1061,7 +1061,7 @@ function matrix_gen(){
       mkdir('php/matrix/'.$i);  
     }
     $error = file_put_contents('php/matrix/'.$i.'/'.($i+$n), bzcompress(json_encode($matrix)));
-    var_dump('php/matrix/'.$i.'/'.$i+$n);
+    //var_dump('php/matrix/'.$i.'/'.$i+$n);
     }
   }
 
