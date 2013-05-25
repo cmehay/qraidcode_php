@@ -993,8 +993,10 @@ function archive_create($qrcodes, $sha1){
   try{
     $zip = new ZipArchive;
     $zip->open(WORKDIR.$sha1.'.zip', ZipArchive::CREATE);
+    trigger_error(WORKDIR.$sha1.'.zip');
     foreach($qrcodes as $key => $value){
-      $zip->addFromString($key.'.png', $value);  
+      $zip->addFromString($key.'.png', $value);
+      trigger_error($key);
     }
     $zip->close();
   }catch(Exception $e) {
