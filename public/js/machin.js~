@@ -237,7 +237,10 @@
 	//console.log('ici');
 	priv.readsendfile(content['data']);
       }
-      else{priv.ajax_encode1(content['data'], content['type']);}
+      else{
+	delete priv.filename;
+	priv.ajax_encode1(content['data'], content['type']);
+      }
     },slide_duration);
   }
   

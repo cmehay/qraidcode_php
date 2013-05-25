@@ -166,6 +166,7 @@
     if(typeof priv.filename != 'undefined'){
       $('input.desc').prop("checked", true);
       $('input[name=optiontitle]').val(priv.filename);
+      $('input[name=optiontitle]').prop("disabled", false)
     }
     priv.display_chunks();
     priv.display_rs();
