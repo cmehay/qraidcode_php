@@ -206,13 +206,13 @@
     }).done(function(json){
       clearInterval(priv.ajaxrefresh);
       if(json.error == true){
+	console.log('fail là');
 	priv.fail(json.msg, 'fourth-step');
 	clearInterval(priv.ajaxrefresh)
 	return false;
       }
       priv.next2('third-step');
     }).fail(function(){
-      console.log('fail here');
       clearInterval(priv.ajaxrefresh);
       priv.fail('Error occured :( try again', 'fourth-step');
     });
