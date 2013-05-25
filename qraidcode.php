@@ -1042,8 +1042,8 @@ function custom_qrcodes($qrcodes, $nbdata, $num=false, $required=false, $name=nu
       }
     }
     $img->setImageDepth(8);
-    $img->quantizeImage(2, Imagick::COLORSPACE_GRAY, 0, false, false );
-    $img->setImageCompressionQuality(00);
+    $img->quantizeImage(1, Imagick::COLORSPACE_GRAY, 0, false, false );
+    //$img->setImageCompressionQuality(00);
     }catch(Exception $e) {
      trigger_error('Imagick caught exception: ' . $e->getMessage());
      return false;  
