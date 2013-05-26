@@ -1012,7 +1012,7 @@ function archive_create($qrcodes, $sha1){
 function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false, $name=null){
   if(!$num && !$required && is_null($name)){
     foreach($qrcodes as $key => $value){
-      file_put_contents(WORKDIR.$tmpdir.'/pre_'.$key.'.png');  
+      file_put_contents(WORKDIR.$tmpdir.'/pre_'.$key.'.png', $value);  
       $qrcodes[$key] = WORKDIR.$tmpdir.'/pre_'.$key.'.png';
     }
     return $qrcodes;
