@@ -1011,6 +1011,10 @@ function archive_create($qrcodes, $sha1){
 
 function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false, $name=null){
   if(!$num && !$required && is_null($name)){
+    foreach($qrcodes as $key => $value){
+      file_put_contents(WORKDIR.$tmpdir.'/pre_'.$key.'.png');  
+      $qrcodes[$key] = WORKDIR.$tmpdir.'/pre_'.$key.'.png';
+    }
     return $qrcodes;
   }
   $qrsize = imagesx(imagecreatefromstring($qrcodes[0]));
@@ -1043,8 +1047,8 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
 	$img->annotateImage($draw, $offset[1], $qrsize - (16 + (16/2)), 0, $str[1]);
       }
     }
-    $img->setImageDepth(1);
-    $img->quantizeImage(1, Imagick::COLORSPACE_GRAY, 0, false, false );
+    //$img->setImageDepth(1);
+    //$img->quantizeImage(1, Imagick::COLORSPACE_GRAY, 0, false, false );
     //$img->setImageCompressionQuality(00);
     if(!is_dir(WORKDIR.$tmpdir)){
       mkdir(WORKDIR.$tmpdir);
