@@ -1028,7 +1028,7 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
     $draw = new ImagickDraw();
     $draw->setFont(FONT);
     $draw->setFontSize( 16 );
-    $img->setFormat('png8');
+    $img->setFormat('PNG8');
     $img->readImageBlob($value);
     if($num){
       $img->annotateImage($draw, 16, 16, 0, ($key+1));
