@@ -1048,7 +1048,7 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
 	$img->annotateImage($draw, $offset[1], $qrsize - (16 + (16/2)), 0, $str[1]);
       }
     }
-    $img->setImageDepth(1);
+    $img->setImageDepth(8);
     $img->setImageAlphaChannel(imagick::ALPHACHANNEL_DEACTIVATE);
     $img->setImageChannelDepth(imagick::CHANNEL_GRAY, 1);
     $img->setImageColormapColor(0, $color->setColor('black'));
