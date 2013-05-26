@@ -997,7 +997,7 @@ function archive_create($qrcodes, $sha1){
     foreach($qrcodes as $key => $value){
       $zip->addFile($value, ($key+1).'.png');
       trigger_error($value);
-      unlink($value);
+      //unlink($value);
       trigger_error($key);
     }
     $zip->close();
