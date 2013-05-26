@@ -1047,8 +1047,9 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
 	$img->annotateImage($draw, $offset[1], $qrsize - (16 + (16/2)), 0, $str[1]);
       }
     }
-    //$img->setImageDepth(1);
-    //$img->quantizeImage(1, Imagick::COLORSPACE_GRAY, 0, false, false );
+    $img->setImageDepth(8);
+    
+    $img->quantizeImage(2, Imagick::COLORSPACE_GRAY, 0, false, false );
     //$img->setImageCompressionQuality(00);
     if(!is_dir(WORKDIR.$tmpdir)){
       mkdir(WORKDIR.$tmpdir);
@@ -1066,16 +1067,16 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
   return $qrcodes;
 }
 
-function optimize_png($qrlist, $tmpdir){
-  foreach($qrlist as $key => $prepng) {
-    $postpng = WORKDIR.$tmpdir.'/'.$key.'.png';
-    exec(PNGCRUSH.' -bit_depth 1 -plte_len 2  -q '.$prepng.' '.$postpng);
-    unlink($prepng);
-    $qrlist[$key] = $postpng;
-  }
-  return $qrlist;
-  
-}
+// function optimize_png($qrlist, $tmpdir){
+//   foreach($qrlist as $key => $prepng) {
+//     $postpng = WORKDIR.$tmpdir.'/'.$key.'.png';
+//     exec(PNGCRUSH.' -bit_depth 1 -plte_len 2  -q '.$prepng.' '.$postpng);
+//     unlink($prepng);
+//     $qrlist[$key] = $postpng;
+//   }
+//   return $qrlist;
+//   
+// }
 
 function matrix_gen(){
   //génère les matrices et les écrits dans des fichiers
@@ -1145,9 +1146,9 @@ function encode($data, $datachunks, $datars, $printnum=false, $printrequired=fal
   if($qr_image === false){
     return 'Custom Qrcodes error';  
   }
-  $_SESSION['status'] = 'Optimizing PNG';
-  trigger_error($_SESSION['status']);
-  $qr_image = optimize_png($qr_image, $sha1);
+//   $_SESSION['status'] = 'Optimizing PNG';
+//   trigger_error($_SESSION['status']);
+//   $qr_image = optimize_png($qr_image, $sha1);
   $_SESSION['status'] = 'Create archive';
   trigger_error($_SESSION['status']);
   if(archive_create($qr_image, $sha1) === false){
