@@ -1024,6 +1024,7 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
   foreach($qrcodes as $key => $value) {
     try {
     $img = new Imagick();
+    $color = new ImagickPixel();
     $draw = new ImagickDraw();
     $draw->setFont(FONT);
     $draw->setFontSize( 16 );
@@ -1047,10 +1048,12 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
 	$img->annotateImage($draw, $offset[1], $qrsize - (16 + (16/2)), 0, $str[1]);
       }
     }
-    $img->setImageDepth(8);
-    
-    $img->quantizeImage(2, Imagick::COLORSPACE_GRAY, 0, false, false );
-    //$img->setImageCompressionQuality(00);
+    $img->setImageDepth(1);
+    $img->setImageAlphaChannel(imagick::ALPHACHANNEL_DEACTIVATE);
+    $img->setImageChannelDepth(imagick::CHANNEL_GRAY, 1);
+    $img->setImageColormapColor(0, $color->setColor('black'));
+    $img->setImageColormapColor(1, $color->setColor('white'));
+    $img->setImageCompressionQuality(00);
     if(!is_dir(WORKDIR.$tmpdir)){
       mkdir(WORKDIR.$tmpdir);
     }
