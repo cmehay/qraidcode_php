@@ -1051,8 +1051,8 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
     $img->setImageDepth(8);
     //$img->setImageAlphaChannel(imagick::ALPHACHANNEL_DEACTIVATE);
     $img->setImageChannelDepth(imagick::CHANNEL_GRAY, 1);
-    $img->setImageColormapColor(0, $color->setColor('black'));
-    $img->setImageColormapColor(1, $color->setColor('white'));
+    //$img->setImageColormapColor(0, $color->setColor('black'));
+    //$img->setImageColormapColor(1, $color->setColor('white'));
     $img->setImageCompressionQuality(00);
     if(!is_dir(WORKDIR.$tmpdir)){
       mkdir(WORKDIR.$tmpdir);
