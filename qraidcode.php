@@ -1065,7 +1065,7 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
 function optimize_png($qrlist, $tmpdir){
   foreach($qrlist as $key => $prepng) {
     $postpng = WORKDIR.$tmpdir.'/'.$key.'.png';
-    exec(PNGCRUSH.' -bit_depth 2 -plte_len 2 -q '.$prepng.' '.$postpng);
+    exec(PNGCRUSH.' -q '.$prepng.' '.$postpng);
     unlink($prepng);
     $qrlist[$key] = $postpng;
   }
