@@ -995,8 +995,8 @@ function archive_create($qrcodes, $sha1){
     $zip->open(WORKDIR.$sha1.'.zip', ZipArchive::CREATE);
     trigger_error(WORKDIR.$sha1.'.zip');
     foreach($qrcodes as $key => $value){
-      $zip->addFromString($key.'.png', $value);
-      trigger_error($key);
+      $zip->addFile(($key+1).'.png', $value);
+      //trigger_error($key);
     }
     $zip->close();
   }catch(Exception $e) {
@@ -1007,7 +1007,7 @@ function archive_create($qrcodes, $sha1){
   return true;
 }
 
-function custom_qrcodes($qrcodes, $nbdata, $num=false, $required=false, $name=null){
+function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false, $name=null){
   if(!$num && !$required && is_null($name)){
     return $qrcodes;
   }
@@ -1024,7 +1024,7 @@ function custom_qrcodes($qrcodes, $nbdata, $num=false, $required=false, $name=nu
     $img->setFormat('PNG8');
     $img->readImageBlob($value);
     if($num){
-      $img->annotateImage($draw, 16, 16, 0, $key);
+      $img->annotateImage($draw, 16, 16, 0, ($key+1));
     }
     if($required){
       $str = $nbdata.' are required';
@@ -1044,14 +1044,31 @@ function custom_qrcodes($qrcodes, $nbdata, $num=false, $required=false, $name=nu
     $img->setImageDepth(1);
     $img->quantizeImage(1, Imagick::COLORSPACE_GRAY, 0, false, false );
     //$img->setImageCompressionQuality(00);
+    if(!is_dir(WORKDIR.$tmpdir)){
+      mkdir(WORKDIR.$tmpdir);
+    }
+    $img->writeImage(WORKDIR.$tmpdir.'/pre_'.$key.'.png');
+    unset($img);
     }catch(Exception $e) {
      trigger_error('Imagick caught exception: ' . $e->getMessage());
      return false;  
     }
-    $qrcodes[$key] = $img;
-    unset($img);
+    
+    $qrcodes[$key] = WORKDIR.$tmpdir.'/pre_'.$key.'.png';
+    
   }
   return $qrcodes;
+}
+
+function optimize_png($qrlist, $tmpdir){
+  foreach($qrlist as $key => $prepng) {
+    $postpng = WORKDIR.$tmpdir.'/'.$key.'.png';
+    exec(PNGCRUSH.' -bit_depth 1 -plte_len 2 -q '.$prepng.' '.$postpng);
+    unlink($prepng);
+    $qrlist[$key] = $postpng;
+  }
+  return $qrlist;
+  
 }
 
 function matrix_gen(){
@@ -1118,10 +1135,13 @@ function encode($data, $datachunks, $datars, $printnum=false, $printrequired=fal
   unset($qrcode);
   $_SESSION['status'] = 'Custom Qrcodes';
   trigger_error($_SESSION['status']);
-  $qr_image = custom_qrcodes($qr_image, $datachunks, $printnum, $printrequired, $name);
+  $qr_image = custom_qrcodes($qr_image, $datachunks, $sha1, $printnum, $printrequired, $name);
   if($qr_image === false){
     return 'Custom Qrcodes error';  
   }
+  $_SESSION['status'] = 'Optimizing PNG';
+  trigger_error($_SESSION['status']);
+  $qr_image = optimize_png($qr_image);
   $_SESSION['status'] = 'Create archive';
   trigger_error($_SESSION['status']);
   if(archive_create($qr_image, $sha1) === false){

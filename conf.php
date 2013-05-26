@@ -7,6 +7,9 @@ define('ZBARIMG', '/var/www/bin/zbarimg');
 //qrencode path
 define('QRENCODE', '/var/www/bin/src/qrencode/qrencode');
 
+//pngcrush
+define('PNGCRUSH', '/var/www/bin/src/pngcrush/pngcrush');
+
 //working dir
 define('WORKDIR', '../work/');
 
