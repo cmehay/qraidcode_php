@@ -1142,7 +1142,7 @@ function encode($data, $datachunks, $datars, $printnum=false, $printrequired=fal
   }
   $_SESSION['status'] = 'Optimizing PNG';
   trigger_error($_SESSION['status']);
-  $qr_image = optimize_png($qr_image);
+  $qr_image = optimize_png($qr_image, $sha1);
   $_SESSION['status'] = 'Create archive';
   trigger_error($_SESSION['status']);
   if(archive_create($qr_image, $sha1) === false){
