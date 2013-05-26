@@ -992,19 +992,19 @@ function qrdecode($picture){
 function archive_create($qrcodes, $sha1){
   try{
     $zip = new ZipArchive;
-    $zip->open(WORKDIR.$sha1.'.zip', ZipArchive::CREATE);
-    trigger_error(WORKDIR.$sha1.'.zip');
+    $zip->open(WORKDIR.$sha1.'/'.$sha1.'.zip', ZipArchive::CREATE);
+    trigger_error(WORKDIR.$sha1.'/'.$sha1.'.zip');
     foreach($qrcodes as $key => $value){
       $zip->addFile(($key+1).'.png', $value);
       unlink($value);
-      //trigger_error($key);
+      trigger_error($key);
     }
     $zip->close();
   }catch(Exception $e) {
     trigger_error('Imagick caught exception: ' . $e->getMessage());
     return false;     
   }
-  $_SESSION['archive'] = WORKDIR.$sha1.'.zip';
+  $_SESSION['archive'] = WORKDIR.$sha1.'/'.$sha1.'.zip';
   return true;
 }
 
