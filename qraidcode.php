@@ -1028,7 +1028,7 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
     $draw = new ImagickDraw();
     $draw->setFont(FONT);
     $draw->setFontSize( 16 );
-    $img->setFormat('PNG8');
+    $img->setFormat('png24');
     $img->readImageBlob($value);
     if($num){
       $img->annotateImage($draw, 16, 16, 0, ($key+1));
@@ -1049,7 +1049,7 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
       }
     }
     $img->setImageDepth(8);
-    //$img->setImageAlphaChannel(imagick::ALPHACHANNEL_DEACTIVATE);
+    $img->setImageAlphaChannel(imagick::ALPHACHANNEL_DEACTIVATE);
     $img->setImageChannelDepth(imagick::CHANNEL_GRAY, 1);
     //$img->setImageColormapColor(0, $color->setColor('black'));
     //$img->setImageColormapColor(1, $color->setColor('white'));
