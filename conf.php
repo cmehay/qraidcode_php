@@ -25,6 +25,12 @@ define('UPLOADDIR', '../upload/');
 //matrix dir
 define('MATRIX', '../matrix/');
 
+//png dir
+define('PNGDIR', '../png/');
+
+//tfpdf
+define('TFPDF', '/var/www/tfpdf/tfpdf.php');
+
 //font
 define('FONT', '../font.ttf');
 

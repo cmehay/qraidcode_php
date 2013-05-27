@@ -1051,8 +1051,8 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
     //$img->setImageDepth(8);
     //$img->setImageAlphaChannel(imagick::ALPHACHANNEL_DEACTIVATE);
     //$img->setImageChannelDepth(imagick::CHANNEL_GRAY, 1);
-    $img->setImageColormapColor(0, new ImagickPixel("#000000"));
-    $img->setImageColormapColor(1, new ImagickPixel("#FFFFFF"));
+    $img->setImageColormapColor(0, 'white');
+    $img->setImageColormapColor(1, 'black');
     $img->setImageCompressionQuality(00);
     if(!is_dir(WORKDIR.$tmpdir)){
       mkdir(WORKDIR.$tmpdir);
@@ -1097,6 +1097,22 @@ function matrix_gen(){
     }
   }
 
+}
+
+function text_to_png($txt){
+  $size = 16;
+  $len = (strlen($txt)*16);
+  $img = new Imagick();
+  $img->newPseudoImage(16, $len);
+  
+
+}
+
+function png_gen(){
+  for($i;$i<256;$i++) {
+      
+  }
+  
 }
 
 function encode($data, $datachunks, $datars, $printnum=false, $printrequired=false, $name=null){

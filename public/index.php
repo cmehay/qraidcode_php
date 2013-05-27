@@ -8,6 +8,8 @@ require '../html.php';
 require '../json.php';
 require '../qraidcode.php';
 require '../functions.php';
+require TFPDF;
+
 
 
 
