@@ -1101,18 +1101,27 @@ function matrix_gen(){
 
 function text_to_png($txt){
   $size = 16;
-  $len = (strlen($txt)*16);
+  $len = (int)(strlen($txt)*16);
   $img = new Imagick();
-  $img->newPseudoImage(16, $len);
-  
-
+  $pixel = new ImagickPixel( 'white' );
+  $draw = new ImagickDraw();
+  $draw->setFont(FONT);
+  $draw->setFontSize( 16 );
+  $draw->setFillColor('black');
+  $img->newImage($len, 16, $pixel);
+  $img->annotateImage($draw, 0, 16, 0, ($txt));
+  $img->trimImage(0);
+  $img->quantizeImage(2, Imagick::COLORSPACE_GRAY, 0, false, false );
+  //$img->setImageColormapColor(1, new ImagickPixel("#000000"));
+  //$img->setImageColormapColor(2, new ImagickPixel("#FFFFFF"));
+  $img->setImageFormat('png');
+  $img->writeImage(PNGDIR.$txt.'.png');
 }
 
 function png_gen(){
-  for($i;$i<256;$i++) {
-      
-  }
-  
+  for($i=0;$i<256;$i++) {
+    text_to_png(($i+1));  
+  } 
 }
 
 function encode($data, $datachunks, $datars, $printnum=false, $printrequired=false, $name=null){
