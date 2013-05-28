@@ -1085,27 +1085,20 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
   if(!is_dir(WORKDIR.$tmpdir)){
     mkdir(WORKDIR.$tmpdir);  
   }
-  trigger_error($size);
   //calcul des proportions
   $x=210;
   $y=297;  
   $margin=10;
   $numqrcode=count($qrcodes);
   $xqrnb = floor(($x-($margin*2)) / $size);
-  trigger_error($xqrnb);
   $incx = $xqrnb;
   $yqrnb = floor(($y-($margin*2)) / $size);
-  trigger_error($yqrnb);
   $incy = $yqrnb;
   $qrperpage = $xqrnb * $yqrnb;
-  trigger_error($qrperpage);
   $pagesnb = ceil($numqrcode/$qrperpage);
-  trigger_error($pagesnb);
 
   $initx = floor(($x - ($xqrnb * $size))/2); 
-  trigger_error($initx);
   $inity = floor(($y - ($yqrnb * $size))/2);
-  trigger_error($inity);
   $innermargin = 10;// by 2
   if(!is_null($name)){
     text_to_png($name, 'title', WORKDIR.$tmpdir);
@@ -1127,6 +1120,7 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
   //num offset
   $numsize= $innermargin/2;
   $numoffset = ($numsize - $innermargin) /2;
+  trigger_error($numoffset);
   
   //required offset
   if($required){
