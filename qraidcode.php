@@ -1110,8 +1110,8 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
       $titley =  $innermargin / 2;
       $titlex = ($titlesize[0] / $titlesize[1]) * $titley;
     } 
-    $titleoffsetx = ($size - ($innermargin * 2) - $titlex) /2;
-    $titleoffsety = ($size - $innermargin) + (($titley - $innermargin)/2);
+    $titleoffsetx = ($size - $titlex) /2;
+    $titleoffsety = ($size - $innermargin) + (($innermargin - $titley)/2);
   }
   
 
