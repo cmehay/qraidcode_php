@@ -1141,7 +1141,6 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
   try{
     $pdf = new tFPDF('P','mm','A4');
     $pdf->SetDrawColor(0);
-    $pdf->addPage();
   //   $posx = $initx;
   //   $posy = $inity;
     $current = 0;
