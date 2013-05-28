@@ -1089,20 +1089,20 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
   $margin=10;
   $numqrcode=count($qrcodes);
   $xqrnb = floor($x / $size);
-  trigger_error(print_r($xqrnb, false));
+  trigger_error($xqrnb);
   $incx = $xqrnb;
   $yqrnb = floor($y / $size);
-  trigger_error(print_r($yqrnb, false));
+  trigger_error($yqrnb);
   $incy = $yqrnb;
   $qrperpage = $xqrnb * $yqrnb;
-  trigger_error(print_r($qrperpage, false));
+  trigger_error($qrperpage);
   $pagesnb = ceil($numqrcode/$qrperpage);
-  trigger_error(print_r($pagesnb, false));
+  trigger_error($pagesnb);
 
   $initx = floor(($x - ($margin * 2)) - (($xqrnb * $size)) / 2); 
-  trigger_error(print_r($initx, false));
+  trigger_error($initx);
   $inity = floor(($y - ($margin * 2)) - (($yqrnb * $size)) / 2);
-  trigger_error(print_r($inity, false));
+  trigger_error($inity);
   $innermargin = 10;// by 2
   if(!is_null($name)){
     text_to_png($name, 'title', WORKDIR.$tmpdir);
