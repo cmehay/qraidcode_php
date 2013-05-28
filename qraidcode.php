@@ -1082,7 +1082,7 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
 // }
 
 function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=false, $name=null){
-
+  trigger_error($size);
   //calcul des proportions
   $x=210;
   $y=297;  
