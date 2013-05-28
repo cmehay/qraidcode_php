@@ -1105,7 +1105,7 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
     $titlesize = getimagesize(WORKDIR.$tmpdir.'/'.'title.png');
     if(($titlesize[0] / $titlesize[1]) * ($innermargin / 2) > ($size - $innermargin)){
       $titlex = ($size - $innermargin);
-      $titley = ($titlesize[0] / $titlesize[1]) * $titlex;
+      $titley = ($titlesize[1] / $titlesize[0]) * $titlex;
     }else{
       $titley =  $innermargin / 2;
       $titlex = ($titlesize[0] / $titlesize[1]) * $titley;
