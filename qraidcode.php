@@ -1151,7 +1151,7 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
 	$pdf->Rect($offsetx, $offsety, $size, $size);
 	//ajoute le numéro du qrcode
 	if($num){
-	  $pdf->Image(PNGDIR.$current.'.png', $offsetx+$numoffset, $offsety+$numoffset, 0, $numsize);  
+	  $pdf->Image(PNGDIR.($current+1).'.png', $offsetx+$numoffset, $offsety+$numoffset, 0, $numsize);  
 	}
 	//indique le nombre de requis
 	if($required){
