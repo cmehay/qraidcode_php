@@ -49,17 +49,17 @@ function json_cb_get_encode_data(){
 
 function json_cb_get_encode_option(){
   //check inputs
-  if(!isset($_POST['chunks']) || !isset($_POST['rs'])){
+  if(!isset($_POST['chunks']) || !isset($_POST['rs']) || $_POST['size']){
     return json_error();
   }
   $nb = (int)($_POST['chunks'] + $_POST['rs']);
   if($nb > MAXQRCODES || $nb < 1){
     return json_error();
   }
-//   $size = (int)($_POST['size'] * 10);
-//   if($size < MINSIZE || $size > MAXSIZE){
-//     return json_error();
-//   }
+  $size = (int)($_POST['size'] * 10);
+  if($size < MINSIZE || $size > MAXSIZE){
+    return json_error();
+  }
   
   if(($_SESSION['datalength'] / $_POST['chunks']) > MAXDATA){
     return json_error();
@@ -69,7 +69,7 @@ function json_cb_get_encode_option(){
     $title = (string) $_POST['optiontitle'];
   }
   
-  $return = encode($_SESSION['data'], $_POST['chunks'], $_POST['rs'], !is_null(get_array($_POST, 'checkbox', 'count')), !is_null(get_array($_POST, 'checkbox', 'total')), $title);
+  $return = encode($_SESSION['data'], $_POST['chunks'], $_POST['rs'], $_POST['size'], !is_null(get_array($_POST, 'checkbox', 'count')), !is_null(get_array($_POST, 'checkbox', 'total')), $title);
   
   if($return !== true){
     return json_error(array(

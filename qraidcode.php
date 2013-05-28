@@ -1088,7 +1088,6 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
   $y=297;  
   $margin=10;
   $numqrcode=count($qrcodes);
-  
   $xqrnb = floor($x / $size);
   trigger_error(print_r($xqrnb, false));
   $incx = $xqrnb;
@@ -1233,7 +1232,7 @@ function png_gen(){
   text_to_png('required');
 }
 
-function encode($data, $datachunks, $datars, $printnum=false, $printrequired=false, $name=null){
+function encode($data, $datachunks, $datars, $size, $printnum=false, $printrequired=false, $name=null){
   $_SESSION['status'] = 'Compute data checksum';
   trigger_error($_SESSION['status']);
   $checksum = hash('crc32', $data, true);
@@ -1288,7 +1287,7 @@ function encode($data, $datachunks, $datars, $printnum=false, $printrequired=fal
 //   $qr_image = optimize_png($qr_image, $sha1);
   $_SESSION['status'] = 'Create PDF';
   trigger_error($_SESSION['status']);
-  if(pdf_create($qr_image, $datachunks, $sha1, $printnum, $printrequired, $name) === false){
+  if(pdf_create($qr_image, $datachunks, $sha1, $size, $printnum, $printrequired, $name) === false){
     return 'PDF creation fail';
   }
   unset($_SESSION['status']);
