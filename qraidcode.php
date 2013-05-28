@@ -1124,11 +1124,14 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
   //required offset
   if($required){
     $reqsize = getimagesize(PNGDIR.'required.png');
+    $reqnumsize = getimagesize(PNGDIR.$nbdata.'.png');
     $reqsizey = round($innermargin/3);
     $reqsizex = round(($reqsize[0] / $reqsize[1]) * $reqsizey);
     $reqoffsetx = round(($size - ($margin / 4)) - $reqsizex);
-    $reqoffsety = ($innermargin - $reqsizey ) /2;
-    trigger_error($numoffset);
+    $reqoffsety = round(($innermargin - $reqsizey ) /2);
+    
+    $requirednumoffset = round(($reqsize[0] / $reqsize[1]) * $reqsizey) + 2;
+    //trigger_error($numoffset);
   }  
 
   
@@ -1161,7 +1164,7 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
 	//indique le nombre de requis
 	if($required){
 	  $pdf->Image(PNGDIR.'required.png', $offsetx+$reqoffsetx, $offsety+$reqoffsety, 0, $reqsizey);
-	  $pdf->Image(PNGDIR.$nbdata.'.png', $offsetx+$reqoffsetx-5, $offsety+$reqoffsety, 0, $reqsizey);
+	  $pdf->Image(PNGDIR.$nbdata.'.png', $offsetx+$reqoffsetx-$requirednumoffset, $offsety+$reqoffsety, 0, $reqsizey);
 	}
 	//ajoute le titre
 	if(isset($titlesize)){
