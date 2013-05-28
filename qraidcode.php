@@ -1176,6 +1176,7 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
 	//ajouter le qrcode
 	file_put_contents(WORKDIR.$tmpdir.'/'.$current.'.png', $qrcodes[$current]);
 	$pdf->Image(WORKDIR.$tmpdir.'/'.$current.'.png', $offsetx+$margin, $offsety+$margin, 0, $size - ($margin * 2));
+	unlink(WORKDIR.$tmpdir.'/'.$current.'.png');
 	$qrcodes[$current];
 	$current++;
 	$offsetx += $size;
