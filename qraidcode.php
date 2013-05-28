@@ -1102,9 +1102,9 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
   $pagesnb = ceil($numqrcode/$qrperpage);
   trigger_error($pagesnb);
 
-  $initx = floor(($x - ($margin * 2)) - ($xqrnb * $size))/2; 
+  $initx = floor((($x - ($margin * 2)) - ($xqrnb * $size))/2); 
   trigger_error($initx);
-  $inity = floor(($y - ($margin * 2)) - ($yqrnb * $size))/2;
+  $inity = floor((($y - ($margin * 2)) - ($yqrnb * $size))/2);
   trigger_error($inity);
   $innermargin = 10;// by 2
   if(!is_null($name)){
