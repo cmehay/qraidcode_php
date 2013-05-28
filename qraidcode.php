@@ -1130,7 +1130,7 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
     $reqoffsetx = round(($size - ($margin / 4)) - $reqsizex);
     $reqoffsety = round(($innermargin - $reqsizey ) /2);
     
-    $requirednumoffset = round(($reqnumsize[0] / $reqnumsize[1]) * $reqsizey) + 4;
+    $requirednumoffset = round(($reqnumsize[0] / $reqnumsize[1]) * $reqsizey) + 1;
     //trigger_error($numoffset);
   }  
 
