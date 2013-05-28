@@ -1124,7 +1124,7 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
   //required offset
   if($required){
     $reqsize = getimagesize(PNGDIR.'required.png');
-    $reqsizey = $innermargin/2;
+    $reqsizey = $innermargin/4;
     $reqsizex = ($reqsize[0] / $reqsize[1]) * $reqsizey;
     $reqoffsetx = ($size - ($margin / 4)) - $reqsizex;
     $reqoffsety = $numoffset;
