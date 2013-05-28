@@ -1082,6 +1082,9 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
 // }
 
 function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=false, $name=null){
+  if(!is_dir(WORKDIR.$tmpdir)){
+    mkdir(WORKDIR.$tmpdir);  
+  }
   trigger_error($size);
   //calcul des proportions
   $x=210;
@@ -1099,9 +1102,9 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
   $pagesnb = ceil($numqrcode/$qrperpage);
   trigger_error($pagesnb);
 
-  $initx = floor(($x - ($margin * 2)) - ($xqrnb * $size)) / 2; 
+  $initx = floor(($x - ($margin * 2)) - ($xqrnb * $size)); 
   trigger_error($initx);
-  $inity = floor(($y - ($margin * 2)) - ($yqrnb * $size)) / 2;
+  $inity = floor(($y - ($margin * 2)) - ($yqrnb * $size));
   trigger_error($inity);
   $innermargin = 10;// by 2
   if(!is_null($name)){
@@ -1118,9 +1121,7 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
     $titleoffsety = ($size - $innermargin) + (($titley - $innermargin)/2);
   }
   
-  if(!is_dir(WORKDIR.$tmpdir)){
-    mkdir(WORKDIR.$tmpdir);  
-  }
+
   
   
   //num offset
