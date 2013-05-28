@@ -1224,6 +1224,7 @@ function text_to_png($txt, $name, $dir=WORKDIR){
   $img->annotateImage($draw, 0, 16, 0, ($txt));
   $img->trimImage(0);
   $img->quantizeImage(2, Imagick::COLORSPACE_GRAY, 0, false, false );
+  $img->setImageDepth(8);
   //$img->setImageColormapColor(1, new ImagickPixel("#000000"));
   //$img->setImageColormapColor(2, new ImagickPixel("#FFFFFF"));
   $img->setImageFormat('png');
