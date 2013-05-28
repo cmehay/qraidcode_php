@@ -49,7 +49,7 @@ function json_cb_get_encode_data(){
 
 function json_cb_get_encode_option(){
   //check inputs
-  if(!isset($_POST['chunks']) || !isset($_POST['rs']) || $_POST['size']){
+  if(!isset($_POST['chunks']) || !isset($_POST['rs']) || !isset($_POST['size'])){
     return json_error();
   }
   $nb = (int)($_POST['chunks'] + $_POST['rs']);
