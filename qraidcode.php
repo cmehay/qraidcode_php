@@ -1105,13 +1105,16 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
     $titlesize = getimagesize(WORKDIR.$tmpdir.'/'.'title.png');
     if(($titlesize[0] / $titlesize[1]) * ($innermargin / 2) > ($size - $innermargin)){
       $titlex = ($size - $innermargin);
-      $titley = 0
+      $titley = ($titlesize[0] / $titlesize[1]) * $titlex;
     }else{
       $titley =  $innermargin / 2;
-      $titlex = 0;
+      $titlex = ($titlesize[0] / $titlesize[1]) * $titley;
     } 
     $titleoffsetx = round(($size - $titlex) /2);
     $titleoffsety = round(($size - $innermargin) + (($innermargin - $titley)/2));
+    trigger_error($titlex);
+    trigger_error($titley);
+    
   }
   
 
@@ -1168,7 +1171,7 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
 	}
 	//ajoute le titre
 	if(isset($titlesize)){
-	  $pdf->Image(WORKDIR.$tmpdir.'/'.'title.png', $offsetx+$titleoffsetx, $offsety+$titleoffsety, $titlex, $titley);
+	  $pdf->Image(WORKDIR.$tmpdir.'/'.'title.png', $offsetx+$titleoffsetx, $offsety+$titleoffsety, 0, $titley);
 	}
 	//ajouter le qrcode
 	file_put_contents(WORKDIR.$tmpdir.'/'.$current.'.png', $qrcodes[$current]);
