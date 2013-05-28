@@ -1119,8 +1119,7 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
   
   //num offset
   $numsize= $innermargin/2;
-  $numoffset = ($numsize - $innermargin) /2;
-  trigger_error($numoffset);
+  $numoffset = ($innermargin - $numsize ) /2;
   
   //required offset
   if($required){
@@ -1128,8 +1127,10 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
     $reqsizey = $innermargin/2;
     $reqsizex = ($reqsize[0] / $reqsize[1]) * $reqsizey;
     $reqoffsetx = ($size - ($margin / 2)) - $reqsizex;
-    $reqoffsety = ($size - $innermargin) + (($reqsizey - $innermargin)/2);
-  }
+    $reqoffsety = $numoffset;
+    trigger_error($numoffset);
+  }  
+
   
 
   
