@@ -1118,6 +1118,11 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
     $titleoffsety = ($size - $innermargin) + (($titley - $innermargin)/2);
   }
   
+  if(!is_dir(WORKDIR.$tmpdir)){
+    mkdir(WORKDIR.$tmpdir);  
+  }
+  
+  
   //num offset
   $numsize= $innermargin/2;
   $numoffset = ($numsize - $innermargin) /2;
