@@ -44,6 +44,19 @@ function file_cb_getarchive(){
   return $file;
 }
 
+function file_cb_getpdf(){
+  if(!isset($_SESSION['pdf'])){
+    return 'File error :(';
+  }
+  $file = file_get_contents($_SESSION['pdf']);
+  if($file === false){
+    return 'File error :(';  
+  }
+  header('Content-type: application/pdf');
+  header('Content-Disposition: attachment; filename="'.urlencode('qraidcode_'.$_SESSION['filename']).'.pdf"');
+  return $file;
+}
+
 
 
 ?>

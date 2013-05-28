@@ -935,7 +935,7 @@ function retreive_data($data){
 }
 
 function qrencode($data){
-  exec('echo "'.base64_encode($data).'" | base64 -d | "'.QRENCODE.'" -8 -s 8 -o - | base64 -w 0', $qrcode, $return);
+  exec('echo "'.base64_encode($data).'" | base64 -d | "'.QRENCODE.'" -8 -s 1 -m 0 -o - | base64 -w 0', $qrcode, $return);
   //var_dump(base64_encode($data));
   if($return != 0 && !$qrcode){
     return false;  
@@ -1081,6 +1081,108 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
 //   
 // }
 
+function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=false, $name=null){
+
+  //calcul des proportions
+  $x=210;
+  $y=297;  
+  $margin=10;
+  $numqrcode=count($qrcodes);
+  
+  $xqrnb = floor($x / $size);
+  $incx = $xqrnb;
+  $yqrnb = floor($y / $size);
+  $incy = $yqrnb;
+  $qrperpage = $xqrnb * $yqrnb;
+  $pagesnb = ceil($numqrcode/$qrperpage);
+  $initx = floor(($x - ($margin * 2)) - (($xqrnb * $size)) / 2); 
+  $inity = floor(($y - ($margin * 2)) - (($yqrnb * $size)) / 2);
+  
+  $innermargin = 10;// by 2
+  if(!is_null($name)){
+    text_to_png($name, 'title', WORKDIR.$tmpdir);
+    $titlesize = getimagesize(WORKDIR.$tmpdir.'/'.'title.png');
+    if(($titlesize[0] / $titlesize[1]) * ($innermargin / 2) > ($size - $innermargin)){
+      $titlex = ($size - $innermargin);
+      $titley = ($titlesize[0] / $titlesize[1]) * $titlex;
+    }else{
+      $titley =  $innermargin / 2;
+      $titlex = ($titlesize[0] / $titlesize[1]) * $titley;
+    } 
+    $titleoffsetx = ($size - ($innermargin * 2) - $titlex) /2;
+    $titleoffsety = ($size - $innermargin) + (($titley - $innermargin)/2);
+  }
+  
+  //num offset
+  $numsize= $innermargin/2;
+  $numoffset = ($numsize - $innermargin) /2;
+  
+  //required offset
+  if($required){
+    $reqsize = getimagesize(PNGDIR.'required.png');
+    $reqsizey = $innermargin/2;
+    $reqsizex = ($reqsize[0] / $reqsize[1]) * $reqsizey;
+    $reqoffsetx = ($size - ($margin / 2)) - $reqsizex;
+    $reqoffsety = ($size - $innermargin) + (($reqsizey - $innermargin)/2);
+  }
+  
+
+  
+  try{
+    $pdf = new FPDF('P','mm','A4');
+    $pdf->SetDrawColor(0);
+    $pdf->addPage();
+  //   $posx = $initx;
+  //   $posy = $inity;
+    $current = 0;
+    for($page=0;$page<$pagesnb;$page++) {
+      $pdf->addPage();
+      $offsetx=$initx;
+      $offsety=$inity;
+      $xqrnb = $incx;
+      for($code=0;$code<$qrperpage;$code++) {
+	if($code == $xqrnb){
+	  $offsetx = $initx;
+	  $offsety += $size;
+	  $xqrnb += $incx;
+	}
+	//$pdf->SetXY($offsetx, $offsety);
+	//dessine le cadre
+	$pdf->Rect($offsetx, $offsety, $size, $size);
+	//ajoute le numéro du qrcode
+	if($num){
+	  $pdf->Image(PNGDIR.$current.'.png', $offsetx+$numoffset, $offsety+$numoffset, 0, $numsize);  
+	}
+	//indique le nombre de requis
+	if($required){
+	  $pdf->Image(PNGDIR.'required.png', $offsetx+$reqoffsetx, $offsety+$reqoffsety, 0, $reqsizey);
+	  $pdf->Image(PNGDIR.$nbdata.'.png', $offsetx+$reqoffsetx-5, $offsety+$reqoffsety, 0, $reqsizey);
+	}
+	//ajoute le titre
+	if(isset($titlesize)){
+	  $pdf->Image(WORKDIR.$tmpdir.'/'.'title.png', $offsetx+$titleoffsetx, $offsety+$titleoffsety, 0, $titley);
+	}
+	//ajouter le qrcode
+	file_put_contents(WORKDIR.$tmpdir.'/'.$current.'.png', $qrcodes[$current]);
+	$pdf->Image(WORKDIR.$tmpdir.'/'.$current.'.png', $offsetx+$margin, $offsety+$margin, 0, $size - ($margin * 2));
+	$qrcodes[$current];
+	$current++;
+	$offsetx += $size;
+	if(!isset($qrcodes[$current])){
+	  break;
+	}
+      }
+    }
+    $pdf->Output(WORKDIR.$tmpdir.'/'.$tmpdir);
+  }catch(Exception $e) {
+     trigger_error('fpdf causes exception: ' . $e->getMessage());
+     return false;
+  }
+  $_SESSION['pdf'] = WORKDIR.$tmpdir.'/'.$tmpdir;
+  return true;
+}
+
+
 function matrix_gen(){
   //génère les matrices et les écrits dans des fichiers
   $base(8);
@@ -1099,7 +1201,7 @@ function matrix_gen(){
 
 }
 
-function text_to_png($txt){
+function text_to_png($txt, $name, $dir=WORKDIR){
   $size = 16;
   $len = (int)(strlen($txt)*16);
   $img = new Imagick();
@@ -1108,20 +1210,21 @@ function text_to_png($txt){
   $draw->setFont(FONT);
   $draw->setFontSize( 16 );
   $draw->setFillColor('black');
-  $img->newImage($len, 16, $pixel);
+  $img->newImage($len, 32, $pixel);
   $img->annotateImage($draw, 0, 16, 0, ($txt));
   $img->trimImage(0);
   $img->quantizeImage(2, Imagick::COLORSPACE_GRAY, 0, false, false );
   //$img->setImageColormapColor(1, new ImagickPixel("#000000"));
   //$img->setImageColormapColor(2, new ImagickPixel("#FFFFFF"));
   $img->setImageFormat('png');
-  $img->writeImage(PNGDIR.$txt.'.png');
+  $img->writeImage($dir.'/'.$name.'.png');
 }
 
 function png_gen(){
-  for($i=0;$i<256;$i++) {
-    text_to_png(($i+1));  
-  } 
+//   for($i=0;$i<256;$i++) {
+//     text_to_png(($i+1));  
+//   } 
+  text_to_png('required');
 }
 
 function encode($data, $datachunks, $datars, $printnum=false, $printrequired=false, $name=null){
@@ -1168,19 +1271,19 @@ function encode($data, $datachunks, $datars, $printnum=false, $printrequired=fal
     }
   }
   unset($qrcode);
-  $_SESSION['status'] = 'Custom Qrcodes';
-  trigger_error($_SESSION['status']);
-  $qr_image = custom_qrcodes($qr_image, $datachunks, $sha1, $printnum, $printrequired, $name);
-  if($qr_image === false){
-    return 'Custom Qrcodes error';  
-  }
+//   $_SESSION['status'] = 'Custom Qrcodes';
+//   trigger_error($_SESSION['status']);
+//   $qr_image = custom_qrcodes($qr_image, $datachunks, $sha1, $printnum, $printrequired, $name);
+//   if($qr_image === false){
+//     return 'Custom Qrcodes error';  
+//   }
 //   $_SESSION['status'] = 'Optimizing PNG';
 //   trigger_error($_SESSION['status']);
 //   $qr_image = optimize_png($qr_image, $sha1);
-  $_SESSION['status'] = 'Create archive';
+  $_SESSION['status'] = 'Create PDF';
   trigger_error($_SESSION['status']);
-  if(archive_create($qr_image, $sha1) === false){
-    return 'Archive creation fail';
+  if(pdf_create($qr_image, $datachunks, $sha1, $printnum, $printrequired, $name) === false){
+    return 'PDF creation fail';
   }
   unset($_SESSION['status']);
   if(!is_null($name)){
