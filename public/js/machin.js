@@ -27,7 +27,7 @@
   };
   
   priv.selectactive = function(from){
-    console.lof(from);
+    console.log(from);
     var corresp = {
       '#file-encode':'#text-encode',
       '#text-encode':'#file-encode'
