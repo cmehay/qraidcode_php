@@ -1244,32 +1244,43 @@ function mktempdir($dir){
   return WORKDIR.$dir;
 }
 
+function set_state($content){
+  if($content === false){
+    return unlink($_SESSION['tmpdir'].'/'.STATEFILE);
+  }
+  return file_put_contents($_SESSION['tmpdir'].'/'.STATEFILE, $content);
+}
+
+function get_state(){
+  if (is_file(WORKDIR.$_SESSION['sha1'].'/'.STATEFILE)){
+    return file_get_contents(WORKDIR.$_SESSION['sha1'].'/'.STATEFILE);  
+  }
+  return false;
+}
+
 function encode($data, $datachunks, $datars, $size, $printnum=false, $printrequired=false, $name=null){
-  $_SESSION['status'] = 'Compute data checksum';
-  trigger_error($_SESSION['status']);
   $checksum = hash('crc32', $data, true);
-  $sha1 = hash('sha1', $data, false);
-  $_SESSION['tmpdir'] = mktempdir($sha1);
-  $_SESSION['status'] = 'Encrypt data';
-  trigger_error($_SESSION['status']);
+  $_SESSION['tmpdir'] = mktempdir($_SESSION['sha1']);
+  set_state('Encrypt data');
+  //trigger_error($_SESSION['status']);
   $enc = encrypt_data($data, gen_key($datachunks));
-  $_SESSION['status'] = 'Split data';
-  trigger_error($_SESSION['status']);
+  set_state('Split data');
+  //trigger_error($_SESSION['status']);
   $data = split_data($enc['data'], $datachunks, $datars);
   $key = split_data($enc['key'], $datachunks, $datars);
-  $_SESSION['status'] = 'Compute Galois fields polynomial table';
-  trigger_error($_SESSION['status']);
+  set_state('Compute Galois fields polynomial table');
+  //trigger_error($_SESSION['status']);
   $table = set_table();
-  $_SESSION['status'] = 'Compute Reed Solomon';
-  trigger_error($_SESSION['status']);
+  set_state('Compute Reed Solomon');
+  //trigger_error($_SESSION['status']);
   $reed_solomon_enc = 'reed_solomon_enc_'.base();
   if($datars > 0){
     $rs = $reed_solomon_enc($data, $datars);
     $rskey = $reed_solomon_enc($key, $datars);  
   }
   $lenght_crypt = encrypt_data(pack('L', $data['length']), $enc['key']);
-  $_SESSION['status'] = 'Pack into binary';
-  trigger_error($_SESSION['status']);
+  set_state('Pack into binary');
+  //trigger_error($_SESSION['status']);
   foreach($data['data'] as $key1 => $value){
     $qrcode[$key1] = format_enc(base(), 'data', $data['chunks'], $key1, $value, $lenght_crypt['data'], $checksum, $key['data'][$key1]);  
   }
@@ -1280,27 +1291,29 @@ function encode($data, $datachunks, $datars, $size, $printnum=false, $printrequi
   }
   //unset variables to free memories
   unset($data);unset($enc);unset($key);unset($rs);unset($checksum);unset($table);unset($reed_solomon_enc);unset($rskey);unset($lenght_crypt);
-  $_SESSION['status'] = 'Generate Qrcodes';
-  trigger_error($_SESSION['status']);
+  set_state('Generate Qrcodes');
+  //trigger_error($_SESSION['status']);
   foreach($qrcode as $key => $value) {
     $qr_image[$key] = qrencode($value);  
     if($qr_image[$key] === false){
+      set_state(false);
       return 'Qrcodes generation fail';  
     }
   }
   unset($qrcode);
-//   $_SESSION['status'] = 'Custom Qrcodes';
+//   set_state('Custom Qrcodes';
 //   trigger_error($_SESSION['status']);
 //   $qr_image = custom_qrcodes($qr_image, $datachunks, $sha1, $printnum, $printrequired, $name);
 //   if($qr_image === false){
 //     return 'Custom Qrcodes error';  
 //   }
-//   $_SESSION['status'] = 'Optimizing PNG';
+//   set_state('Optimizing PNG';
 //   trigger_error($_SESSION['status']);
 //   $qr_image = optimize_png($qr_image, $sha1);
-  $_SESSION['status'] = 'Create PDF';
-  trigger_error($_SESSION['status']);
+  set_state('Create PDF');
+  //trigger_error($_SESSION['status']);
   if(pdf_create($qr_image, $datachunks, $sha1, $size, $printnum, $printrequired, $name) === false){
+    set_state(false);
     return 'PDF creation fail';
   }
   unset($_SESSION['status']);
@@ -1309,6 +1322,7 @@ function encode($data, $datachunks, $datars, $size, $printnum=false, $printrequi
   }else{
     $_SESSION['filename'] = $sha1;
   }
+  set_state(false);
   return true;
 }
 

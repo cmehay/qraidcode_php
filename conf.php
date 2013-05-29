@@ -31,7 +31,8 @@ define('PNGDIR', '../png/');
 //tfpdf
 define('TFPDF', '/var/www/tfpdf/tfpdf.php');
 
-
+//statefile
+define('STATEFILE', 'state');
 
 //font
 define('FONT', '../font.ttf');

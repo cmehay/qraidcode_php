@@ -37,6 +37,7 @@ function json_cb_get_encode_data(){
     return json_error('badsize');
   }
   $_SESSION['data'] = $raw;
+  $_SESSION['sha1'] = hash('sha1', $raw, false);
   $_SESSION['datalength'] = $length;
   return json_valid(array(
       'maxqr' => MAXQRCODES,
@@ -81,11 +82,12 @@ function json_cb_get_encode_option(){
 }
 
 function json_cb_get_encode_status(){
-  if(!isset($_SESSION['status'])){
+  $content = get_state();
+  if($content === false){
     $_SESSION['status'] = 'Please wait';
   }
   return json_valid(array(
-      'msg' => $_SESSION['status']
+      'msg' => $content
   ));
 }
 
