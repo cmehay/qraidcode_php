@@ -37,6 +37,8 @@ define('STATEFILE', 'state');
 //font
 define('FONT', '../font.ttf');
 
+//microsleep
+define('MICROSLEEP', 100000);
 
 //max input size
 define('MAXINPUT', 300000);

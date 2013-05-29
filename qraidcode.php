@@ -1262,28 +1262,36 @@ function encode($data, $datachunks, $datars, $size, $printnum=false, $printrequi
   $checksum = hash('crc32', $data, true);
   $_SESSION['tmpdir'] = mktempdir($_SESSION['sha1']);
   set_state('Encrypt data');
+  usleep(MICROSLEEP);
   //trigger_error($_SESSION['status']);
   $enc = encrypt_data($data, gen_key($datachunks));
   set_state('Split data');
+  usleep(MICROSLEEP);
   //trigger_error($_SESSION['status']);
   $data = split_data($enc['data'], $datachunks, $datars);
   $key = split_data($enc['key'], $datachunks, $datars);
   set_state('Compute Galois fields polynomial table');
+  usleep(MICROSLEEP);
   //trigger_error($_SESSION['status']);
   $table = set_table();
   set_state('Compute Reed Solomon');
+  usleep(MICROSLEEP);
   //trigger_error($_SESSION['status']);
   $reed_solomon_enc = 'reed_solomon_enc_'.base();
+  usleep(MICROSLEEP);
   if($datars > 0){
     $rs = $reed_solomon_enc($data, $datars);
     $rskey = $reed_solomon_enc($key, $datars);  
   }
+  usleep(MICROSLEEP);
   $lenght_crypt = encrypt_data(pack('L', $data['length']), $enc['key']);
   set_state('Pack into binary');
+  usleep(MICROSLEEP);
   //trigger_error($_SESSION['status']);
   foreach($data['data'] as $key1 => $value){
     $qrcode[$key1] = format_enc(base(), 'data', $data['chunks'], $key1, $value, $lenght_crypt['data'], $checksum, $key['data'][$key1]);  
   }
+  usleep(MICROSLEEP);
   if($datars > 0){
     foreach($rs as $key2 => $value) {
       $qrcode[$key1+$key2+1] = format_enc(base(), 'rs', $data['chunks'], $key2, $value, $lenght_crypt['data'], $checksum, $rskey[$key2]);
@@ -1294,6 +1302,7 @@ function encode($data, $datachunks, $datars, $size, $printnum=false, $printrequi
   set_state('Generate Qrcodes');
   //trigger_error($_SESSION['status']);
   foreach($qrcode as $key => $value) {
+  usleep(MICROSLEEP);
     $qr_image[$key] = qrencode($value);  
     if($qr_image[$key] === false){
       set_state(false);
@@ -1311,6 +1320,7 @@ function encode($data, $datachunks, $datars, $size, $printnum=false, $printrequi
 //   trigger_error($_SESSION['status']);
 //   $qr_image = optimize_png($qr_image, $sha1);
   set_state('Create PDF');
+  usleep(MICROSLEEP);
   //trigger_error($_SESSION['status']);
   if(pdf_create($qr_image, $datachunks, $size, $printnum, $printrequired, $name) === false){
     set_state(false);
