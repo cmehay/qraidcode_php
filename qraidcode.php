@@ -1081,7 +1081,7 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
 //   
 // }
 
-function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=false, $name=null){
+function pdf_create($qrcodes, $nbdata, $size, $num=false, $required=false, $name=null){
   //calcul des proportions
   $x=210;
   $y=297;  
@@ -1182,12 +1182,12 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
 	}
       }
     }
-    $pdf->Output($_SESSION['tmpdir'].'/'.$tmpdir);
+    $pdf->Output($_SESSION['tmpdir'].'/'.$_SESSION['sha1']);
   }catch(Exception $e) {
      trigger_error('fpdf causes exception: ' . $e->getMessage());
      return false;
   }
-  $_SESSION['pdf'] = $_SESSION['tmpdir'].'/'.$tmpdir;
+  $_SESSION['pdf'] = $_SESSION['tmpdir'].'/'.$_SESSION['sha1'];
   return true;
 }
 
@@ -1312,7 +1312,7 @@ function encode($data, $datachunks, $datars, $size, $printnum=false, $printrequi
 //   $qr_image = optimize_png($qr_image, $sha1);
   set_state('Create PDF');
   //trigger_error($_SESSION['status']);
-  if(pdf_create($qr_image, $datachunks, $sha1, $size, $printnum, $printrequired, $name) === false){
+  if(pdf_create($qr_image, $datachunks, $size, $printnum, $printrequired, $name) === false){
     set_state(false);
     return 'PDF creation fail';
   }
