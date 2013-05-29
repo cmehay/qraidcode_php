@@ -27,7 +27,7 @@
   };
   
   priv.selectactive = function(from){
-    console.log(from);
+    //console.log(from);
     var corresp = {
       'file-encode':'text-encode',
       'text-encode':'file-encode'
@@ -262,6 +262,9 @@
     },slide_duration);
   }
   
+  priv.slidedecode1 = function(){
+    
+  }
   
   priv.display_filesize = function(file){
     var filesize = priv.filesize(file, maxlength_encode);
@@ -339,9 +342,13 @@
     $('#second-step .encode .next').click(function(){
       priv.slideencode1();
     });
+    $('#second-step .decode .next').click(function(){
+      priv.slidedecode1();
+    });
     $('#third-step .encode .next').click(function(){
       priv.slideencode2();
     });
+    
     $('#file-encode').change(function(){
       priv.display_filesize(this.files);
     });

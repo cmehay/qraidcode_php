@@ -1012,8 +1012,8 @@ function archive_create($qrcodes, $sha1){
 function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false, $name=null){
   if(!$num && !$required && is_null($name)){
     foreach($qrcodes as $key => $value){
-      file_put_contents(WORKDIR.$tmpdir.'/pre_'.$key.'.png', $value);  
-      $qrcodes[$key] = WORKDIR.$tmpdir.'/pre_'.$key.'.png';
+      file_put_contents($_SESSION['tmpdir'].'/pre_'.$key.'.png', $value);  
+      $qrcodes[$key] = $_SESSION['tmpdir'].'/pre_'.$key.'.png';
     }
     return $qrcodes;
   }
@@ -1054,17 +1054,17 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
     $img->setImageColormapColor(0, 'white');
     $img->setImageColormapColor(1, 'black');
     $img->setImageCompressionQuality(00);
-    if(!is_dir(WORKDIR.$tmpdir)){
-      mkdir(WORKDIR.$tmpdir);
+    if(!is_dir($_SESSION['tmpdir'])){
+      mkdir($_SESSION['tmpdir']);
     }
-    $img->writeImage(WORKDIR.$tmpdir.'/pre_'.$key.'.png');
+    $img->writeImage($_SESSION['tmpdir'].'/pre_'.$key.'.png');
     unset($img);
     }catch(Exception $e) {
      trigger_error('Imagick caught exception: ' . $e->getMessage());
      return false;  
     }
     
-    $qrcodes[$key] = WORKDIR.$tmpdir.'/pre_'.$key.'.png';
+    $qrcodes[$key] = $_SESSION['tmpdir'].'/pre_'.$key.'.png';
     
   }
   return $qrcodes;
@@ -1072,7 +1072,7 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
 
 // function optimize_png($qrlist, $tmpdir){
 //   foreach($qrlist as $key => $prepng) {
-//     $postpng = WORKDIR.$tmpdir.'/'.$key.'.png';
+//     $postpng = $_SESSION['tmpdir'].'/'.$key.'.png';
 //     exec(PNGCRUSH.' -bit_depth 1 -plte_len 2  -q '.$prepng.' '.$postpng);
 //     unlink($prepng);
 //     $qrlist[$key] = $postpng;
@@ -1082,9 +1082,6 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
 // }
 
 function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=false, $name=null){
-  if(!is_dir(WORKDIR.$tmpdir)){
-    mkdir(WORKDIR.$tmpdir);  
-  }
   //calcul des proportions
   $x=210;
   $y=297;  
@@ -1101,8 +1098,8 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
   $inity = floor(($y - ($yqrnb * $size))/2);
   $innermargin = 10;// by 2
   if(!is_null($name)){
-    text_to_png($name, 'title', WORKDIR.$tmpdir);
-    $titlesize = getimagesize(WORKDIR.$tmpdir.'/'.'title.png');
+    text_to_png($name, 'title', $_SESSION['tmpdir']);
+    $titlesize = getimagesize($_SESSION['tmpdir'].'/'.'title.png');
     if(($titlesize[0] / $titlesize[1]) * ($innermargin / 2) > ($size - $innermargin)){
       $titlex = ($size - $innermargin);
       $titley = ($titlesize[1] / $titlesize[0]) * $titlex;
@@ -1171,12 +1168,12 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
 	}
 	//ajoute le titre
 	if(isset($titlesize)){
-	  $pdf->Image(WORKDIR.$tmpdir.'/'.'title.png', $offsetx+$titleoffsetx, $offsety+$titleoffsety, 0, $titley);
+	  $pdf->Image($_SESSION['tmpdir'].'/'.'title.png', $offsetx+$titleoffsetx, $offsety+$titleoffsety, 0, $titley);
 	}
 	//ajouter le qrcode
-	file_put_contents(WORKDIR.$tmpdir.'/'.$current.'.png', $qrcodes[$current]);
-	$pdf->Image(WORKDIR.$tmpdir.'/'.$current.'.png', $offsetx+$margin, $offsety+$margin, 0, $size - ($margin * 2));
-	unlink(WORKDIR.$tmpdir.'/'.$current.'.png');
+	file_put_contents($_SESSION['tmpdir'].'/'.$current.'.png', $qrcodes[$current]);
+	$pdf->Image($_SESSION['tmpdir'].'/'.$current.'.png', $offsetx+$margin, $offsety+$margin, 0, $size - ($margin * 2));
+	unlink($_SESSION['tmpdir'].'/'.$current.'.png');
 	$qrcodes[$current];
 	$current++;
 	$offsetx += $size;
@@ -1185,12 +1182,12 @@ function pdf_create($qrcodes, $nbdata, $tmpdir, $size, $num=false, $required=fal
 	}
       }
     }
-    $pdf->Output(WORKDIR.$tmpdir.'/'.$tmpdir);
+    $pdf->Output($_SESSION['tmpdir'].'/'.$tmpdir);
   }catch(Exception $e) {
      trigger_error('fpdf causes exception: ' . $e->getMessage());
      return false;
   }
-  $_SESSION['pdf'] = WORKDIR.$tmpdir.'/'.$tmpdir;
+  $_SESSION['pdf'] = $_SESSION['tmpdir'].'/'.$tmpdir;
   return true;
 }
 
@@ -1240,11 +1237,19 @@ function png_gen(){
   text_to_png('required');
 }
 
+function mktempdir($dir){
+  if(!is_dir(WORKDIR.$dir)){
+    mkdir(WORKDIR.$dir);  
+  }
+  return WORKDIR.$dir;
+}
+
 function encode($data, $datachunks, $datars, $size, $printnum=false, $printrequired=false, $name=null){
   $_SESSION['status'] = 'Compute data checksum';
   trigger_error($_SESSION['status']);
   $checksum = hash('crc32', $data, true);
   $sha1 = hash('sha1', $data, false);
+  $_SESSION['tmpdir'] = mktempdir($sha1);
   $_SESSION['status'] = 'Encrypt data';
   trigger_error($_SESSION['status']);
   $enc = encrypt_data($data, gen_key($datachunks));
