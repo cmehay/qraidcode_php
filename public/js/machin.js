@@ -26,8 +26,7 @@
     $('#second-step').css('right', '0px');
   };
   
-  priv.selectactive = function(selector){
-    var from = '#'+selector.next().attr('id');
+  priv.selectactive = function(from){
     var corresp = {
       '#file-encode':'#text-encode',
       '#text-encode':'#file-encode'
@@ -36,7 +35,7 @@
     $(from).prop("disabled", false);
     $(corresp[from]).parent().css('background-color', '#F3F3F3');
     $(from).parent().css('background-color', 'white');
-    this.css('pointer-events', 'none');
+    $(from).prev().css('pointer-events', 'none');
     $(corresp[from]).prev().css('pointer-events', 'auto');
   };
   
@@ -346,7 +345,7 @@
       priv.display_filesize(this.files);
     });
     $('.activate').click(function(){
-      priv.selectactive($(this));
+      priv.selectactive($(this).next().attr('id'));
     });
     $('#text-encode').bind("keyup change", function() {
       priv.display_textlength($(this).val());
