@@ -347,7 +347,7 @@
     });
     $('.activate').click(function(){
       priv.selectactive(this);
-    }
+    });
     $('#text-encode').bind("keyup change", function() {
       priv.display_textlength($(this).val());
     });
