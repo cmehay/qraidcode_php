@@ -47,11 +47,13 @@ function index_page(){
       <div class="encode">
 	<div class="left input">
 	  <div class="description">First enter your message</div>
+	  <div class="activate"></div>
 	  <textarea id="text-encode" class="invalid"></textarea>
 	  <div class="textsize">'.number_format(MAXINPUT).' bytes remaining</div>
 	</div>
 	<div class="right input">
 	  <div class="description">or your file below</div>
+	  <div class="activate"></div>
 	  <form id="form-encode" enctype="multipart/form-data">
 	    <input id="file-encode" class="invalid" type="file" id="inputsimple" name="inputsimple" /><div class="description2 filesize">('.number_format(MAXINPUT).' bytes max)</div>
 	  </form>

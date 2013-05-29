@@ -253,9 +253,9 @@
     priv.next1('third-step', true);
     setTimeout(function(){
       priv.ajax_encode2($('#third-step .encode :input').serialize());
-      setTimeout(function(){
-	priv.ajaxrefresh=setInterval(function(){priv.getstatus('encode')},1000);
-      },1000);
+//       setTimeout(function(){
+// 	priv.ajaxrefresh=setInterval(function(){priv.getstatus('encode')},1000);
+//       },1000);
     },slide_duration);
   }
   
@@ -342,6 +342,9 @@
     $('#file-encode').change(function(){
       priv.display_filesize(this.files);
     });
+    $('.activate').click(function(){
+      priv.switchclick(this.parent());
+    }
     $('#text-encode').bind("keyup change", function() {
       priv.display_textlength($(this).val());
     });
