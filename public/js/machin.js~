@@ -26,7 +26,8 @@
     $('#second-step').css('right', '0px');
   };
   
-  machin.selectactive = function(from){
+  priv.selectactive = function(selector){
+    var from = '#'+selector.next().attr('id');
     var corresp = {
       '#file-encode':'#text-encode',
       '#text-encode':'#file-encode'
@@ -35,6 +36,8 @@
     $(from).prop("disabled", false);
     $(corresp[from]).parent().css('background-color', '#F3F3F3');
     $(from).parent().css('background-color', 'white');
+    this.css('pointer-events', 'none');
+    $(corresp[from]).prev().css('pointer-events', 'auto');
   };
   
   machin.prev = function(from){
@@ -327,12 +330,12 @@
     $('.prev').click(function(){
       machin.prev($(this).parent().parent().attr('id'));
     });
-    $('#second-step .encode .left').click(function(){
-      machin.selectactive('#text-encode');
-    });
-    $('#second-step .encode .right').click(function(){
-      machin.selectactive('#file-encode');
-    });
+//     $('#second-step .encode .left').click(function(){
+//       machin.selectactive('#text-encode');
+//     });
+//     $('#second-step .encode .right').click(function(){
+//       machin.selectactive('#file-encode');
+//     });
     $('#second-step .encode .next').click(function(){
       priv.slideencode1();
     });
@@ -343,7 +346,7 @@
       priv.display_filesize(this.files);
     });
     $('.activate').click(function(){
-      priv.switchclick(this.parent());
+      priv.selectactive(this);
     }
     $('#text-encode').bind("keyup change", function() {
       priv.display_textlength($(this).val());
