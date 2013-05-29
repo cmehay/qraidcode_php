@@ -29,15 +29,15 @@
   priv.selectactive = function(from){
     console.log(from);
     var corresp = {
-      '#file-encode':'#text-encode',
-      '#text-encode':'#file-encode'
+      'file-encode':'text-encode',
+      'text-encode':'file-encode'
     };    
-    $(corresp[from]).prop("disabled", true);
-    $(from).prop("disabled", false);
-    $(corresp[from]).parent().css('background-color', '#F3F3F3');
-    $(from).parent().css('background-color', 'white');
-    $(from).prev().css('pointer-events', 'none');
-    $(corresp[from]).prev().css('pointer-events', 'auto');
+    $('#'+corresp[from]).prop("disabled", true);
+    $('#'+from).prop("disabled", false);
+    $('#'+corresp[from]).parent().css('background-color', '#F3F3F3');
+    $('#'+from).parent().css('background-color', 'white');
+    $('#'+from).prev().css('pointer-events', 'none');
+    $('#'+corresp[from]).prev().css('pointer-events', 'auto');
   };
   
   machin.prev = function(from){
