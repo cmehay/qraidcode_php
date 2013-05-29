@@ -53,8 +53,8 @@ function index_page(){
 	</div>
 	<div class="right input">
 	  <div class="description">or your file below</div>
-	  <div class="activate"></div>
 	  <form id="form-encode" enctype="multipart/form-data">
+	    <div class="activate"></div>
 	    <input id="file-encode" class="invalid" type="file" id="inputsimple" name="inputsimple" /><div class="description2 filesize">('.number_format(MAXINPUT).' bytes max)</div>
 	  </form>
 	</div>
