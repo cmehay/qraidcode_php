@@ -27,6 +27,7 @@
   };
   
   priv.selectactive = function(from){
+    console.lof(from);
     var corresp = {
       '#file-encode':'#text-encode',
       '#text-encode':'#file-encode'
