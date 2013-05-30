@@ -379,7 +379,7 @@
     });
     $('#decode-input').change(function(){
       priv.display_images(this.files);
-    }
+    });
     $('.activate').click(function(){
       priv.selectactive($(this).next().attr('id'));
     });

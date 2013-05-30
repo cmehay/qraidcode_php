@@ -296,7 +296,10 @@
     if(filesize == false){
       $('.decode .filesize').html('Files too large or empty');
       $('#decode-input').addClass('invalid');
+      return false;
     }
+    $('.decode .filesize').html(priv.intform(filesize)+' bytes');
+    $('.decode .input').css('margin-top', '10px');
   }
   
   priv.display_textlength = function(text){
