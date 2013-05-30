@@ -1,5 +1,5 @@
 <?php
-set_time_limit(240);
+set_time_limit(300);
 session_start();
 
 //index
@@ -63,8 +63,8 @@ function index_page(){
       </div>
       <div class="decode">
 	<div class="description">Select pictures of your qrcodes</div><div class="description">(they can all be in the same picture as long they are full and legible)</div>
-	<div class="input"><input type="file" id="inputmultiple" name="inputmultiple" multiple /></div>
-	<div class="description">(Use CTRL key to select severall files if needed)</div>
+	<div class="input"><input id="decode-input invalide" type="file" id="inputmultiple" name="inputmultiple" multiple /></div>
+	<div class="description filesize">(Use CTRL key to select severall files if needed)</div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>
 	<div class="next">'.htmlentities('next -->').'</div>
       </div>

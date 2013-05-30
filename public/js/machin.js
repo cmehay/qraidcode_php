@@ -163,6 +163,10 @@
     return false;
   };
   
+  priv.checkdecode = function(){
+    
+  }
+  
   priv.fail = function(msg, prev){
     $('#wait').html(msg);
     setTimeout(function(){
@@ -272,7 +276,8 @@
   }
   
   priv.slidedecode1 = function(){
-    
+     priv.next1('second-step', true);
+     
   }
   
   priv.display_filesize = function(file){
@@ -284,6 +289,17 @@
     }
     $('.filesize').html(priv.intform(filesize)+' bytes');
     $('#file-encode').removeClass('invalid');
+  }
+  
+  priv.display_images = function(files){
+    var filesize = priv.filesize(files, maxlength_decode);
+    if(filesize == false){
+      $('.decode .filesize').html('Files too large or empty');
+      $('#decode-input').addClass('invalid');
+      return false;
+    }
+    $('.decode .filesize').html(priv.intform(filesize)+' bytes');
+    $('.decode .input').css('margin-top', '10px');
   }
   
   priv.display_textlength = function(text){
@@ -361,6 +377,9 @@
     $('#file-encode').change(function(){
       priv.display_filesize(this.files);
     });
+    $('#decode-input').change(function(){
+      priv.display_images(this.files);
+    }
     $('.activate').click(function(){
       priv.selectactive($(this).next().attr('id'));
     });
