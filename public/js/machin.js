@@ -8,7 +8,7 @@
   var maxlength_encode = 300000;
   var maxlength_decode = 20000000;
   var slide_duration = 1000;
-  var maxqrcodes = 256;
+  var maxqrcodes = 150;
   var wait_def = 'Please wait...';
   
 

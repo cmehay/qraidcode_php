@@ -73,13 +73,14 @@
   }
   
   priv.next2 = function(from){
-    priv.setwaitdef();
+    
     var corresp = {
       'second-step':'third-step',
       'third-step':'fourth-step',
     };
     $('#wait').css('opacity', 0);
     setTimeout(function(){$('#'+corresp[from]).css('right', '0px');}, 110);
+    priv.setwaitdef();
   }
   
   priv.filesize = function(files, maxsize){

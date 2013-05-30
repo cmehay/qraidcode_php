@@ -44,7 +44,7 @@ define('MICROSLEEP', 100000);
 define('MAXINPUT', 300000);
 
 //max qrcodes
-define('MAXQRCODES', 256);
+define('MAXQRCODES', 150);
 
 //qrcode size
 define('MINSIZE', 40);
