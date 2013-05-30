@@ -1012,8 +1012,8 @@ function archive_create($qrcodes, $sha1){
 function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false, $name=null){
   if(!$num && !$required && is_null($name)){
     foreach($qrcodes as $key => $value){
-      file_put_contents($_SESSION['tmpdir'].'/pre_'.$key.'.png', $value);  
-      $qrcodes[$key] = $_SESSION['tmpdir'].'/pre_'.$key.'.png';
+      file_put_contents(TMPDIR.'/pre_'.$key.'.png', $value);  
+      $qrcodes[$key] = TMPDIR.'/pre_'.$key.'.png';
     }
     return $qrcodes;
   }
@@ -1054,17 +1054,17 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
     $img->setImageColormapColor(0, 'white');
     $img->setImageColormapColor(1, 'black');
     $img->setImageCompressionQuality(00);
-    if(!is_dir($_SESSION['tmpdir'])){
-      mkdir($_SESSION['tmpdir']);
+    if(!is_dir(TMPDIR)){
+      mkdir(TMPDIR);
     }
-    $img->writeImage($_SESSION['tmpdir'].'/pre_'.$key.'.png');
+    $img->writeImage(TMPDIR.'/pre_'.$key.'.png');
     unset($img);
     }catch(Exception $e) {
      trigger_error('Imagick caught exception: ' . $e->getMessage());
      return false;  
     }
     
-    $qrcodes[$key] = $_SESSION['tmpdir'].'/pre_'.$key.'.png';
+    $qrcodes[$key] = TMPDIR.'/pre_'.$key.'.png';
     
   }
   return $qrcodes;
@@ -1072,7 +1072,7 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
 
 // function optimize_png($qrlist, $tmpdir){
 //   foreach($qrlist as $key => $prepng) {
-//     $postpng = $_SESSION['tmpdir'].'/'.$key.'.png';
+//     $postpng = TMPDIR.'/'.$key.'.png';
 //     exec(PNGCRUSH.' -bit_depth 1 -plte_len 2  -q '.$prepng.' '.$postpng);
 //     unlink($prepng);
 //     $qrlist[$key] = $postpng;
@@ -1081,7 +1081,7 @@ function custom_qrcodes($qrcodes, $nbdata, $tmpdir, $num=false, $required=false,
 //   
 // }
 
-function pdf_create($qrcodes, $nbdata, $size, $num=false, $required=false, $name=null){
+function pdf_create($qrcodes, $sha1, $nbdata, $size, $num=false, $required=false, $name=null){
   //calcul des proportions
   $x=210;
   $y=297;  
@@ -1098,8 +1098,8 @@ function pdf_create($qrcodes, $nbdata, $size, $num=false, $required=false, $name
   $inity = floor(($y - ($yqrnb * $size))/2);
   $innermargin = 10;// by 2
   if(!is_null($name)){
-    text_to_png($name, 'title', $_SESSION['tmpdir']);
-    $titlesize = getimagesize($_SESSION['tmpdir'].'/'.'title.png');
+    text_to_png($name, 'title', TMPDIR);
+    $titlesize = getimagesize(TMPDIR.'/'.'title.png');
     if(($titlesize[0] / $titlesize[1]) * ($innermargin / 2) > ($size - $innermargin)){
       $titlex = ($size - $innermargin);
       $titley = ($titlesize[1] / $titlesize[0]) * $titlex;
@@ -1168,12 +1168,12 @@ function pdf_create($qrcodes, $nbdata, $size, $num=false, $required=false, $name
 	}
 	//ajoute le titre
 	if(isset($titlesize)){
-	  $pdf->Image($_SESSION['tmpdir'].'/'.'title.png', $offsetx+$titleoffsetx, $offsety+$titleoffsety, 0, $titley);
+	  $pdf->Image(TMPDIR.'/'.'title.png', $offsetx+$titleoffsetx, $offsety+$titleoffsety, 0, $titley);
 	}
 	//ajouter le qrcode
-	file_put_contents($_SESSION['tmpdir'].'/'.$current.'.png', $qrcodes[$current]);
-	$pdf->Image($_SESSION['tmpdir'].'/'.$current.'.png', $offsetx+$margin, $offsety+$margin, 0, $size - ($margin * 2));
-	unlink($_SESSION['tmpdir'].'/'.$current.'.png');
+	file_put_contents(TMPDIR.'/'.$current.'.png', $qrcodes[$current]);
+	$pdf->Image(TMPDIR.'/'.$current.'.png', $offsetx+$margin, $offsety+$margin, 0, $size - ($margin * 2));
+	unlink(TMPDIR.'/'.$current.'.png');
 	$qrcodes[$current];
 	$current++;
 	$offsetx += $size;
@@ -1182,12 +1182,11 @@ function pdf_create($qrcodes, $nbdata, $size, $num=false, $required=false, $name
 	}
       }
     }
-    $pdf->Output($_SESSION['tmpdir'].'/'.$_SESSION['sha1']);
+    $pdf->Output(TMPDIR.'/'.$sha1);
   }catch(Exception $e) {
      trigger_error('fpdf causes exception: ' . $e->getMessage());
      return false;
   }
-  $_SESSION['pdf'] = $_SESSION['tmpdir'].'/'.$_SESSION['sha1'];
   return true;
 }
 
@@ -1239,16 +1238,19 @@ function png_gen(){
 
 function mktempdir($dir){
   if(!is_dir(WORKDIR.$dir)){
-    mkdir(WORKDIR.$dir);  
+    if(!mkdir(WORKDIR.$dir)){
+      return false;
+    }  
   }
-  return WORKDIR.$dir;
+  define('TMPDIR', WORKDIR.$dir);
+  return true;
 }
 
 function set_state($content){
   if($content === false){
-    return unlink($_SESSION['tmpdir'].'/'.STATEFILE);
+    return unlink(TMPDIR.'/'.STATEFILE);
   }
-  return file_put_contents($_SESSION['tmpdir'].'/'.STATEFILE, $content);
+  return file_put_contents(TMPDIR.'/'.STATEFILE, $content);
 }
 
 function get_state(){
@@ -1258,9 +1260,18 @@ function get_state(){
   return false;
 }
 
-function encode($data, $datachunks, $datars, $size, $printnum=false, $printrequired=false, $name=null){
+function encode($data, $sha1, $datachunks, $datars, $size, $printnum=false, $printrequired=false, $name=null){
   $checksum = hash('crc32', $data, true);
-  $_SESSION['tmpdir'] = mktempdir($_SESSION['sha1']);
+  if(!mktempdir($sha1)){
+    return 'Unable to create temporaty directory';
+  }
+  if(!is_null($name)){
+    $_SESSION['filename'] = $name;
+  }else{
+    $_SESSION['filename'] = $sha1;
+  }
+  $_SESSION['pdf'] = TMPDIR.'/'.$sha1;
+  session_write_close();
   set_state('Encrypt data');
   usleep(MICROSLEEP);
   //trigger_error($_SESSION['status']);
@@ -1322,16 +1333,11 @@ function encode($data, $datachunks, $datars, $size, $printnum=false, $printrequi
   set_state('Create PDF');
   usleep(MICROSLEEP);
   //trigger_error($_SESSION['status']);
-  if(pdf_create($qr_image, $datachunks, $size, $printnum, $printrequired, $name) === false){
+  if(pdf_create($qr_image, $sha1, $datachunks, $size, $printnum, $printrequired, $name) === false){
     set_state(false);
     return 'PDF creation fail';
   }
-  unset($_SESSION['status']);
-  if(!is_null($name)){
-    $_SESSION['filename'] = $name;
-  }else{
-    $_SESSION['filename'] = $sha1;
-  }
+  //unset($_SESSION['status']);
   set_state(false);
   return true;
 }
