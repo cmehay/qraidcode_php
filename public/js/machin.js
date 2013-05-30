@@ -292,6 +292,7 @@
   }
   
   priv.display_images = function(files){
+    console.log('');
     var filesize = priv.filesize(files, maxlength_decode);
     if(filesize == false){
       $('.decode .filesize').html('Files too large or empty');
