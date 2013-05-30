@@ -9,10 +9,15 @@
   var maxlength_decode = 20000000;
   var slide_duration = 1000;
   var maxqrcodes = 256;
+  var wait_def = 'Please wait...';
   
 
   priv.intform = function(int){
     return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
+  }
+  
+  priv.setwaitdef = function(){
+    $('#wait').html(wait_def);
   }
   
   machin.firstslide = function(truc){
@@ -49,10 +54,12 @@
     $('#'+from).css('right', '-700px');
     console.log(corresp[from]);
     $('#'+corresp[from]).css('right', '0px');
-    $('#wait').css('opacity', 0)
+    $('#wait').css('opacity', 0);
+    priv.setwaitdef();
   };
   
   priv.next1 = function(from, wait){
+    priv.setwaitdef();
     var corresp = {
       'second-step':'third-step',
       'third-step':'fourth-step',
@@ -66,12 +73,14 @@
   }
   
   priv.next2 = function(from){
+    
     var corresp = {
       'second-step':'third-step',
       'third-step':'fourth-step',
     };
     $('#wait').css('opacity', 0);
     setTimeout(function(){$('#'+corresp[from]).css('right', '0px');}, 110);
+    priv.setwaitdef();
   }
   
   priv.filesize = function(files, maxsize){
