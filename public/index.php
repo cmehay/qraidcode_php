@@ -65,6 +65,7 @@ function index_page(){
 	<div class="description">Select pictures of your qrcodes</div><div class="description">(they can all be in the same picture as long they are full and legible)</div>
 	<div class="input"><input id="decode-input" class="invalide" type="file" id="inputmultiple" name="inputmultiple" multiple /></div>
 	<div class="description filesize">(Use CTRL key to select severall files if needed)</div>
+	<div class="display_images"></div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>
 	<div class="next">'.htmlentities('next -->').'</div>
       </div>
