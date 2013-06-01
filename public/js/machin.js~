@@ -402,11 +402,11 @@
       if(that.height() > that.width()){
 	//console.log('dafuq?');
 	that.css('height', block.height);
-	that.removeAttr('width');
+	that.css('width', '');
       }else{
 	//console.log('dafuq?!');
 	that.css('width', block.width);
-	that.removeAttr('height');
+	that.css('height', '');
       }
       //position
       that.css('top', top);that.css('left', left+((block.width - that.width())/2));
