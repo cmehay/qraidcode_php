@@ -383,7 +383,7 @@
     var width = parseInt($('.display-images').width());
     var height = parseInt($('.display-images').height());
     var block = {
-      'height': Math.floor((height)-(margin*2)/Math.ceil(count/seuil)),
+      'height': Math.floor(((height-(margin*2))/Math.ceil(count/seuil)),
       'width': Math.floor((width/seuil)-(margin*2))
     };
     $('.thumbnail').each(function(){
@@ -408,7 +408,7 @@
       }
       //position
       that.css('top', top);that.css('left', left);
-      left = left + block.width;
+      left = left + block.width+(margin*2);
       that.css('opacity', 1);
     }
     
