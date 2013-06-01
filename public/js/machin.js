@@ -377,8 +377,8 @@
     var count = $('.thumbnail').length;
     var seuil = 12;
     var margin = 3;//px
-    var width = $('.display-images').width;
-    var height = $('.display-images').height;
+    var width = parseInt($('.display-images').width());
+    var height = parseInt($('.display-images').height());
     var block = {
       'height': Math.floor((height/seuil)-(margin*2)/Math.ceil(count/seuil)),
       'width': Math.floor((width/seuil)-(margin*2))
