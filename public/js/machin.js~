@@ -369,7 +369,7 @@
   }
   
   priv.rangetachambre = function(){
-    console.log($('.thumbnail').attr('name')):
+    console.log($('.thumbnail').attr('name'));
   }
   
   machin.onready = function(){
