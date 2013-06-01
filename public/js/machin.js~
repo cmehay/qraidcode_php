@@ -301,6 +301,13 @@
     }
     $('.decode .filesize').html(priv.intform(filesize)+' bytes');
     $('.decode .input').css('margin-top', '10px');
+    for(i=0;i<files.length;i++){
+      var file = files[i];
+      console.log(file.type);
+//       if(!file.type.match('image')){
+//         
+//       }
+    }
   }
   
   priv.display_textlength = function(text){
