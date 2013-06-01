@@ -400,15 +400,17 @@
       }
       var that = $('.thumbnail[name='+each[i]+']');
       if(that.height() > that.width()){
-	console.log('dafuq?');
+	//console.log('dafuq?');
 	that.css('height', block.height);
+	that.removeAttr('width');
       }else{
-	console.log('dafuq?!');
+	//console.log('dafuq?!');
 	that.css('width', block.width);
+	that.removeAttr('height');
       }
       //position
       that.css('top', top);that.css('left', left);
-      left = left + block.width+(margin*2);
+      left = left + block.width+(margin*2)+((block.width - that.width())/2);
       that.css('opacity', 1);
     }
     
