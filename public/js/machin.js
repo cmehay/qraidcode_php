@@ -374,8 +374,11 @@
   
   priv.rangetachambre = function(){
     var each = [];
-    var count = $('.thumbnail').length;
-    var seuil = 12;
+    var count = parseInt($('.thumbnail').length());
+    var seuil = 8;
+    if(count < seuil){
+      seuil = count;
+    }
     var margin = 3;//px
     var width = parseInt($('.display-images').width());
     var height = parseInt($('.display-images').height());
