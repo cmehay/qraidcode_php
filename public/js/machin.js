@@ -380,7 +380,7 @@
     var width = parseInt($('.display-images').width());
     var height = parseInt($('.display-images').height());
     var block = {
-      'height': Math.floor((height/seuil)-(margin*2)/Math.ceil(count/seuil)),
+      'height': Math.floor((height)-(margin*2)/Math.ceil(count/seuil)),
       'width': Math.floor((width/seuil)-(margin*2))
     };
     $('.thumbnail').each(function(){
