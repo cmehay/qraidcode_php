@@ -305,12 +305,12 @@
       var file = files[i];
       //console.log(file.type);
       if(!file.type.match('image') && !file.type.match('pdf')){
-	console.log('fail');
+	//console.log('fail');
         continue;
       }
       var filereader = new FileReader();
       filereader.onload = function(even){
-	console.log('ok');
+	//console.log('ok');
 	priv.add_thumb(even.target.result);
       }
       filereader.readAsDataURL(file);
@@ -372,6 +372,7 @@
   }
   
   priv.rangetachambre = function(){
+    console.log('fail?');
     console.log($('.thumbnail').attr('name'));
   }
   
