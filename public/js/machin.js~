@@ -403,7 +403,9 @@
       //position
       that.css('top', top);that.css('left', left);
       left += block.width;
+      that.css('opacity', 1);
     }
+    
   }
   
   machin.onready = function(){
