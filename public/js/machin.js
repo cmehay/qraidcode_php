@@ -305,10 +305,12 @@
       var file = files[i];
       //console.log(file.type);
       if(!file.type.match('image') || !file.type.match('pdf')){
+	console.log('fail');
         continue;
       }
       var filereader = new FileReader();
       filereader.onload = function(even){
+	console.log('ok');
 	priv.add_thumb(even.target.result);
       }
       filereader.readAsDataURL(file);
