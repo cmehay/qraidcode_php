@@ -323,6 +323,7 @@
       num = $('.thumbnail:last').attr('name');
     }
     $('<img class="thumbnail" name="'+num+'" src="'+image+'" />').appendTo('.display-images');
+    priv.rangetachambre();
   }
   
   priv.display_textlength = function(text){
@@ -421,7 +422,6 @@
     $('input.desc').change(function(){
       priv.switchclick('input[name=optiontitle]', !$(this).is(':checked'));
     });
-    $('.display-images').change(priv.rangetachambre);
   };
   
   window.machin = machin; 

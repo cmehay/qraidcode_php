@@ -323,6 +323,7 @@
       num = $('.thumbnail:last').attr('name');
     }
     $('<img class="thumbnail" name="'+num+'" src="'+image+'" />').appendTo('.display-images');
+    priv.rangetachambre();
   }
   
   priv.display_textlength = function(text){
@@ -372,6 +373,7 @@
   }
   
   priv.rangetachambre = function(){
+    console.log('fail?');
     console.log($('.thumbnail').attr('name'));
   }
   
