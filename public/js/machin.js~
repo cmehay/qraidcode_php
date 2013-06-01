@@ -322,7 +322,7 @@
     if($('.thumbnail').length > 0){
       num = $('.thumbnail:last').attr('name');
     }
-    $('<img class="thumbnail" name="'+num+'" src="'+image+'" />').appendTo('.display_images');
+    $('<img class="thumbnail" name="'+num+'" src="'+image+'" />').appendTo('.display-images');
   }
   
   priv.display_textlength = function(text){

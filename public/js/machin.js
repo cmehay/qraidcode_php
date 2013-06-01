@@ -318,12 +318,11 @@
   }
   
   priv.add_thumb = function(image){
-    console.log(image);
     var num = 0;
     if($('.thumbnail').length > 0){
       num = $('.thumbnail:last').attr('name');
     }
-    $('<img class="thumbnail" name="'+num+'" src="'+image+'" />').appendTo('.display_images');
+    $('<img class="thumbnail" name="'+num+'" src="'+image+'" />').appendTo('.display-images');
   }
   
   priv.display_textlength = function(text){
@@ -421,7 +420,7 @@
     $('input.desc').change(function(){
       priv.switchclick('input[name=optiontitle]', !$(this).is(':checked'));
     });
-    $('.display_images').change(priv.rangetachambre);
+    $('.display-images').change(priv.rangetachambre);
   };
   
   window.machin = machin; 
