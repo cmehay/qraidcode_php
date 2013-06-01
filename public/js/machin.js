@@ -392,7 +392,7 @@
     for(i=0;i<count;i++){
       if(i == seuil){
 	left = margin;
-	height = height + block.height;
+	top = top + block.height;
 	seuil = seuil+seuil;
       }
       var that = $('.thumbnail[name='+each[i]+']');
