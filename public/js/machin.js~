@@ -422,7 +422,6 @@
     $('input.desc').change(function(){
       priv.switchclick('input[name=optiontitle]', !$(this).is(':checked'));
     });
-    $('.display-images').change(priv.rangetachambre);
   };
   
   window.machin = machin; 

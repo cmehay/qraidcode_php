@@ -320,7 +320,7 @@
   priv.add_thumb = function(image){
     var num = 0;
     if($('.thumbnail').length > 0){
-      num = $('.thumbnail:last').attr('name');
+      num = $('.thumbnail:last').attr('name')+1;
     }
     $('<img class="thumbnail" name="'+num+'" src="'+image+'" />').appendTo('.display-images');
     priv.rangetachambre();
