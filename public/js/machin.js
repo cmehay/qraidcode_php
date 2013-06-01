@@ -374,7 +374,7 @@
   
   priv.rangetachambre = function(){
     var each = [];
-    var count = parseInt($('.thumbnail').length());
+    var count = $('.thumbnail').length;
     var seuil = 8;
     if(count < seuil){
       seuil = count;
