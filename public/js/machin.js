@@ -409,8 +409,8 @@
 	that.removeAttr('height');
       }
       //position
-      that.css('top', top);that.css('left', left);
-      left = left + block.width+(margin*2)+((block.width - that.width())/2);
+      that.css('top', top);that.css('left', left+((block.width - that.width())/2));
+      left = left + block.width+(margin*2);
       that.css('opacity', 1);
     }
     

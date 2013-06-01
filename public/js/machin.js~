@@ -400,11 +400,11 @@
       }
       var that = $('.thumbnail[name='+each[i]+']');
       if(that.height() > that.width()){
-	console.log('dafuq?');
+	//console.log('dafuq?');
 	that.css('height', block.height);
 	that.removeAttr('width');
       }else{
-	console.log('dafuq?!');
+	//console.log('dafuq?!');
 	that.css('width', block.width);
 	that.removeAttr('height');
       }
