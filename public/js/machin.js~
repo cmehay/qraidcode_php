@@ -396,9 +396,11 @@
       }
       var that = $('.thumbnail[name='+each[i]+']');
       if(that.height() > that.width()){
-	that.height(block.height);
+	console.log('dafuq?');
+	that.css('height', block.height);
       }else{
-	that.width(block.width);
+	console.log('dafuq?');
+	that.css('width', block.width);
       }
       //position
       that.css('top', top);that.css('left', left);

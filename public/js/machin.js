@@ -386,23 +386,26 @@
     $('.thumbnail').each(function(){
       each.push($(this).attr('name'));
     });
+    console.log(block.height);
     var top = margin;
     var left = margin;
     for(i=0;i<count;i++){
       if(i == seuil){
 	left = margin;
-	height += block.height;
-	seuil += seuil;
+	height = height + block.height;
+	seuil = seuil+seuil;
       }
       var that = $('.thumbnail[name='+each[i]+']');
       if(that.height() > that.width()){
+	console.log('dafuq?');
 	that.css('height', block.height);
       }else{
+	console.log('dafuq?!');
 	that.css('width', block.width);
       }
       //position
       that.css('top', top);that.css('left', left);
-      left += block.width;
+      left = left + block.width;
       that.css('opacity', 1);
     }
     
