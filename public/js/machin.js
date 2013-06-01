@@ -396,9 +396,9 @@
       }
       var that = $('.thumbnail[name='+each[i]+']');
       if(that.height() > that.width()){
-	that.height(block.height);
+	that.css('height', block.height);
       }else{
-	that.width(block.width);
+	that.css('width', block.width);
       }
       //position
       that.css('top', top);that.css('left', left);

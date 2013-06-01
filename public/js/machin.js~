@@ -384,7 +384,7 @@
       'width': Math.floor((width/seuil)-(margin*2))
     };
     $('.thumbnail').each(function(){
-      each.push(this.attr('name'));
+      each.push($(this).attr('name'));
     });
     var top = margin;
     var left = margin;
