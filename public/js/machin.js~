@@ -304,7 +304,7 @@
     for(i=0;i<files.length;i++){
       var file = files[i];
       //console.log(file.type);
-      if(!file.type.match('image') || !file.type.match('pdf')){
+      if(!file.type.match('image') && !file.type.match('pdf')){
 	console.log('fail');
         continue;
       }

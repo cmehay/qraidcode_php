@@ -318,6 +318,7 @@
   }
   
   priv.add_thumb = function(image){
+    console.log(image);
     var num = 0;
     if($('.thumbnail').length > 0){
       num = $('.thumbnail:last').attr('name');
