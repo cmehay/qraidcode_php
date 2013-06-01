@@ -373,8 +373,39 @@
   }
   
   priv.rangetachambre = function(){
-    console.log('fail?');
-    console.log($('.thumbnail').attr('name'));
+    var each = [];
+    var count = $('.thumbnail').length;
+    var seuil = 12;
+    var margin = 3;//px
+    var width = $('.display-images').width;
+    var height = $('.display-images').height;
+    var block = {
+      'heigth': Math.floor((height/seuil)-(margin*2)/Math.ceil(count/seuil)),
+      'width': Math.floor((width/seuil)-(margin*2))
+    };
+    $('.thumbnail').each(function(){
+      each.push(this.attr('name'));
+    });
+    var top = margin;
+    var left = margin;
+    for(i=0;i<count;i++){
+      if(i == seuil){
+	left = margin;
+	height += block.height;
+	seuil += seuil;
+      }
+      var that = $('.thumbnail[name='+each[i]+']');
+      if(that.height() > that.width()){
+	that.height(block.height);
+      }else{
+	that.width(block.width);
+      }
+      //position
+      that.css('top', top);that.css('left', left);
+      left += block.width;
+      that.css('opacity', 1);
+    }
+    
   }
   
   machin.onready = function(){
