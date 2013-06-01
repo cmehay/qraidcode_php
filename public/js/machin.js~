@@ -303,11 +303,23 @@
     $('.decode .input').css('margin-top', '10px');
     for(i=0;i<files.length;i++){
       var file = files[i];
-      console.log(file.type);
-//       if(!file.type.match('image')){
-//         
-//       }
+      //console.log(file.type);
+      if(!file.type.match('image') || !file.type.match('pdf')){
+        continue;
+      }
+      var filereader = new FileReader();
+      filereader.onload = function(even){
+	priv.add_thumb(even.target.result);
+      }
     }
+  }
+  
+  priv.add_thumb = function(image){
+    var num = 0;
+    if($('.thumbnail').length > 0){
+      num = $('.thumbnail:last').attr('name');
+    }
+    $('<img class="thumbnail" name="'+num+'" src="'+image+'" />').appendTo('.display_images');
   }
   
   priv.display_textlength = function(text){
@@ -356,6 +368,10 @@
     $(to).prop("disabled", active);
   }
   
+  priv.rangetachambre = function(){
+    console.log($('.thumbnail').attr('name')):
+  }
+  
   machin.onready = function(){
     $('#encode').click(function(){
       machin.firstslide('encode');
@@ -401,6 +417,7 @@
     $('input.desc').change(function(){
       priv.switchclick('input[name=optiontitle]', !$(this).is(':checked'));
     });
+    $('.display_images').change(priv.rangetachambre);
   };
   
   window.machin = machin; 
