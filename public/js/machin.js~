@@ -292,7 +292,7 @@
   }
   
   priv.display_images = function(files){
-    console.log('');
+    //console.log('');
     var filesize = priv.filesize(files, maxlength_decode);
     if(filesize == false){
       $('.decode .filesize').html('Files too large or empty');
@@ -311,6 +311,7 @@
       filereader.onload = function(even){
 	priv.add_thumb(even.target.result);
       }
+      picReader.readAsDataURL(file);
     }
   }
   

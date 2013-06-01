@@ -311,7 +311,7 @@
       filereader.onload = function(even){
 	priv.add_thumb(even.target.result);
       }
-      picReader.readAsDataURL(file);
+      filereader.readAsDataURL(file);
     }
   }
   
