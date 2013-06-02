@@ -326,7 +326,7 @@
     if($('.thumbnail').length > 0){
       num = parseInt($('.thumbnail:last').attr('name'))+1;
     }
-    $('<img class="thumbnail" name="'+num+'" src="'+image+'" data-size=""/>').appendTo('.display-images');
+    $('<img class="thumbnail" name="'+num+'" src="'+image+'" data-size="'+size+'"/>').appendTo('.display-images');
   }
   
   priv.display_textlength = function(text){
