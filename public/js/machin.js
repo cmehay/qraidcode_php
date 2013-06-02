@@ -316,7 +316,7 @@
       filereader.readAsDataURL(file);
     }    
     setTimeout(function(){
-      priv.rangetachambre();
+      priv.rangetachambre(false);
       setTimeout(priv.rangetachambre, 400);
     }, 500);
   }
@@ -375,7 +375,7 @@
     $(to).prop("disabled", active);
   }
   
-  priv.rangetachambre = function(){
+  priv.rangetachambre = function(display){
     var each = [];
     var count = $('.thumbnail').length;
     var seuil = 8;
@@ -428,7 +428,9 @@
       console.log('width '+that.width()); 
       that.css('top', Math.floor(top+((block.height - that.height())/2)));that.css('left', Math.floor(left+((block.width - that.width())/2)));
       left = left + block.width+(margin*2);
-      that.css('opacity', 1);
+      if(display !== false){
+	that.css('opacity', 1);
+      }
     }
     
   }

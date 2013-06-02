@@ -316,8 +316,8 @@
       filereader.readAsDataURL(file);
     }    
     setTimeout(function(){
-      priv.rangetachambre()
-      setTimeout(priv.rangetachambre, 400)
+      priv.rangetachambre();
+      setTimeout(priv.rangetachambre, 400);
     }, 500);
   }
   
