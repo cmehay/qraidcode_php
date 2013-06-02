@@ -10,6 +10,7 @@
   var slide_duration = 1000;
   var maxqrcodes = 150;
   var wait_def = 'Please wait...';
+  var pdf_icon = 'public/img/pdf-icon.png';
   
 
   priv.intform = function(int){
@@ -328,6 +329,9 @@
   
   priv.add_thumb = function(image, size){
     var num = 0;
+    if(image.match('application/pdf')){
+      image = pdf_icon;
+    }
     if($('.thumbnail').length > 0){
       num = parseInt($('.thumbnail:last').attr('name'))+1;
     }
