@@ -294,16 +294,7 @@
   priv.display_images = function(files){
     //console.log('');
     //var filesize = priv.filesize(files, maxlength_decode);
-    var filesize = parseInt($('.decode .filesize').attr('data-size'));
-    if(filesize > maxlength_decode){
-      $('.decode .filesize').html('Too much data (max: '+priv.intform(maxlength_decode)+' bytes)');
-      $('#decode-input').addClass('invalid');
-      $('#decode-input').prop("disabled", true);
-      return false;
-    }
-    $('.decode .filesize').html(priv.intform(filesize)+' bytes');
-    $('.decode .input').css('margin-top', '10px');
-    $('#decode-input').prop("disabled", false);
+
     for(i=0;i<files.length;i++){
       var file = files[i];
       //console.log(file.type);
@@ -323,6 +314,16 @@
       priv.rangetachambre(false);
       setTimeout(priv.rangetachambre, 400);
     }, 500);
+    var filesize = parseInt($('.decode .filesize').attr('data-size'));
+    if(filesize > maxlength_decode){
+      $('.decode .filesize').html('Too much data (max: '+priv.intform(maxlength_decode)+' bytes)');
+      $('#decode-input').addClass('invalid');
+      $('#decode-input').prop("disabled", true);
+      return false;
+    }
+    $('.decode .filesize').html(priv.intform(filesize)+' bytes');
+    $('.decode .input').css('margin-top', '10px');
+    $('#decode-input').prop("disabled", false);
   }
   
   priv.add_thumb = function(image, size){
