@@ -311,9 +311,10 @@
       var filereader = new FileReader();
       filereader.onload = function(even){
 	//console.log('ok');
-	priv.add_thumb(even.target.result, even.target.size);
+	priv.add_thumb(even.target.result, this.thissize);
       }
       filereader.readAsDataURL(file);
+      filereader.thissize = file.size;
     }    
     setTimeout(function(){
       priv.rangetachambre(false);
@@ -382,6 +383,7 @@
     if(count < seuil){
       seuil = count;
     }
+    var cursize = 0;
     var seuilck = seuil;
     var margin = 3;//px
     var width = parseInt($('.display-images').width());
@@ -432,8 +434,11 @@
       if(display !== false){
 	that.css('opacity', 1);
       }
+      cursize = cursize + parseInt(that.attr('data-size'));
     }
-    
+    //update filesize
+    $('.decode .filesize').html(priv.intform(cursize)+' bytes');
+    $('.decode .filesize').attr('data-size', cursize);
   }
   
   machin.onready = function(){

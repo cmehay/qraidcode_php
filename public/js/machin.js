@@ -293,14 +293,17 @@
   
   priv.display_images = function(files){
     //console.log('');
-    var filesize = priv.filesize(files, maxlength_decode);
-    if(filesize == false){
+    //var filesize = priv.filesize(files, maxlength_decode);
+    var filesize = parseInt($('.decode .filesize').attr('data-size'));
+    if(filesize > maxlength_decode){
       $('.decode .filesize').html('Files too large or empty');
       $('#decode-input').addClass('invalid');
+      $('#decode-input input').prop("disabled", true);
       return false;
     }
     $('.decode .filesize').html(priv.intform(filesize)+' bytes');
     $('.decode .input').css('margin-top', '10px');
+    $('#decode-input input').prop("disabled", false);
     for(i=0;i<files.length;i++){
       var file = files[i];
       //console.log(file.type);
@@ -383,6 +386,7 @@
     if(count < seuil){
       seuil = count;
     }
+    var cursize = 0;
     var seuilck = seuil;
     var margin = 3;//px
     var width = parseInt($('.display-images').width());
@@ -433,8 +437,11 @@
       if(display !== false){
 	that.css('opacity', 1);
       }
+      cursize = cursize + parseInt(that.attr('data-size'));
     }
-    
+    //update filesize
+    $('.decode .filesize').html(priv.intform(cursize)+' bytes');
+    $('.decode .filesize').attr('data-size', cursize);
   }
   
   machin.onready = function(){
