@@ -403,6 +403,7 @@
 	'height': parseInt(that.height()),
 	'width': parseInt(that.width())
       }
+      console.log(cur);
       if(cur.height > cur.width){
 	console.log(block.width * (cur.height/cur.width));
 	that.css('height', block.height);
