@@ -315,7 +315,10 @@
       }
       filereader.readAsDataURL(file);
     }    
-    setTimeout(priv.rangetachambre, 500);
+    setTimeout(function(){
+      priv.rangetachambre();
+      setTimeout(priv.rangetachambre, 400);
+    }, 500);
   }
   
   priv.add_thumb = function(image){
@@ -423,7 +426,7 @@
       //position
       console.log('heigth '+that.height());
       console.log('width '+that.width()); 
-      that.css('top', top+((block.height - that.height())/2));that.css('left', left+((block.width - that.width())/2));
+      that.css('top', Math.floor(top+((block.height - that.height())/2)));that.css('left', Math.floor(left+((block.width - that.width())/2)));
       left = left + block.width+(margin*2);
       that.css('opacity', 1);
     }
