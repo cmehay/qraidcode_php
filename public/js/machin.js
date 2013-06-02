@@ -418,8 +418,8 @@
 // 	//that.css('height', block.height * (cur.width/cur.height));
 // 	that.css('height', '');
 //       }
-      that.css('maxheight', block.height);
-      that.css('maxwidth', block.width);
+      that.css('max-height', block.height);
+      that.css('max-width', block.width);
       //position
       console.log('heigth '+that.height());
       console.log('width '+that.width()); 

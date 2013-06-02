@@ -407,17 +407,19 @@
 	'width': that[0].naturalWidth
       }
       console.log(cur);
-      if(cur.height > cur.width){
-	//console.log(block.width * (cur.height/cur.width));
-	that.css('height', block.height);
-	//that.css('width', block.width * (cur.height/cur.width));
-	that.css('width', '');
-      }else{
-	//console.log(block.height * (cur.width/cur.height));
-	that.css('width', block.width);
-	//that.css('height', block.height * (cur.width/cur.height));
-	that.css('height', '');
-      }
+//       if(cur.height > cur.width){
+// 	//console.log(block.width * (cur.height/cur.width));
+// 	that.css('height', block.height);
+// 	//that.css('width', block.width * (cur.height/cur.width));
+// 	that.css('width', '');
+//       }else{
+// 	//console.log(block.height * (cur.width/cur.height));
+// 	that.css('width', block.width);
+// 	//that.css('height', block.height * (cur.width/cur.height));
+// 	that.css('height', '');
+//       }
+      that.css('maxheight', block.height);
+      that.css('maxwidth', block.width);
       //position
       console.log('heigth '+that.height());
       console.log('width '+that.width()); 
