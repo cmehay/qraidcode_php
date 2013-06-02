@@ -399,6 +399,7 @@
 	seuil = seuil+seuil;
       }
       var that = $('.thumbnail[name='+each[i]+']');
+      console.log('.thumbnail[name='+each[i]+']');
       console.log(that);
       console.log(that[0].naturalHeight);
       var cur = {
