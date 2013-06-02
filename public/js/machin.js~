@@ -402,14 +402,14 @@
       if(that.height() > that.width()){
 	//console.log('dafuq?');
 	that.css('height', block.height);
-	that.css('width', 'auto');
+	that.css('width', '');
       }else{
 	//console.log('dafuq?!');
 	that.css('width', block.width);
-	that.css('height', 'auto');
+	that.css('height', '');
       }
       //position
-      
+      console.log(that.height()));
       that.css('top', top+((block.height - that.height())/2));that.css('left', left+((block.width - that.width())/2));
       left = left + block.width+(margin*2);
       that.css('opacity', 1);
