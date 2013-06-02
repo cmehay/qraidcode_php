@@ -399,17 +399,21 @@
 	seuil = seuil+seuil;
       }
       var that = $('.thumbnail[name='+each[i]+']');
-      if(that.height() > that.width()){
+      var cur = {
+	'height': parseInt(that.height()),
+	'width': parseInt(that.width())
+      }
+      if(cur.height > cur.width){
 	//console.log('dafuq?');
 	that.css('height', block.height);
-	that.css('width', '');
+	that.css('width', block.width * (cur.height/cur.width));
       }else{
 	//console.log('dafuq?!');
 	that.css('width', block.width);
-	that.css('height', '');
+	that.css('height', block.height * (cur.width/cur.height));
       }
       //position
-      console.log(that.height);
+      console.log(that.);
       that.css('top', top+((block.height - that.height())/2));that.css('left', left+((block.width - that.width())/2));
       left = left + block.width+(margin*2);
       that.css('opacity', 1);
