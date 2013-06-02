@@ -314,7 +314,8 @@
 	priv.add_thumb(even.target.result);
       }
       filereader.readAsDataURL(file);
-    }
+    }    
+    setTimeout(priv.rangetachambre, 500);
   }
   
   priv.add_thumb = function(image){
@@ -323,7 +324,6 @@
       num = parseInt($('.thumbnail:last').attr('name'))+1;
     }
     $('<img class="thumbnail" name="'+num+'" src="'+image+'" />').appendTo('.display-images');
-    setTimeout(priv.rangetachambre, 500);
   }
   
   priv.display_textlength = function(text){
