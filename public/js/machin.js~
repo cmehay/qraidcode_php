@@ -296,7 +296,7 @@
     //var filesize = priv.filesize(files, maxlength_decode);
     var filesize = parseInt($('.decode .filesize').attr('data-size'));
     if(filesize > maxlength_decode){
-      $('.decode .filesize').html('Too much data (max: '+priv.intform(filesize)+' bytes)');
+      $('.decode .filesize').html('Too much data (max: '+priv.intform(maxlength_decode)+' bytes)');
       $('#decode-input').addClass('invalid');
       $('#decode-input').prop("disabled", true);
       return false;
