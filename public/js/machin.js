@@ -404,11 +404,11 @@
 	'width': parseInt(that.width())
       }
       if(cur.height > cur.width){
-	//console.log('dafuq?');
+	console.log(block.width * (cur.height/cur.width));
 	that.css('height', block.height);
 	that.css('width', block.width * (cur.height/cur.width));
       }else{
-	//console.log('dafuq?!');
+	console.log(block.height * (cur.width/cur.height));
 	that.css('width', block.width);
 	that.css('height', block.height * (cur.width/cur.height));
       }
