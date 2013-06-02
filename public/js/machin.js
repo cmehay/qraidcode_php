@@ -323,7 +323,7 @@
       num = parseInt($('.thumbnail:last').attr('name'))+1;
     }
     $('<img class="thumbnail" name="'+num+'" src="'+image+'" />').appendTo('.display-images');
-    priv.rangetachambre();
+    setTimeout(priv.rangetachambre, 500);
   }
   
   priv.display_textlength = function(text){
@@ -401,7 +401,7 @@
       var that = $('.thumbnail[name='+each[i]+']');
       console.log('.thumbnail[name='+each[i]+']');
       console.log(that);
-      setTimeout(function(){console.log(that[0].naturalHeight)},1000);
+      console.log(that[0].naturalHeight);
       var cur = {
 	'height': that[0].naturalHeight,
 	'width': that[0].naturalWidth
