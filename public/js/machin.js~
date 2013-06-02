@@ -389,7 +389,7 @@
     $('.thumbnail').each(function(){
       each.push($(this).attr('name'));
     });
-    console.log(block.height);
+    //console.log(block.height);
     var top = margin;
     var left = margin;
     for(i=0;i<count;i++){
