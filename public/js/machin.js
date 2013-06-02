@@ -401,8 +401,8 @@
       var that = $('.thumbnail[name='+each[i]+']');
       console.log(that);
       var cur = {
-	'height': that.height,
-	'width': that.width
+	'height': that[0].naturalHeight,
+	'width': that[0].naturalWidth
       }
       console.log(cur);
       if(cur.height > cur.width){
