@@ -430,7 +430,9 @@
       that.css('top', Math.floor(top+((block.height - that.height())/2)));that.css('left', Math.floor(left+((block.width - that.width())/2)));
       left = left + block.width+(margin*2);
       if(display !== false){
-	that.css('opacity', 1);
+	setTimeout(function(){
+	  that.css('opacity', 1);
+	},500);
       }
     }
     

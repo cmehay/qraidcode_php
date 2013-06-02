@@ -382,6 +382,7 @@
     if(count < seuil){
       seuil = count;
     }
+    var seuilck = seuil;
     var margin = 3;//px
     var width = parseInt($('.display-images').width());
     var height = parseInt($('.display-images').height());
@@ -396,10 +397,10 @@
     var top = margin;
     var left = margin;
     for(i=0;i<count;i++){
-      if(i == seuil){
+      if(i == seuilck){
 	left = margin;
 	top = top + block.height;
-	seuil = seuil+seuil;
+	seuilck = seuil+seuilck;
       }
       var that = $('.thumbnail[name='+each[i]+']');
       console.log('.thumbnail[name='+each[i]+']');
