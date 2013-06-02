@@ -410,11 +410,13 @@
       if(cur.height > cur.width){
 	//console.log(block.width * (cur.height/cur.width));
 	that.css('height', block.height);
-	that.css('width', block.width * (cur.height/cur.width));
+	//that.css('width', block.width * (cur.height/cur.width));
+	that.css('width', '');
       }else{
 	//console.log(block.height * (cur.width/cur.height));
 	that.css('width', block.width);
-	that.css('height', block.height * (cur.width/cur.height));
+	//that.css('height', block.height * (cur.width/cur.height));
+	that.css('height', '');
       }
       //position
       console.log('heigth '+that.height());
