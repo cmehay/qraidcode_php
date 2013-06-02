@@ -89,7 +89,7 @@
     }
     var nb = files.length;
     var size = 0;
-    var reader = new FileReader();
+    //var reader = new FileReader();
     var filescontent = [];
     for(i=0;i<nb;i++){
       size += files[i].size;
@@ -311,7 +311,7 @@
       var filereader = new FileReader();
       filereader.onload = function(even){
 	//console.log('ok');
-	priv.add_thumb(even.target.result);
+	priv.add_thumb(even.target.result, file.size);
       }
       filereader.readAsDataURL(file);
     }    
@@ -321,12 +321,12 @@
     }, 500);
   }
   
-  priv.add_thumb = function(image){
+  priv.add_thumb = function(image, size){
     var num = 0;
     if($('.thumbnail').length > 0){
       num = parseInt($('.thumbnail:last').attr('name'))+1;
     }
-    $('<img class="thumbnail" name="'+num+'" src="'+image+'" />').appendTo('.display-images');
+    $('<img class="thumbnail" name="'+num+'" src="'+image+'" data-size="'+size+'"/>').appendTo('.display-images');
   }
   
   priv.display_textlength = function(text){
