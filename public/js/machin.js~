@@ -400,7 +400,7 @@
       }
       var that = $('.thumbnail[name='+each[i]+']');
       console.log(that);
-      console.log(that[0].naturalHeight);
+      console.log(that[0]);
       var cur = {
 	'height': that[0].naturalHeight,
 	'width': that[0].naturalWidth
