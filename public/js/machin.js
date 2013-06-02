@@ -413,7 +413,8 @@
 	that.css('height', block.height * (cur.width/cur.height));
       }
       //position
-      console.log(that.);
+      console.log(that.height);
+      console.log(that.width); 
       that.css('top', top+((block.height - that.height())/2));that.css('left', left+((block.width - that.width())/2));
       left = left + block.width+(margin*2);
       that.css('opacity', 1);
