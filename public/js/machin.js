@@ -298,12 +298,12 @@
     if(filesize > maxlength_decode){
       $('.decode .filesize').html('Files too large or empty');
       $('#decode-input').addClass('invalid');
-      $('#decode-input input').prop("disabled", true);
+      $('#decode-input').prop("disabled", true);
       return false;
     }
     $('.decode .filesize').html(priv.intform(filesize)+' bytes');
     $('.decode .input').css('margin-top', '10px');
-    $('#decode-input input').prop("disabled", false);
+    $('#decode-input').prop("disabled", false);
     for(i=0;i<files.length;i++){
       var file = files[i];
       //console.log(file.type);
