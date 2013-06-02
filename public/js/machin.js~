@@ -311,7 +311,7 @@
       var filereader = new FileReader();
       filereader.onload = function(even){
 	//console.log('ok');
-	priv.add_thumb(even.target.result, even.size);
+	priv.add_thumb(even.target.result, even.target.size);
       }
       filereader.readAsDataURL(file);
     }    

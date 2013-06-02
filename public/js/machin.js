@@ -311,9 +311,10 @@
       var filereader = new FileReader();
       filereader.onload = function(even){
 	//console.log('ok');
-	priv.add_thumb(even.target.result, even.target.size);
+	priv.add_thumb(even.target.result, this.thissize);
       }
       filereader.readAsDataURL(file);
+      filereader.thissize = file.size;
     }    
     setTimeout(function(){
       priv.rangetachambre(false);
