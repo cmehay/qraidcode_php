@@ -399,17 +399,18 @@
 	seuil = seuil+seuil;
       }
       var that = $('.thumbnail[name='+each[i]+']');
+      console.log(that);
       var cur = {
 	'height': parseInt(that.height()),
 	'width': parseInt(that.width())
       }
       console.log(cur);
       if(cur.height > cur.width){
-	console.log(block.width * (cur.height/cur.width));
+	//console.log(block.width * (cur.height/cur.width));
 	that.css('height', block.height);
 	that.css('width', block.width * (cur.height/cur.width));
       }else{
-	console.log(block.height * (cur.width/cur.height));
+	//console.log(block.height * (cur.width/cur.height));
 	that.css('width', block.width);
 	that.css('height', block.height * (cur.width/cur.height));
       }
