@@ -10,7 +10,7 @@
   var slide_duration = 1000;
   var maxqrcodes = 150;
   var wait_def = 'Please wait...';
-  var pdf_icon = 'public/img/pdf-icon.png';
+  var pdf_icon = 'public/styles/img/pdf-icon.png';
   
 
   priv.intform = function(int){
