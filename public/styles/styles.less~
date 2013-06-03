@@ -261,7 +261,8 @@ a {
   bottom: 2em;
   top: 8em;
   width: 100%;
-  z-index: -10;
+  z-index: 0;
+  pointer-events:none;
   .thumbnail{
     opacity:0;
     position: absolute;

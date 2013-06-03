@@ -325,6 +325,7 @@
     $('.decode .filesize').html(priv.intform(filesize)+' bytes');
     $('.decode .input').css('margin-top', '10px');
     $('#decode-input').prop("disabled", false);
+    $('.display-image').css('z-index', 0);
   }
   
   priv.add_thumb = function(image, size){
