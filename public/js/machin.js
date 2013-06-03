@@ -329,7 +329,6 @@
     $('.thumbnail').click(function(){
       priv.rm_thumb(this);
     });
-    )
   }
   
   priv.add_thumb = function(image, size){
