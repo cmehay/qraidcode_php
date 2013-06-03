@@ -326,10 +326,7 @@
     $('.decode .input').css('margin-top', '10px');
     $('#decode-input').prop("disabled", false);
     $('.display-images').css('z-index', 0);
-    $('.thumbnail').click(function(){
-      console.log('dadafuk?');
-      priv.rm_thumb(this);
-    });
+
   }
   
   priv.add_thumb = function(image, size){
@@ -341,6 +338,10 @@
       num = parseInt($('.thumbnail:last').attr('name'))+1;
     }
     $('<img class="thumbnail" name="'+num+'" src="'+image+'" data-size="'+size+'"/>').appendTo('.display-images');
+    $('.thumbnail').click(function(){
+      console.log('dadafuk?');
+      priv.rm_thumb(this);
+    });
   }
   
   priv.rm_thumb = function(that){
