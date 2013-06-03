@@ -343,6 +343,7 @@
   }
   
   priv.rm_thumb = function(that){
+    console.log('dafuk?');
     $(that).delete();
     priv.rangetachambre();
   }

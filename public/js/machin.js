@@ -327,6 +327,7 @@
     $('#decode-input').prop("disabled", false);
     $('.display-images').css('z-index', 0);
     $('.thumbnail').click(function(){
+      console.log('dadafuk?');
       priv.rm_thumb(this);
     });
   }
