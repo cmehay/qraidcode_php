@@ -326,6 +326,10 @@
     $('.decode .input').css('margin-top', '10px');
     $('#decode-input').prop("disabled", false);
     $('.display-images').css('z-index', 0);
+    $('.thumbnail').click(function(){
+      priv.rm_thumb(this);
+    });
+    )
   }
   
   priv.add_thumb = function(image, size){
@@ -337,6 +341,11 @@
       num = parseInt($('.thumbnail:last').attr('name'))+1;
     }
     $('<img class="thumbnail" name="'+num+'" src="'+image+'" data-size="'+size+'"/>').appendTo('.display-images');
+  }
+  
+  priv.rm_thumb = function(that){
+    $(that).delete();
+    priv.rangetachambre();
   }
   
   priv.display_textlength = function(text){
