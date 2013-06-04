@@ -1377,6 +1377,7 @@ function encode($data, $sha1, $datachunks, $datars, $size, $printnum=false, $pri
 function decode($images, $tmpdir){
   unset($_SESSION['decode_img']);
   session_write_close();
+  base(8);
   if(!mktempdir($tmpdir)){
     return 'Unable to create temporaty directory';
   }
