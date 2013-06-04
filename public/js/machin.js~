@@ -189,10 +189,14 @@
     priv.display_rs();
   }
   
-  priv.ajax_encode1 = function(data, type){   
+  priv.ajax_encode1 = function(data, type, name){
+    var sendname = null;
+    if(name != 'undefined'){
+      sendname = encodeURIComponent(name);
+    }
     console.log(data);
     $.ajax({
-        url: '?mod=json&action=get_encode_data&type='+type,
+        url: '?mod=json&action=get_encode_data&type='+type+'&name='+sendname,
         type: 'POST',
         data: data,
         processData: false,
@@ -300,8 +304,8 @@
 	priv.readsendfile(content['data']);
       }
       else{
+	priv.ajax_encode1(content['data'], content['type'], priv.filename);
 	delete priv.filename;
-	priv.ajax_encode1(content['data'], content['type']);
       }
     },slide_duration);
   }

@@ -256,7 +256,7 @@
       url:'?mod=json&action=get_decode',
       type: 'GET',
       dataType: 'json'
-    }).done'(function(json){
+    }).done(function(json){
       if(json.error){
 	$('#third-step .decode .error').html(json.msg);
 	$('#third-step .decode .link').addClass('hidden');
