@@ -320,6 +320,7 @@
   }
   
   priv.slidedecode1 = function(){
+    console.log('loops?');
     if($('.filesize').attr('data-size') > maxlength_decode || $('.filesize').attr('data-size') == 0){
       return false
     }
