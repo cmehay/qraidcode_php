@@ -266,7 +266,6 @@
 	$('#third-step .decode .error').addClass('hidden');
       }
       priv.next2('second-step');
-      }
     }).fail(function(){
       priv.fail('Error occured :( try again', 'third-step');
     });
