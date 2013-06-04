@@ -320,18 +320,17 @@
   }
   
   priv.slidedecode1 = function(){
-    console.log('loops?');
     if($('.filesize').attr('data-size') > maxlength_decode || $('.filesize').attr('data-size') == 0){
       return false
     }
     priv.next1('second-step', true);
-    setInterval(function(){
+    setTimeout(function(){
       priv.currents_images = [];
       $('.thumbnail').each(function(){
 	priv.currents_images.push($(this).attr('name'));
       });
       priv.ajax_decode1(0);
-    });
+    }, 1000);
   }
   
   priv.display_filesize = function(file){
