@@ -273,7 +273,7 @@
   
   priv.ajax_decode1 = function(int){
     var total = priv.currents_images.length;
-    $('.wait').html('Uploading '+int+'/'+total);
+    $('#wait').html('Uploading '+int+'/'+total);
     $.ajax({
       url:'?mod=json&action=send_decode&num='+int,
       type: 'POST',

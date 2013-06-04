@@ -330,7 +330,7 @@
 	priv.currents_images.push($(this).attr('name'));
       });
       priv.ajax_decode1(0);
-    }
+    });
   }
   
   priv.display_filesize = function(file){
