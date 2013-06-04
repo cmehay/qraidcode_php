@@ -332,7 +332,10 @@
       $('.thumbnail').each(function(){
 	priv.currents_images.push($(this).attr('name'));
       });
-      priv.ajax_decode1(0);
+      //attends que la boucle soit terminée.
+      $.when.apply($, priv.currents_images).done(function(){
+	priv.ajax_decode1(0);	
+      });
     }, 1000);
   }
   
