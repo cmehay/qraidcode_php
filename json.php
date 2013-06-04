@@ -113,6 +113,8 @@ function json_cb_send_decode(){
     return json_error('Too much data ><');
   }
   $_SESSION['decode_img'][$_GET['num']] = $raw;
+  trigger_error(count($_SESSION['decode_img']));
+  session_write_close();
   return json_valid();
 }
 
