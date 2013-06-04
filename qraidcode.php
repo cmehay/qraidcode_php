@@ -943,9 +943,9 @@ function qrencode($data){
   return base64_decode($qrcode[0]);
 }
 
-function get_image_type($picture){
-  exec('echo "'.base64_encode($picture).'" | base64 -d | file --mime-type -b -', $mime, $return);
-  if($return != 0 && !$mime){
+function get_file_type($picture, $option='--mime-type'){
+  exec('echo "'.base64_encode($picture).'" | base64 -d | file '.$option.' -b -', $mime, $return);
+  if($return != 0 || !$mime){
     return false;  
   }
   $mime = explode('/', $mime[0]);
@@ -956,7 +956,7 @@ function get_image_type($picture){
 function qrdecode($picture){
   try {
     $img = new Imagick();
-    $img->setFormat(get_image_type($picture));
+    $img->setFormat(get_file_type($picture));
     $img->readImageBlob($picture);
     $img->setFormat('MIFF');      
   }catch(Exception $e){
@@ -1260,6 +1260,37 @@ function get_state(){
   return false;
 }
 
+function write_decoded($content, $tmpdir){
+  $type = substr($content, 0, strpos($data,"/"));
+  $data = substr($content,strpos($content,"/")+1);
+  $sha = sha1($data);
+  switch($type){
+    case 'text':
+      $filename = $sha.'txt';
+      break;
+    case 'file':
+      $filename = $sha;
+      break;
+    default:
+      $filename = $type;  
+      break;
+  }
+  try{
+    $zip = new ZipArchive;
+    $zip->open($tmpdir.'/'.$sha.'.zip', ZipArchive::CREATE);
+    //trigger_error($tmpdir.'/'.$sha.'.zip')
+    $zip->addFromString($filename, $data);
+      //trigger_error($value);
+    $zip->close();
+  }catch(Exception $e) {
+    trigger_error('Imagick caught exception: ' . $e->getMessage());
+    return false;     
+  }
+  $_SESSION['archive'] = $tmpdir.'/'.$sha.'.zip';
+  return true;
+}
+
+
 function encode($data, $sha1, $datachunks, $datars, $size, $printnum=false, $printrequired=false, $name=null){
   $checksum = hash('crc32', $data, true);
   if(!mktempdir($sha1)){
@@ -1342,6 +1373,41 @@ function encode($data, $sha1, $datachunks, $datars, $size, $printnum=false, $pri
   return true;
 }
 
+
+function decode($images, $tmpdir){
+  unset($_SESSION['decode_img']);
+  session_write_close();
+  if(!mktempdir($tmpdir)){
+    return 'Unable to create temporaty directory';
+  }
+  $qrdecode=array();
+  set_state('Read images');
+  foreach($qr_image as $value){
+    $qrdecode = array_merge($qrdecode, qrdecode($value));    
+  }
+  set_state('Decode binaries');
+  usleep(MICROSLEEP);
+  foreach($qrdecode as $key => $value) {
+    $decoded[$key] = format_dec($value);  
+  }
+  unset($qrdecode);
+  set_state('Decode Reed Solomon');
+  $message = retreive_data($decoded);
+  unset($decoded);
+  if($message === false){
+    return 'Decode data fail... be sure you gave enough qrcodes';
+  }
+  set_state('Create archive');
+  usleep(MICROSLEEP);
+  $return = write_decoded($message, $tmpdir);
+  unset($message);
+  if(!$return){
+    set_state(false);
+    return 'Writing file fail';
+  }
+  set_state(false);
+  return true;
+}
 //var_dump(4294967296 * 2913);
 // $chunks = 200;
 // $rschunks = 10;

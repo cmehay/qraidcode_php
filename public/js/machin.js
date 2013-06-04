@@ -189,10 +189,14 @@
     priv.display_rs();
   }
   
-  priv.ajax_encode1 = function(data, type){   
+  priv.ajax_encode1 = function(data, type, name){
+    var sendname = null;
+    if(name != 'undefined'){
+      sendname = encodeURIComponent(name);
+    }
     console.log(data);
     $.ajax({
-        url: '?mod=json&action=get_encode_data&type='+type,
+        url: '?mod=json&action=get_encode_data&type='+type+'&name='+sendname,
         type: 'POST',
         data: data,
         processData: false,
@@ -247,6 +251,46 @@
     })
   }
   
+  priv.ajax_decode2 = function(){
+    $.ajax({
+      url:'?mod=json&action=get_decode',
+      type: 'GET',
+      dataType: 'json'
+    }).done'(function(json){
+      if(json.error){
+	$('#third-step .decode .error').html(json.msg);
+	$('#third-step .decode .link').addClass('hidden');
+	$('#third-step .decode .error').removeClass('hidden');
+      }else{
+	$('#third-step .decode .link').removeClass('hidden');
+	$('#third-step .decode .error').addClass('hidden');
+      }
+      priv.next2('second-step');
+      }
+    }).fail(function(){
+      priv.fail('Error occured :( try again', 'third-step');
+    });
+  }
+  
+  priv.ajax_decode1 = function(int){
+    var total = priv.currents_images.length;
+    $('.wait').html('Uploading '+int+'/'+total);
+    $.ajax({
+      url:'?mod=json&action=send_decode&num='+int,
+      type: 'POST',
+      data: int+'='priv.currents_images[int],
+      dataType: 'json'
+    }).done(function(json){
+      if(int < total){
+	priv.ajax_decode1(int+1);
+      }else{
+	priv.ajax_decode2();
+      }
+    }).fail(function(){
+      priv.fail('Error occured :( try again', 'third-step');
+    });
+  }
+  
   priv.slideencode1 = function(){
     var content = priv.checkencode1();
     console.log(content);
@@ -260,8 +304,8 @@
 	priv.readsendfile(content['data']);
       }
       else{
+	priv.ajax_encode1(content['data'], content['type'], priv.filename);
 	delete priv.filename;
-	priv.ajax_encode1(content['data'], content['type']);
       }
     },slide_duration);
   }
@@ -277,8 +321,17 @@
   }
   
   priv.slidedecode1 = function(){
-     priv.next1('second-step', true);
-     
+    if($('.filesize').attr('data-size') > maxlength_decode || $('.filesize').attr('data-size') == 0){
+      return false
+    }
+    priv.next1('second-step', true);
+    setInterval(function(){
+      priv.currents_images = [];
+      $('.thumbnail').each(function(){
+	priv.currents_images.push($(this).attr('name'));
+      });
+      priv.ajax_decode1(0);
+    }
   }
   
   priv.display_filesize = function(file){

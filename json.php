@@ -28,6 +28,14 @@ function json_cb_get_encode_data(){
     json_error();
   }
   
+  if(isset($_GET['name'])){
+    if(is_array($_GET['name'])){
+      return json_error();
+    }
+    $raw = urldecode($_GET['name']).'/'.$raw;
+  }else{
+    $raw = $_GET['type'].'/'.$raw;
+  }
   $length = strlen($raw);
   if($length > MAXINPUT || $length == 0){
     return json_error('badsize');  
@@ -91,9 +99,31 @@ function json_cb_get_encode_status(){
   ));
 }
 
-function json_cb_decode(){
-  
+function json_cb_send_decode(){
+  $raw = getencodedata($_POST[$_GET['num']], 'file');
+  if($raw == false){
+    return json_error('file error');  
+  }
+  if (!isset($_SESSION['decode_size'])) {
+    $_SESSION['decode_size'] = 0;  
+  }
+  $_SESSION['decode_size'] += strlen($raw);
+  if($_SESSION['decode_size'] > MAXDECODE){
+    return json_error('Too much data ><');
+  }
+  $_SESSION['decode_img'][$_GET['num']] = $raw;
+  return json_valid();
 }
+
+function json_cb_get_decode() {
+  $_SESSION['tmpdir'] = sha1(gen_key(32)); 
+  $return = decode($_SESSION['decode_img'], $_SESSION['tmpdir']);
+  if($return !== true){
+    return json_error($return);
+  }
+  return json_valid();
+}
+
 
 
 

@@ -43,6 +43,9 @@ define('MICROSLEEP', 100000);
 //max input size
 define('MAXINPUT', 300000);
 
+//max image decode
+define('MAXDECODE', 20000000);
+
 //max qrcodes
 define('MAXQRCODES', 150);
 
@@ -62,8 +65,7 @@ $_SESSION['conf'] = array(
         'js/machin.js'
     ),
     'lang' => 'en',
-    'title' => 'QRaidCODE',
-    
+    'title' => 'QRaidCODE'
 )
 
 ?>
