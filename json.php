@@ -100,6 +100,7 @@ function json_cb_get_encode_status(){
 }
 
 function json_cb_send_decode(){
+  sleep(10);
   $raw = getencodedata($_POST[$_GET['num']], 'file');
   if($raw == false){
     return json_error('file error');  
@@ -116,6 +117,7 @@ function json_cb_send_decode(){
 }
 
 function json_cb_get_decode() {
+  sleep(10);
   $_SESSION['tmpdir'] = sha1(gen_key(32)); 
   $return = decode($_SESSION['decode_img'], $_SESSION['tmpdir']);
   if($return !== true){
