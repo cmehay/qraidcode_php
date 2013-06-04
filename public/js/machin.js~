@@ -273,14 +273,14 @@
   
   priv.ajax_decode1 = function(int){
     var total = priv.currents_images.length;
-    $('#wait').html('Uploading '+int+'/'+total);
+    $('#wait').html('Uploading '+(int+1)+'/'+total);
     $.ajax({
       url:'?mod=json&action=send_decode&num='+int,
       type: 'POST',
       data: int+'='+priv.currents_images[int],
       dataType: 'json'
     }).done(function(json){
-      if(int < total){
+      if(int+1 < total){
 	priv.ajax_decode1(int+1);
       }else{
 	priv.ajax_decode2();
