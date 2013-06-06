@@ -192,7 +192,7 @@
   priv.ajax_encode1 = function(data, type, name){
     var sendname = null;
     if(name != 'undefined'){
-      console.log('dafuq?'):
+      console.log('dafuq?');
       sendname = encodeURIComponent(name);
     }
     console.log(sendname);
