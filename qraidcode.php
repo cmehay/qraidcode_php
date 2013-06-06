@@ -965,7 +965,7 @@ function qrdecode($picture){
   }
 
   exec('echo "'.base64_encode($img).'" | base64 -d | "'.ZBARIMG.'" -q MIFF:- | base64 -w 0', $xml, $return);
-  trigger_error('echo "'.base64_encode($img).'" | base64 -d | "'.ZBARIMG.'" -q MIFF:- | base64 -w 0');
+  trigger_error('echo "'.'fufufu'.'" | base64 -d | "'.ZBARIMG.'" -q MIFF:- | base64 -w 0');
   //exec('./zbar-code/zbarimg/zbarimg -q randomtest.png | base64 -w 0', $xml, $return);
   if($return != 0 && !$xml){
     trigger_error($return);
