@@ -284,7 +284,7 @@
     $.ajax({
       url:'?mod=json&action=send_decode&num='+int,
       type: 'POST',
-      data: int+'='+getimgdata(priv.currents_images[int]),
+      data: int+'='+priv.getimgdata(priv.currents_images[int]),
       dataType: 'json'
     }).done(function(json){
       if(json.error){
