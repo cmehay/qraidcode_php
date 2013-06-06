@@ -44,6 +44,7 @@ function json_cb_get_encode_data(){
   if($min > MAXQRCODES){
     return json_error('badsize');
   }
+  trigger_error($raw);
   $_SESSION['data'] = $raw;
   $_SESSION['sha1'] = hash('sha1', $raw, false);
   $_SESSION['datalength'] = $length;
