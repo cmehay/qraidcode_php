@@ -399,16 +399,16 @@
   priv.add_thumb = function(image, size){
     var num = 0;
     var base64 = null;
-    var class = 'img';
+    var classs = 'img';
     if(image.match('application/pdf')){
       base64 = image;
       image = pdf_icon;
-      class = 'pdf';
+      classs = 'pdf';
     }
     if($('.thumbnail').length > 0){
       num = parseInt($('.thumbnail:last').attr('name'))+1;
     }
-    $('<img class="thumbnail '+class+'" name="'+num+'" src="'+image+'" data-size="'+size+'" data-base64="'+base64+'"/>').appendTo('.display-images');
+    $('<img class="thumbnail '+classs+'" name="'+num+'" src="'+image+'" data-size="'+size+'" data-base64="'+base64+'"/>').appendTo('.display-images');
     $('.thumbnail').click(function(){
       console.log('dadafuk?');
       priv.rm_thumb(this);
