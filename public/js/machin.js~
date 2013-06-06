@@ -329,7 +329,6 @@
     priv.next1('second-step', true);
     setTimeout(function(){
       priv.currents_images = [];
-      $.queue(function
       $('.thumbnail').each(function(){
 	priv.currents_images.push($(this).attr('name'));
       });
