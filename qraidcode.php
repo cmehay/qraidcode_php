@@ -1300,7 +1300,7 @@ function write_decoded($content, $tmpdir){
   }
   try{
     $zip = new ZipArchive;
-    $zip->open($tmpdir.'/'.$sha.'.zip', ZipArchive::CREATE);
+    $zip->open($tmpdir.'/QRaidCODE.zip', ZipArchive::CREATE);
     //trigger_error($tmpdir.'/'.$sha.'.zip')
     $zip->addFromString($filename, $data);
       //trigger_error($value);
@@ -1309,7 +1309,7 @@ function write_decoded($content, $tmpdir){
     trigger_error('Imagick caught exception: ' . $e->getMessage());
     return false;     
   }
-  $_SESSION['archive'] = $tmpdir.'/'.$sha.'.zip';
+  //$_SESSION['archive'] = $tmpdir.'/'.$sha.'.zip';
   return true;
 }
 
@@ -1399,6 +1399,7 @@ function encode($data, $sha1, $datachunks, $datars, $size, $printnum=false, $pri
 
 function decode($images, $tmpdir){
   unset($_SESSION['decode_img']);
+  $_SESSION['archive'] = $tmpdir.'/QRaidCODE.zip';
   session_write_close();
   base(8);
   if(!mktempdir($tmpdir)){
