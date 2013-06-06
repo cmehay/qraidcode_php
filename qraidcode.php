@@ -963,10 +963,11 @@ function qrdecode($picture){
     trigger_error($e);
     return false;
   }
-
-  exec('echo "'.base64_encode($img).'" | base64 -d | "'.ZBARIMG.'" -q MIFF:- | base64 -w 0', $xml, $return);
-  trigger_error(base64_encode($img));
-  trigger_error('echo "'.base64_encode($img).'" | base64 -d | "'.ZBARIMG.'" -q MIFF:- | base64 -w 0');
+  $base64 = base64_encode($img);
+  exec('echo "'.$base64.'" | base64 -d | "'.ZBARIMG.'" -q MIFF:- | base64 -w 0', $xml, $return);
+  trigger_error($base64);
+  trigger_error('echo "'.$base64.'" | base64 -d | "'.ZBARIMG.'" -q MIFF:- | base64 -w 0');
+  unset($base64);
   //exec('./zbar-code/zbarimg/zbarimg -q randomtest.png | base64 -w 0', $xml, $return);
   if($return != 0 && !$xml){
     trigger_error($return);
