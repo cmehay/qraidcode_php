@@ -971,7 +971,7 @@ function qrdecode($picture){
   //exec('./zbar-code/zbarimg/zbarimg -q randomtest.png | base64 -w 0', $xml, $return);
   if($return != 0 && !$xml){
     trigger_error($return);
-    trigger_error($xml[0]);
+    trigger_error($xml[1]);
     return false;  
   }
   $data = explode('QR-Code:', base64_decode($xml[0]));
