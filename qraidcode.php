@@ -979,12 +979,12 @@ function qrdecode($picture){
   fwrite($pipes[0], $img);
   trigger_error('ici');
   $decoded =  stream_get_contents($pipes[1]);
-  trigger_error('ici');
+  trigger_error('ici');trigger_error($decoded);
   $stderr = stream_get_contents($pipes[2]);
   trigger_error('ici');
   fclose($pipes[0]); fclose($pipes[1]); fclose($pipes[2]);
   if(proc_close($process) != 0){
-    trigger_error($decoded);
+ 
     trigger_error($stderr);
     return false;  
   }
