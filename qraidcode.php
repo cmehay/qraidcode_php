@@ -668,13 +668,14 @@ function encrypt_data($data, $key=null) {
     $encrypted = mcrypt_generic($cipher, $data);
     mcrypt_generic_deinit($cipher);
   }
+  trigger_error(sha1($key));
   return array(
     'data' => $encrypted,
     'key' => $key);
 }
 
 function decrypt_data($key, $data){
-
+  trigger_error(sha1($key));
   $cryptkey = hash('sha256', $key, true);
   $iv = hash('sha256', $cryptkey, true);
   for($i=0;$i<42;$i++) {
