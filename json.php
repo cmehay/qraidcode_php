@@ -28,7 +28,7 @@ function json_cb_get_encode_data(){
     json_error();
   }
   
-  if(isset($_GET['name'])){
+  if($_GET['name'] == ''){
     if(is_array($_GET['name'])){
       return json_error();
     }
