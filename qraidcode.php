@@ -1284,6 +1284,7 @@ function get_state(){
 }
 
 function write_decoded($content, $tmpdir){
+  trigger_error($content);
   $type = substr($content, 0, strpos($content,"/"));
   $data = substr($content,strpos($content,"/")+1);
   $sha = sha1($data);
