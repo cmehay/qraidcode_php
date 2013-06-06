@@ -1383,7 +1383,7 @@ function decode($images, $tmpdir){
   }
   $qrdecode=array();
   set_state('Read images');
-  foreach($qr_image as $value){
+  foreach($images as $value){
     $qrdecode = array_merge($qrdecode, qrdecode($value));    
   }
   set_state('Decode binaries');
