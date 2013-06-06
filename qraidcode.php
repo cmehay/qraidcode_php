@@ -987,6 +987,7 @@ function qrdecode($picture){
   }
   $data = explode('QR-Code:', $decoded);
   unset($decoded);
+  trigger_error('ici');
   //var_dump($xml[0]);
   //$data = xmlstr_to_array(base64_decode($xml[0]));
   //exec('echo "'.base64_encode($picture).'" | base64 -d > test.png');
