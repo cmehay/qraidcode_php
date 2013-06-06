@@ -964,16 +964,30 @@ function qrdecode($picture){
     return false;
   }
 
-//  exec('echo "'.base64_encode($img).'" | base64 -d | "'.ZBARIMG.'" -q MIFF:- | base64 -w 0', $xml, $return);
-  exec('echo "'.base64_encode($img).'" | base64 -d /var/www/textimage', $xml, $return);
-  //trigger_error(ZBARIMG);
-  //exec('./zbar-code/zbarimg/zbarimg -q randomtest.png | base64 -w 0', $xml, $return);
-  if($return != 0 && !$xml){
+  $descriptorspec = array(
+    0 => array("pipe", "r"),  // // stdin est un pipe où le processus va lire
+    1 => array("pipe", "w"),  // stdout est un pipe où le processus va écrire
+    2 => array("pipe", "w") // stderr est un fichier
+  );
+  
+  $process = proc_open('"'.ZBARIMG.'" -q MIFF:-', $descriptorspec, $pipes, '/var/www/bin', null);
+  
+  if (!is_resource($process)) {
+    trigger_error('not ressource');
+    return false;
+  }
+  
+  fwrite($pipes[0], $img);
+  $decoded =  stream_get_contents($pipes[1]);
+  $stderr = stream_get_contents($pipes[2]);
+  fclose($pipes[0]); fclose($pipes[1]); fclose($pipes[2]);
+  if(proc_close($process) != 0 || !$decoded || $stderr){
     trigger_error($return);
-    trigger_error(print_r($xml, false));
+    trigger_error($stderr);
     return false;  
   }
-  $data = explode('QR-Code:', base64_decode($xml[0]));
+  $data = explode('QR-Code:', $decoded);
+  unset($decoded);
   //var_dump($xml[0]);
   //$data = xmlstr_to_array(base64_decode($xml[0]));
   //exec('echo "'.base64_encode($picture).'" | base64 -d > test.png');
@@ -986,6 +1000,7 @@ function qrdecode($picture){
   foreach($data as $key => $value){
     $data[$key]=base64_encode($value);
     $length = strlen($data[$key]);
+    //fix the last char
     $data[$key][$length-1] = '=';
     $data[$key] = base64_decode($data[$key]);
   }
@@ -1394,7 +1409,7 @@ function decode($images, $tmpdir){
     }  
   }
   if(count($qrdecode) === 0){
-    return 'No qrcodes has been found... be sure there are legible';  
+    return 'No qrcodes has been found... be sure they are legible on the pictures';  
   }
   
   set_state('Decode binaries');
