@@ -194,7 +194,7 @@
     if(name != 'undefined'){
       sendname = encodeURIComponent(name);
     }
-    console.log(data);
+    console.log(sendname);
     $.ajax({
         url: '?mod=json&action=get_encode_data&type='+type+'&name='+sendname,
         type: 'POST',
