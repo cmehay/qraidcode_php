@@ -1300,7 +1300,7 @@ function write_decoded($content, $tmpdir){
   }
   try{
     $zip = new ZipArchive;
-    $zip->open($tmpdir.'/QRaidCODE.zip', ZipArchive::CREATE);
+    $zip->open(TMPDIR.'/QRaidCODE.zip', ZipArchive::CREATE);
     //trigger_error($tmpdir.'/'.$sha.'.zip')
     $zip->addFromString($filename, $data);
       //trigger_error($value);
