@@ -976,7 +976,7 @@ function qrdecode($picture){
     trigger_error('not ressource');
     return false;
   }
-  
+  trigger_error('ça vient là ?');
   fwrite($pipes[0], $img);
   $decoded =  stream_get_contents($pipes[1]);
   $stderr = stream_get_contents($pipes[2]);
