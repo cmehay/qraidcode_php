@@ -271,13 +271,20 @@
     });
   }
   
+  priv.getimgdata = function(int){
+    if($('.thumbnail[name='+int+']').is($('.pdf'))){
+      return $('.thumbnail[name='+int+']').attr('data-base64');
+    }
+    return $('.thumbnail[name='+int+']').attr('src');
+  }
+  
   priv.ajax_decode1 = function(int){
     var total = priv.currents_images.length;
     $('#wait').html('Uploading '+(int+1)+'/'+total);
     $.ajax({
       url:'?mod=json&action=send_decode&num='+int,
       type: 'POST',
-      data: int+'='+priv.currents_images[int],
+      data: int+'='+getimgdata(priv.currents_images[int]),
       dataType: 'json'
     }).done(function(json){
       if(json.error){
@@ -391,13 +398,17 @@
   
   priv.add_thumb = function(image, size){
     var num = 0;
+    var base64 = null;
+    var class = 'img';
     if(image.match('application/pdf')){
+      base64 = image;
       image = pdf_icon;
+      class = 'pdf';
     }
     if($('.thumbnail').length > 0){
       num = parseInt($('.thumbnail:last').attr('name'))+1;
     }
-    $('<img class="thumbnail" name="'+num+'" src="'+image+'" data-size="'+size+'"/>').appendTo('.display-images');
+    $('<img class="thumbnail '+class+'" name="'+num+'" src="'+image+'" data-size="'+size+'" data-base64="'+base64+'"/>').appendTo('.display-images');
     $('.thumbnail').click(function(){
       console.log('dadafuk?');
       priv.rm_thumb(this);
