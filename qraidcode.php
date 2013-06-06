@@ -1399,12 +1399,12 @@ function encode($data, $sha1, $datachunks, $datars, $size, $printnum=false, $pri
 
 function decode($images, $tmpdir){
   unset($_SESSION['decode_img']);
-  $_SESSION['archive'] = $tmpdir.'/QRaidCODE.zip';
-  session_write_close();
   base(8);
   if(!mktempdir($tmpdir)){
     return 'Unable to create temporaty directory';
   }
+  $_SESSION['archive'] = TMPDIR.'/QRaidCODE.zip';
+  session_write_close();
   $qrdecode=array();
   set_state('Read images');
   trigger_error('Read images');
