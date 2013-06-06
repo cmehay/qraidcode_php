@@ -976,7 +976,6 @@ function qrdecode($picture){
     trigger_error('not ressource');
     return false;
   }
-  trigger_error('ça vient là ?');
   fwrite($pipes[0], $img);
   $decoded =  stream_get_contents($pipes[1]);
   $stderr = stream_get_contents($pipes[2]);
@@ -1402,6 +1401,7 @@ function decode($images, $tmpdir){
   }
   $qrdecode=array();
   set_state('Read images');
+  trigger_error('Read images');
   foreach($images as $value){
     $return = qrdecode($value);
     if($return !== false){
@@ -1413,18 +1413,21 @@ function decode($images, $tmpdir){
   }
   
   set_state('Decode binaries');
+  trigger_error('Decode binaries');  
   usleep(MICROSLEEP);
   foreach($qrdecode as $key => $value) {
     $decoded[$key] = format_dec($value);  
   }
   unset($qrdecode);
   set_state('Decode Reed Solomon');
+  trigger_error('Decode Reed Solomon');
   $message = retreive_data($decoded);
   unset($decoded);
   if($message === false){
     return 'Decode data fail... be sure you gave enough qrcodes';
   }
   set_state('Create archive');
+  trigger_error('Create archive');
   usleep(MICROSLEEP);
   $return = write_decoded($message, $tmpdir);
   unset($message);
