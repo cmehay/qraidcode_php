@@ -966,7 +966,7 @@ function qrdecode($picture){
 
   $descriptorspec = array(
     0 => array("pipe", "r"),  // // stdin est un pipe où le processus va lire
-    1 => array("pipe", "w"),  // stdout est un pipe où le processus va écrire
+    1 => array("pipe", "a"),  // stdout est un pipe où le processus va écrire
     2 => array("pipe", "a") // stderr est un fichier
   );
   
