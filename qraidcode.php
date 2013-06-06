@@ -1384,8 +1384,15 @@ function decode($images, $tmpdir){
   $qrdecode=array();
   set_state('Read images');
   foreach($images as $value){
-    $qrdecode = array_merge($qrdecode, qrdecode($value));    
+    $return = qrdecode($value);
+    if($return !== false){
+      $qrdecode = array_merge($qrdecode, $return);
+    }  
   }
+  if(count($qrdecode) === 0){
+    return 'No qrcodes has been found... be sure there are legible';  
+  }
+  
   set_state('Decode binaries');
   usleep(MICROSLEEP);
   foreach($qrdecode as $key => $value) {
