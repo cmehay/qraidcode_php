@@ -104,7 +104,7 @@
       return false;
     }
     priv.filename = files[0].name;
-    console.log(priv.filename);
+    //console.log(priv.filename);
     return size;
   };
   
@@ -315,7 +315,7 @@
       }
       else{
 	priv.ajax_encode1(content['data'], content['type'], priv.filename);
-	delete priv.filename;
+	//delete priv.filename;
       }
     },slide_duration);
   }

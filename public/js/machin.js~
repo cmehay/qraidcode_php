@@ -104,7 +104,7 @@
       return false;
     }
     priv.filename = files[0].name;
-    //console.log(priv.filescontent);
+    console.log(priv.filename);
     return size;
   };
   
