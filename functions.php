@@ -3,6 +3,7 @@
 
 function getencodedata($data, $type) {
   if($type === 'file'){
+    trigger_error(base64_decode(str_replace(' ','+',substr($data,strpos($data,",")+1))));
     return base64_decode(str_replace(' ','+',substr($data,strpos($data,",")+1)));  
   }
   if($type === 'text'){
