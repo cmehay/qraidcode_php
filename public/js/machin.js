@@ -329,12 +329,12 @@
     priv.next1('second-step', true);
     setTimeout(function(){
       priv.currents_images = [];
+      $.queue(function
       $('.thumbnail').each(function(){
 	priv.currents_images.push($(this).attr('name'));
       });
-      //attends que la boucle soit terminée.
-      $.when.apply($, priv.currents_images).done(function(){
-	priv.ajax_decode1(0);	
+      $('.thumbnail').queue(function() {
+	priv.ajax_decode1(0);
       });
     }, 1000);
   }
