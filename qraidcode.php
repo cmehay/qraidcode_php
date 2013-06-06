@@ -966,8 +966,8 @@ function qrdecode($picture){
 
   $descriptorspec = array(
     0 => array("pipe", "r"),  // // stdin est un pipe où le processus va lire
-    1 => array("pipe", "a"),  // stdout est un pipe où le processus va écrire
-    2 => array("pipe", "a") // stderr est un fichier
+    1 => array("pipe", "w"),  // stdout est un pipe où le processus va écrire
+    2 => array("pipe", "w") // stderr est un fichier
   );
   
   $process = proc_open('"'.ZBARIMG.'" -q MIFF:-', $descriptorspec, $pipes, '/var/www/bin', null);
@@ -977,12 +977,14 @@ function qrdecode($picture){
     return false;
   }
   fwrite($pipes[0], $img);
+  fclose($pipes[0]);
   trigger_error('ici');
   $decoded =  stream_get_contents($pipes[1]);
+  fclose($pipes[1]); 
   trigger_error('ici');trigger_error($decoded);
   $stderr = stream_get_contents($pipes[2]);
   trigger_error('ici');
-  fclose($pipes[0]); fclose($pipes[1]); fclose($pipes[2]);
+  fclose($pipes[2]);
   if(proc_close($process) != 0){
  
     trigger_error($stderr);
