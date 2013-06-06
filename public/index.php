@@ -86,7 +86,7 @@ function index_page(){
 	<div class="next">'.htmlentities('next -->').'</div>
       </div>
       <div class="decode">
-	<div class="link"><a href="?mod=file&action=getdata">Download your data</a></div>
+	<div class="link"><a href="?mod=file&action=getarchive">Download your data</a></div>
 	<div class="error millieu hidden"></div>
 	<div class="prev">'.htmlentities('<-- prev').'</div>
       </div>
