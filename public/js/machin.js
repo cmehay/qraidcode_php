@@ -331,9 +331,10 @@
       priv.currents_images = [];
       $('.thumbnail').each(function(){
 	priv.currents_images.push($(this).attr('name'));
+	console.log(priv.currents_images);
       });
       $('.thumbnail').queue(function() {
-	console.log(priv.currents_images);
+	
 	priv.ajax_decode1(0);
 	$(this).dequeue();
       });

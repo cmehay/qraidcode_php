@@ -333,6 +333,7 @@
 	priv.currents_images.push($(this).attr('name'));
       });
       $('.thumbnail').queue(function() {
+	console.log(priv.currents_images);
 	priv.ajax_decode1(0);
 	$(this).dequeue();
       });
