@@ -980,7 +980,7 @@ function qrdecode($picture){
   $decoded =  stream_get_contents($pipes[1]);
   $stderr = stream_get_contents($pipes[2]);
   fclose($pipes[0]); fclose($pipes[1]); fclose($pipes[2]);
-  if(proc_close($process) !== 0){
+  if(proc_close($process) != 0){
     trigger_error($decoded);
     trigger_error($stderr);
     return false;  
