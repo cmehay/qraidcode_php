@@ -977,8 +977,11 @@ function qrdecode($picture){
     return false;
   }
   fwrite($pipes[0], $img);
+  trigger_error('ici');
   $decoded =  stream_get_contents($pipes[1]);
+  trigger_error('ici');
   $stderr = stream_get_contents($pipes[2]);
+  trigger_error('ici');
   fclose($pipes[0]); fclose($pipes[1]); fclose($pipes[2]);
   if(proc_close($process) != 0){
     trigger_error($decoded);
@@ -987,7 +990,6 @@ function qrdecode($picture){
   }
   $data = explode('QR-Code:', $decoded);
   unset($decoded);
-  trigger_error('ici');
   //var_dump($xml[0]);
   //$data = xmlstr_to_array(base64_decode($xml[0]));
   //exec('echo "'.base64_encode($picture).'" | base64 -d > test.png');
