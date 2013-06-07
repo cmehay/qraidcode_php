@@ -132,7 +132,7 @@
     var filereader = new FileReader();
     filereader.onload = function (event) {
       //console.log('là');
-      priv.ajax_encode1('data='+event.target.result, 'file');
+      priv.ajax_encode1('data='+event.target.result, 'file', priv.filename);
     };
     setTimeout(function(){
       console.log('avantdernier');
@@ -314,7 +314,7 @@
 	priv.readsendfile(content['data']);
       }
       else{
-	priv.ajax_encode1(content['data'], content['type'], priv.filename);
+	priv.ajax_encode1(content['data'], content['type'], 'text');
 	//delete priv.filename;
       }
     },slide_duration);

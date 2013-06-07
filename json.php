@@ -90,10 +90,10 @@ function json_cb_get_encode_option(){
   return json_valid();
 }
 
-function json_cb_get_encode_status(){
+function json_cb_get_status(){
   $content = get_state();
   if($content === false){
-    $_SESSION['status'] = 'Please wait';
+    $content = 'Please wait';
   }
   return json_valid(array(
       'msg' => $content

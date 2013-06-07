@@ -242,9 +242,9 @@
     });
   }
   
-  priv.getstatus = function(action){
+  priv.getstatus = function(){
     $.ajax({
-      url:'?mod=json&action=get_'+action+'_status',
+      url:'?mod=json&action=get_status',
       type: 'GET',
       dataType: 'json'
     }).done(function(json){
@@ -258,6 +258,7 @@
       type: 'GET',
       dataType: 'json'
     }).done(function(json){
+      clearInterval(priv.ajaxrefresh)
       if(json.error){
 	$('#third-step .decode .error').html(json.msg);
 	$('#third-step .decode .link').addClass('hidden');
@@ -268,6 +269,7 @@
       }
       priv.next2('second-step');
     }).fail(function(){
+      clearInterval(priv.ajaxrefresh)
       priv.fail('Error occured :( try again', 'third-step');
     });
   }
@@ -294,6 +296,7 @@
       if(int+1 < total){
 	priv.ajax_decode1(int+1);
       }else{
+	priv.ajaxrefresh=setInterval(function(){priv.getstatus()},1000);
 	priv.ajax_decode2();
       }
     }).fail(function(){
@@ -325,7 +328,7 @@
     setTimeout(function(){
       priv.ajax_encode2($('#third-step .encode :input').serialize());
       setTimeout(function(){
-	priv.ajaxrefresh=setInterval(function(){priv.getstatus('encode')},1000);
+	priv.ajaxrefresh=setInterval(function(){priv.getstatus()},1000);
       },1000);
     },slide_duration);
   }
