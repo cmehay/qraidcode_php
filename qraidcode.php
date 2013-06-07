@@ -847,7 +847,7 @@ function format_dec($data) {
       $return['crypted_length'] = $data[$next+4].$data[$next+5].$data[$next+6].$data[$next+7];
       //var_dump($return['crypted_length']);
       //clé
-      $return['key'] = substr($data, $next+8);
+      $return['key'] = substr(substr($data, $next+8), 0, -1);
       trigger_error(bin2hex($return['key']));
     break;
     
@@ -887,7 +887,7 @@ function format_dec($data) {
       $return['crypted_length'] = $data[$next+4].$data[$next+5].$data[$next+6].$data[$next+7];
       //var_dump($return['crypted_length']);
       //clé
-      $return['key'] = substr($data, $next+8);
+      $return['key'] = substr(substr($data, $next+8), 0, -1);
     break;
       
   }
