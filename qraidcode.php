@@ -1292,7 +1292,7 @@ function write_decoded($content, $tmpdir){
   $sha = sha1($data);
   switch($type){
     case 'text':
-      $filename = $sha.'txt';
+      $filename = $sha.'.txt';
       break;
     case 'file':
       $filename = $sha;
