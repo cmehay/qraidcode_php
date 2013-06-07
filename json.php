@@ -121,8 +121,8 @@ function json_cb_send_decode(){
 
 function json_cb_get_decode() {
   sleep(2);
-  $_SESSION['tmpdir'] = sha1(gen_key(32)); 
-  $return = decode($_SESSION['decode_img'], $_SESSION['tmpdir']);
+  $_SESSION['sha1'] = sha1(gen_key(32)); 
+  $return = decode($_SESSION['decode_img'], $_SESSION['sha1']);
   if($return !== true){
     return json_error($return);
   }
