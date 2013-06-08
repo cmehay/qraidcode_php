@@ -110,9 +110,9 @@ function expon($a, $e) {
 }
 
 function set_matrix($c, $l){
-  if (isset($GLOBALS['matrix'])) {
-    return $GLOBALS['matrix'];
-  }
+//   if (isset($GLOBALS['matrix'])) {
+//     return $GLOBALS['matrix'];
+//   }
   if(file_exists(MATRIX.$c.'/'.$l)){
     //var_dump('c bon');
     $GLOBALS['matrix'] = json_decode(bzdecompress(file_get_contents(MATRIX.$c.'/'.$l)), true);
