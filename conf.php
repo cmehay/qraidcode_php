@@ -62,6 +62,8 @@ define('MAXSIZE', 190);
 //maxdata per qrcodes
 define('MAXDATA', 2891);
 
+//min tmp time in sec
+define('TIMEOUT', 300);
 
 $_SESSION['conf'] = array(
     'scripts' => array(
