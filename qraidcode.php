@@ -526,6 +526,7 @@ function reed_solomon_dec_8($data, $rs, $chunks, $length=null, $build=false){
 	  /////////////////
 	  
 	  $unpack=unpack('C*', $data_vector[$n][$byte]);
+	  trigger_error($n.' - '.$byte);
 	  $xor[$n] = pack('C*', mul($unpack[1], $newtable[$disk][$n]));  	
 	  if($n > 0){
 	    $xor[0] = $xor[0] ^ $xor[$n];
