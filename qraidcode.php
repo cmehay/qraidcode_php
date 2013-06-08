@@ -670,14 +670,14 @@ function encrypt_data($data, $key=null) {
     $encrypted = mcrypt_generic($cipher, $data);
     mcrypt_generic_deinit($cipher);
   }
-  //trigger_error(bin2hex($key));
+  trigger_error(bin2hex($key));
   return array(
     'data' => $encrypted,
     'key' => $key);
 }
 
 function decrypt_data($key, $data){
-  //trigger_error(bin2hex($key));
+  trigger_error(bin2hex($key));
   $cryptkey = hash('sha256', $key, true);
   $iv = hash('sha256', $cryptkey, true);
   for($i=0;$i<42;$i++) {

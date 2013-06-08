@@ -58,7 +58,7 @@ function set_hash_init(){
 
 function delete_old(){
   if(isset($_SESSION['delete_old'])){return null;}
-  foreach(array_diff(scandir(WORKDIR), array('..', '.')) as $value) {
+  foreach(array_diff(scandir(WORKDIR), array('..', '.', '.gitignore')) as $value) {
     $stat = stat(WORKDIR.$value);
     //trigger_error($stat['mtime']);
     if(($_SERVER['REQUEST_TIME'] - $stat['mtime']) > TIMEOUT){
