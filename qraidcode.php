@@ -464,12 +464,12 @@ function reed_solomon_enc_8($array, $m){
 }
 
 function reed_solomon_dec_8($data, $rs, $chunks, $length=null, $build=false){
-  trigger_error($chunks);
+  //trigger_error($chunks);
   $c=$chunks;
   $chunklen = strlen($data[array_rand($data)]);
   end($rs);$maxrs = key($rs);reset($rs);
   $l=$c+$maxrs+1;
-  trigger_error($l);
+  //trigger_error($l);
   $avail = count($data);
   
   if($avail + count($rs) < $c){
@@ -528,7 +528,7 @@ function reed_solomon_dec_8($data, $rs, $chunks, $length=null, $build=false){
 	  /////////////////
 	  
 	  $unpack=unpack('C*', $data_vector[$n][$byte]);
-	  trigger_error($n.' - '.$byte);
+	  //trigger_error($n.' - '.$byte);
 	  $xor[$n] = pack('C*', mul($unpack[1], $newtable[$disk][$n]));  	
 	  if($n > 0){
 	    $xor[0] = $xor[0] ^ $xor[$n];
@@ -673,14 +673,14 @@ function encrypt_data($data, $key=null) {
     $encrypted = mcrypt_generic($cipher, $data);
     mcrypt_generic_deinit($cipher);
   }
-  trigger_error(bin2hex($key));
+  //trigger_error(bin2hex($key));
   return array(
     'data' => $encrypted,
     'key' => $key);
 }
 
 function decrypt_data($key, $data){
-  trigger_error(bin2hex($key));
+  //trigger_error(bin2hex($key));
   $cryptkey = hash('sha256', $key, true);
   $iv = hash('sha256', $cryptkey, true);
   for($i=0;$i<42;$i++) {
@@ -915,7 +915,7 @@ function retreive_data($data){
       }
     }
     //print_r($value);
-    trigger_error($value['type'].' - '.$value['current']);
+    //trigger_error($value['type'].' - '.$value['current']);
     $parse['data'][$value['type']][$value['current']] = $value['data'];
     $parse['key'][$value['type']][$value['current']] = $value['key'];
   }
@@ -970,7 +970,7 @@ function get_file_type($picture){
   //trigger_error('ici');
   $type =  trim(stream_get_contents($pipes[1]));
   fclose($pipes[1]); 
-  trigger_error($type);
+  //trigger_error($type);
   $stderr = stream_get_contents($pipes[2]);
   //trigger_error('ici');
   fclose($pipes[2]);
