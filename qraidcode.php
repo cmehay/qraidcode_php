@@ -915,7 +915,7 @@ function retreive_data($data){
       }
     }
     //print_r($value);
-    
+    trigger_error($value['type'].' - '.$value['current']);
     $parse['data'][$value['type']][$value['current']] = $value['data'];
     $parse['key'][$value['type']][$value['current']] = $value['key'];
   }
