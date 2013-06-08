@@ -954,7 +954,7 @@ function get_file_type($picture){
     2 => array("pipe", "w") // stderr est un fichier
   );
    //$process = proc_open('file '.$option.' -b -', $descriptorspec, $pipes, '/var/www/bin', null);
-   $process = proc_open('identify -format %m', $descriptorspec, $pipes, '/var/www/bin', null);
+   $process = proc_open('identify -format %m -', $descriptorspec, $pipes, '/var/www/bin', null);
   
   if (!is_resource($process)) {
     trigger_error('not ressource');
@@ -965,7 +965,7 @@ function get_file_type($picture){
   //trigger_error('ici');
   $type =  trim(stream_get_contents($pipes[1]));
   fclose($pipes[1]); 
-  trigger_error($type );
+  trigger_error($type);
   $stderr = stream_get_contents($pipes[2]);
   //trigger_error('ici');
   fclose($pipes[2]);
