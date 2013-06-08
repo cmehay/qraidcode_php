@@ -973,9 +973,9 @@ function get_file_type($picture, $option='--mime-type'){
     trigger_error($stderr);
     return false;  
   }
-  $mime = explode('/', $mime[0]);
-  if($mime[0] !== 'image' && $mime[1] !== 'pdf'){return false;};
-  return $mime[1];
+  $mime = explode('/', $mime);
+  if($mime[0] !== 'image' && trim($mime[1]) !== 'pdf'){return false;};
+  return trim($mime[1]);
 
 
   //exec('echo "'.base64_encode($picture).'" | base64 -d | file '.$option.' -b -', $mime, $return);
