@@ -51,7 +51,7 @@ function get_array($var, $a=null, $b=null, $c=null, $d=null){
 
 function set_hash_init(){
   if(is_file(BLACKLIST)){
-    return json_decode(file_get_contents(BLACKLIST));
+    return json_decode(file_get_contents(BLACKLIST), true);
   }
   return array();
 }
