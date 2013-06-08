@@ -947,13 +947,14 @@ function qrencode($data){
   return base64_decode($qrcode[0]);
 }
 
-function get_file_type($picture, $option='--mime-type'){
+function get_file_type($picture){
   $descriptorspec = array(
     0 => array("pipe", "r"),  // // stdin est un pipe où le processus va lire
     1 => array("pipe", "w"),  // stdout est un pipe où le processus va écrire
     2 => array("pipe", "w") // stderr est un fichier
   );
-   $process = proc_open('file '.$option.' -b -', $descriptorspec, $pipes, '/var/www/bin', null);
+   //$process = proc_open('file '.$option.' -b -', $descriptorspec, $pipes, '/var/www/bin', null);
+   $process = proc_open('identify -format %m', $descriptorspec, $pipes, '/var/www/bin', null);
   
   if (!is_resource($process)) {
     trigger_error('not ressource');
@@ -962,20 +963,18 @@ function get_file_type($picture, $option='--mime-type'){
   fwrite($pipes[0], $picture);
   fclose($pipes[0]);
   //trigger_error('ici');
-  $mime =  stream_get_contents($pipes[1]);
+  $type =  trim(stream_get_contents($pipes[1]));
   fclose($pipes[1]); 
   trigger_error($mime);
   $stderr = stream_get_contents($pipes[2]);
   //trigger_error('ici');
   fclose($pipes[2]);
   if(proc_close($process) != 0){
- 
     trigger_error($stderr);
     return false;  
   }
-  $mime = explode('/', $mime);
-  if($mime[0] !== 'image' && trim($mime[1]) !== 'pdf'){return false;};
-  return trim($mime[1]);
+  //if($mime[0] !== 'image' && trim($mime[1]) !== 'pdf'){return false;};
+  return $mime;
 
 
   //exec('echo "'.base64_encode($picture).'" | base64 -d | file '.$option.' -b -', $mime, $return);
@@ -997,7 +996,7 @@ function pdf_extract($pdf){
     1 => array("pipe", "w"),// stdout
     2 => array("pipe", "w") // stderr
   );
-  $process = proc_open(PDFIMAGES.' - ./pdfextract/', $descriptorspec, $pipes, TMPDIR, null);
+  $process = proc_open(PDFIMAGES.' -j - ./pdfextract/', $descriptorspec, $pipes, TMPDIR, null);
   if (!is_resource($process)) {
     trigger_error('not ressource');
     return false;
@@ -1023,10 +1022,13 @@ function pdf_extract($pdf){
 
 
 function qrdecode($picture){
+  $filetype = get_file_type($picture);
+  if($filetype === false){return false;}  
   try {
     $img = new Imagick();
-    $img->setFormat(get_file_type($picture));
+    $img->setFormat($filetype);
     $img->readImageBlob($picture);
+    $img->setColorspace(imagick::COLORSPACE_GRAY);
     $img->setFormat('MIFF');      
   }catch(Exception $e){
     trigger_error($e);
@@ -1479,7 +1481,7 @@ function decode($images, $tmpdir){
   set_state('Read images');
   trigger_error('Read images');
   foreach($images as $value){
-    if(get_file_type($value) == 'pdf'){
+    if(get_file_type($value) == 'PDF'){
       trigger_error('pdf');
       $pictures = pdf_extract($value);
       if(is_array($pictures)){
