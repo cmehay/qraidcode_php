@@ -58,11 +58,11 @@ function set_hash_init(){
 
 function delete_old(){
   if(isset($_SESSION['delete_old'])){return null;}
-  foreach(array_diff(scandir(TMPDIR), array('..', '.')) as $value) {
-    $stat = stat(TMPDIR.$value);
+  foreach(array_diff(scandir(WORKDIR), array('..', '.')) as $value) {
+    $stat = stat(WORKDIR.$value);
     trigger_error($stat['mtime']);
     if(($_SERVER['REQUEST_TIME'] - $stat['mtime']) > TIMEOUT){
-      rrmdir(TMPDIR.$value);
+      rrmdir(WORKDIR.$value);
     }
   }
   $_SESSION['delete_old'] = true;
