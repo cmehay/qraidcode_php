@@ -1479,9 +1479,9 @@ function decode($images, $tmpdir){
   set_state('Read images');
   trigger_error('Read images');
   foreach($images as $value){
-    if(get_file_type($picture) == 'pdf'){
+    if(get_file_type($value) == 'pdf'){
       trigger_error('pdf');
-      $pictures = pdf_extract($picture);
+      $pictures = pdf_extract($value);
       if(is_array($pictures)){
         foreach($pictures as $value){
 	  $return = qrdecode($value);
