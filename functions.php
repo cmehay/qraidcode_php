@@ -50,11 +50,10 @@ function get_array($var, $a=null, $b=null, $c=null, $d=null){
 }
 
 function set_hash_init(){
-  $hasharray = array();
-  foreach(array_diff(scandir(PNGDIR), array('..', '.')) as $value) {
-    $hasharray[hash('crc32', file_get_contents(PNGDIR.$value), false)] = true;
+  if(is_file(BLACKLIST)){
+    return json_decode(file_get_contents(BLACKLIST));
   }
-  return $hasharray;
+  return array();
 }
 
 

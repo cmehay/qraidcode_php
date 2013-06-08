@@ -40,6 +40,9 @@ define('STATEFILE', 'state');
 //font
 define('FONT', '../font.ttf');
 
+//blacklist img
+define('BLACKLIST', '../blacklist.json');
+
 //microsleep
 define('MICROSLEEP', 100000);
 
