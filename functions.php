@@ -13,7 +13,7 @@ function rrmdir($dir) {
 
 function getencodedata($data, $type) {
   if($type === 'file'){
-    trigger_error(base64_decode(str_replace(' ','+',substr($data,strpos($data,",")+1))));
+    //trigger_error(base64_decode(str_replace(' ','+',substr($data,strpos($data,",")+1))));
     return base64_decode(str_replace(' ','+',substr($data,strpos($data,",")+1)));  
   }
   if($type === 'text'){
@@ -60,7 +60,7 @@ function delete_old(){
   if(isset($_SESSION['delete_old'])){return null;}
   foreach(array_diff(scandir(WORKDIR), array('..', '.')) as $value) {
     $stat = stat(WORKDIR.$value);
-    trigger_error($stat['mtime']);
+    //trigger_error($stat['mtime']);
     if(($_SERVER['REQUEST_TIME'] - $stat['mtime']) > TIMEOUT){
       rrmdir(WORKDIR.$value);
     }

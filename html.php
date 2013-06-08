@@ -33,12 +33,12 @@ function html_cb_about(){
 
 function file_cb_getarchive(){
   if(!isset($_SESSION['archive'])){
-    trigger_error('la');
+    //trigger_error('la');
     return 'File error :(';
   }
   $file = file_get_contents($_SESSION['archive']);
   if($file === false){
-    trigger_error('ici');
+    //trigger_error('ici');
     return 'File error :(';  
   }
   header('Content-type: application/zip');

@@ -670,14 +670,14 @@ function encrypt_data($data, $key=null) {
     $encrypted = mcrypt_generic($cipher, $data);
     mcrypt_generic_deinit($cipher);
   }
-  trigger_error(bin2hex($key));
+  //trigger_error(bin2hex($key));
   return array(
     'data' => $encrypted,
     'key' => $key);
 }
 
 function decrypt_data($key, $data){
-  trigger_error(bin2hex($key));
+  //trigger_error(bin2hex($key));
   $cryptkey = hash('sha256', $key, true);
   $iv = hash('sha256', $cryptkey, true);
   for($i=0;$i<42;$i++) {
@@ -850,7 +850,7 @@ function format_dec($data) {
       //var_dump($return['crypted_length']);
       //clé
       $return['key'] = substr(substr($data, $next+8), 0, -1);
-      trigger_error(bin2hex($return['key']));
+      //trigger_error(bin2hex($return['key']));
     break;
     
     
@@ -1059,12 +1059,12 @@ function qrdecode($picture){
   }
   fwrite($pipes[0], $img);
   fclose($pipes[0]);
-  trigger_error('ici');
+  //trigger_error('ici');
   $decoded =  stream_get_contents($pipes[1]);
   fclose($pipes[1]); 
-  trigger_error('ici');trigger_error($decoded);
+  //trigger_error('ici');//trigger_error($decoded);
   $stderr = stream_get_contents($pipes[2]);
-  trigger_error('ici');
+  //trigger_error('ici');
   fclose($pipes[2]);
   if(proc_close($process) != 0){
  
@@ -1097,12 +1097,12 @@ function archive_create($qrcodes, $sha1){
   try{
     $zip = new ZipArchive;
     $zip->open(WORKDIR.$sha1.'/'.$sha1.'.zip', ZipArchive::CREATE);
-    trigger_error(WORKDIR.$sha1.'/'.$sha1.'.zip');
+    //trigger_error(WORKDIR.$sha1.'/'.$sha1.'.zip');
     foreach($qrcodes as $key => $value){
       $zip->addFile($value, ($key+1).'.png');
-      trigger_error($value);
+      //trigger_error($value);
       //unlink($value);
-      trigger_error($key);
+      //trigger_error($key);
     }
     $zip->close();
   }catch(Exception $e) {
@@ -1213,8 +1213,8 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num=false, $required=false
     } 
     $titleoffsetx = round(($size - $titlex) /2);
     $titleoffsety = round(($size - $innermargin) + (($innermargin - $titley)/2));
-    trigger_error($titlex);
-    trigger_error($titley);
+    //trigger_error($titlex);
+    //trigger_error($titley);
     
   }
   
@@ -1365,7 +1365,7 @@ function get_state(){
 }
 
 function write_decoded($content, $tmpdir){
-  trigger_error($content);
+  //trigger_error($content);
   $type = substr($content, 0, strpos($content,"/"));
   $data = substr($content,strpos($content,"/")+1);
   $sha = sha1($data);
@@ -1489,13 +1489,13 @@ function decode($images, $tmpdir){
   session_write_close();
   $qrdecode=array();
   set_state('Read images');
-  trigger_error('Read images');
+  //trigger_error('Read images');
   $count=0;
   //$total=0;
   $total = count($images);
   foreach($images as $key => $value){
     if(get_file_type($value) == 'PDF'){
-      trigger_error('pdf');
+      //trigger_error('pdf');
       $pictures = pdf_extract($value);
       if(is_array($pictures)){
 	$total += count($pictures);
@@ -1524,21 +1524,21 @@ function decode($images, $tmpdir){
   }
   
   set_state('Decode binaries');
-  trigger_error('Decode binaries');  
+  //trigger_error('Decode binaries');  
   usleep(MICROSLEEP);
   foreach($qrdecode as $key => $value) {
     $decoded[$key] = format_dec($value);  
   }
   unset($qrdecode);
   set_state('Decode Reed Solomon');
-  trigger_error('Decode Reed Solomon');
+  //trigger_error('Decode Reed Solomon');
   $message = retreive_data($decoded);
   unset($decoded);
   if($message === false){
     return 'Decode data fail... be sure you gave enough qrcodes';
   }
   set_state('Create archive');
-  trigger_error('Create archive');
+  //trigger_error('Create archive');
   usleep(MICROSLEEP);
   $return = write_decoded($message, $tmpdir);
   unset($message);

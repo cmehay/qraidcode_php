@@ -13,7 +13,7 @@ require TFPDF;
 delete_old();
 
 
-trigger_error(print_r($_POST, true));
+//trigger_error(print_r($_POST, true));
 
 function parse() {
 

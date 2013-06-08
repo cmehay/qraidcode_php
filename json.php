@@ -44,7 +44,7 @@ function json_cb_get_encode_data(){
   if($min > MAXQRCODES){
     return json_error('badsize');
   }
-  trigger_error($raw);
+  //trigger_error($raw);
   $_SESSION['data'] = $raw;
   $_SESSION['sha1'] = hash('sha1', $raw, false);
   $_SESSION['datalength'] = $length;
@@ -114,7 +114,7 @@ function json_cb_send_decode(){
     return json_error('Too much data ><');
   }
   $_SESSION['decode_img'][$_GET['num']] = $raw;
-  trigger_error(count($_SESSION['decode_img']));
+  //trigger_error(count($_SESSION['decode_img']));
   session_write_close();
   return json_valid();
 }
