@@ -464,6 +464,7 @@ function reed_solomon_enc_8($array, $m){
 }
 
 function reed_solomon_dec_8($data, $rs, $chunks, $length=null, $build=false){
+  trigger_error($chunks);
   $c=$chunks;
   $chunklen = strlen($data[array_rand($data)]);
   end($rs);$maxrs = key($rs);reset($rs);
@@ -932,9 +933,9 @@ function retreive_data($data){
   
   $keylen = key_size($last['count']);
   
-  $key = $reed_solomon_dec($parse['key']['data'], $parse['key']['rs'],$last['count'], $keylen, true);
+  $key = $reed_solomon_dec($parse['key']['data'], $parse['key']['rs'], $last['count'], $keylen, true);
   if(!$key){return false;}
-  $data = $reed_solomon_dec($parse['data']['data'], $parse['data']['rs'],$last['count'], array_shift(unpack('L', decrypt_data($key, $last['crypted_length']))), true);
+  $data = $reed_solomon_dec($parse['data']['data'], $parse['data']['rs'], $last['count'], array_shift(unpack('L', decrypt_data($key, $last['crypted_length']))), true);
   if(!$data){return false;}
   return decrypt_data($key, $data);
 }
