@@ -11,7 +11,7 @@ define('QRENCODE', '/var/www/bin/src/qrencode/qrencode');
 define('PNGCRUSH', '/var/www/bin/src/pngcrush/pngcrush');
 
 //pdfimages
-define('PDFIMAGES', '/var/www/bin/src/xpdf/xpdf/pdfimages');
+define('PDFIMAGES', '/var/www/bin/src/poppler/utils/pdfimages');
 
 //working dir
 define('WORKDIR', '../work/');
