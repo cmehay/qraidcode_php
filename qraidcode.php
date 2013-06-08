@@ -1010,9 +1010,16 @@ function pdf_extract($pdf){
     return false;  
   }
   $files = array();
+  $hasharray = array();
   foreach(array_diff(scandir($tmpdir), array('..', '.')) as $value) {
     if(is_file($tmpdir.'/'.$value)){
-      array_push($files, file_get_contents($tmpdir.'/'.$value));  
+      $content = file_get_contents($tmpdir.'/'.$value);
+      $hash = hash('crc32', $content, false);
+      if(isset($hasharray[$hash])){
+	continue;
+      }
+      $hasharray[$hash] = true;
+      array_push($files, $content);  
       unlink($tmpdir.'/'.$value);
     }
   }
