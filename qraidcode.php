@@ -965,7 +965,7 @@ function get_file_type($picture){
   //trigger_error('ici');
   $type =  trim(stream_get_contents($pipes[1]));
   fclose($pipes[1]); 
-  trigger_error($mime);
+  trigger_error($type );
   $stderr = stream_get_contents($pipes[2]);
   //trigger_error('ici');
   fclose($pipes[2]);
@@ -974,7 +974,7 @@ function get_file_type($picture){
     return false;  
   }
   //if($mime[0] !== 'image' && trim($mime[1]) !== 'pdf'){return false;};
-  return $mime;
+  return $type ;
 
 
   //exec('echo "'.base64_encode($picture).'" | base64 -d | file '.$option.' -b -', $mime, $return);
