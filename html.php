@@ -42,7 +42,7 @@ function file_cb_getarchive(){
     return 'File error :(';  
   }
   header('Content-type: application/zip');
-  header('Content-Disposition: attachment; filename="'.urlencode($_SESSION['filename']).'.zip"');
+  header('Content-Disposition: attachment; filename="'.urlencode('QRaidCODE.zip').'"');
   return $file;
 }
 
