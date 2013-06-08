@@ -1036,7 +1036,7 @@ function qrdecode($picture){
     $img->setFormat($filetype);
     $img->readImageBlob($picture);
     if($img->getImageHeight() < 200){
-      $img->resizeImage(500, 500, 'FILTER_POINT', 0, true);
+      $img->resizeImage(500, 500, imagick::FILTER_POINT, 0, true);
     }
     //$img->setColorspace(imagick::COLORSPACE_GRAY);
     $img->setFormat('MIFF');      
