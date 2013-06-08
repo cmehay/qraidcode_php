@@ -40,10 +40,12 @@
     };    
     $('#'+corresp[from]).prop("disabled", true);
     $('#'+from).prop("disabled", false);
+    $('#'+from).focus();
     $('#'+corresp[from]).parent().css('background-color', '#F3F3F3');
     $('#'+from).parent().css('background-color', 'white');
     $('#'+from).prev().css('pointer-events', 'none');
     $('#'+corresp[from]).prev().css('pointer-events', 'all');
+    
   };
   
   machin.prev = function(from){
