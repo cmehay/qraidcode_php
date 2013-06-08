@@ -60,6 +60,7 @@ function delete_old(){
   if(isset($_SESSION['delete_old'])){return null;}
   foreach(array_diff(scandir(TMPDIR), array('..', '.')) as $value) {
     $stat = stat(TMPDIR.$value);
+    trigger_error($stat['mtime']);
     if(($_SERVER['REQUEST_TIME'] - $stat['mtime']) > TIMEOUT){
       rrmdir(TMPDIR.$value);
     }
