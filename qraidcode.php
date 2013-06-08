@@ -1028,7 +1028,7 @@ function qrdecode($picture){
     $img = new Imagick();
     $img->setFormat($filetype);
     $img->readImageBlob($picture);
-    $img->setColorspace(imagick::COLORSPACE_GRAY);
+    //$img->setColorspace(imagick::COLORSPACE_GRAY);
     $img->setFormat('MIFF');      
   }catch(Exception $e){
     trigger_error($e);
