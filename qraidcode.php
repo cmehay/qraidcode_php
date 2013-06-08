@@ -973,7 +973,7 @@ function get_file_type($picture){
     trigger_error($stderr);
     return false;  
   }
-  //if($mime[0] !== 'image' && trim($mime[1]) !== 'pdf'){return false;};
+  if(strpos($type, 'PDF') !== false){$type = 'PDF';};
   return $type ;
 
 
