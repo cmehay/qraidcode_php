@@ -115,7 +115,7 @@ function set_matrix($c, $l){
   }
   if(file_exists(MATRIX.$c.'/'.$l)){
     //var_dump('c bon');
-    $GLOBALS['matrix'] = json_decode(bzdecompress(file_get_contents(MATRIX.$c.'/'.$l)));
+    $GLOBALS['matrix'] = json_decode(bzdecompress(file_get_contents(MATRIX.$c.'/'.$l)), true);
     return $GLOBALS['matrix'];
   }
   
