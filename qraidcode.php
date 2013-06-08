@@ -1490,21 +1490,31 @@ function decode($images, $tmpdir){
   $qrdecode=array();
   set_state('Read images');
   trigger_error('Read images');
-  foreach($images as $value){
+  $count=0;
+  //$total=0;
+  $total = count($images);
+  foreach($images as $key => $value){
     if(get_file_type($value) == 'PDF'){
       trigger_error('pdf');
       $pictures = pdf_extract($value);
       if(is_array($pictures)){
-        foreach($pictures as $value){
+	$total += count($pictures);
+        foreach($pictures as $key => $value){
+	  $count++;
+	  set_state('Read image '.$count.'/'.$total);
 	  $return = qrdecode($value);
+	  unset($pictures[$key]);
 	  if($return !== false){
 	    $qrdecode = array_merge($qrdecode, $return);
-	  };  
+	  };
         }
       }
       continue;
     }
+    $count++;
+    set_state('Read image '.$count.'/'.$total);
     $return = qrdecode($value);
+    unset($images[$key]);
     if($return !== false){
       $qrdecode = array_merge($qrdecode, $return);
     }  

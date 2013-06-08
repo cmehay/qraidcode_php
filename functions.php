@@ -56,5 +56,17 @@ function set_hash_init(){
   return array();
 }
 
+function delete_old(){
+  if(isset($_SESSION['delete_old'])){return null;}
+  foreach(array_diff(scandir(TMPDIR), array('..', '.')) as $value) {
+    $stat = stat(TMPDIR.$value);
+    if(($_SERVER['REQUEST_TIME'] - $stat['mtime']) > TIMEOUT){
+      rrmdir(TMPDIR.$value);
+    }
+  }
+  $_SESSION['delete_old'] = true;
+}
+
+
 
 ?>
