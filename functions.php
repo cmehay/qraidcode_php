@@ -49,7 +49,13 @@ function get_array($var, $a=null, $b=null, $c=null, $d=null){
   return null;
 }
 
-
+function set_hash_init(){
+  $hasharray = array();
+  foreach(array_diff(scandir(PNGDIR), array('..', '.')) as $value) {
+    $hasharray[hash('crc32', file_get_contents($value), false)];
+  }
+  return $hasharray;
+}
 
 
 ?>

@@ -1010,7 +1010,7 @@ function pdf_extract($pdf){
     return false;  
   }
   $files = array();
-  $hasharray = array();
+  $hasharray = set_hash_init();
   foreach(array_diff(scandir($tmpdir), array('..', '.')) as $value) {
     if(is_file($tmpdir.'/'.$value)){
       $content = file_get_contents($tmpdir.'/'.$value);
@@ -1035,6 +1035,9 @@ function qrdecode($picture){
     $img = new Imagick();
     $img->setFormat($filetype);
     $img->readImageBlob($picture);
+    if($image->getImageHeight() < 200){
+      $img->resizeImage(500, 500, FILTER_POINT, 0, true);
+    }
     //$img->setColorspace(imagick::COLORSPACE_GRAY);
     $img->setFormat('MIFF');      
   }catch(Exception $e){
