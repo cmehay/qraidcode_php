@@ -10,7 +10,7 @@ require '../qraidcode.php';
 require '../functions.php';
 require TFPDF;
 
-
+delete_old();
 
 
 trigger_error(print_r($_POST, true));
