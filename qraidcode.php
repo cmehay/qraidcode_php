@@ -1035,7 +1035,7 @@ function qrdecode($picture){
     $img = new Imagick();
     $img->setFormat($filetype);
     $img->readImageBlob($picture);
-    if($image->getImageHeight() < 200){
+    if($img->getImageHeight() < 200){
       $img->resizeImage(500, 500, FILTER_POINT, 0, true);
     }
     //$img->setColorspace(imagick::COLORSPACE_GRAY);
