@@ -933,6 +933,8 @@ function retreive_data($data){
   $reed_solomon_dec = 'reed_solomon_dec_'.base();
   
   $keylen = key_size($last['count']);
+  ksort($parse['key']['data']);ksort($parse['key']['rs']);
+  ksort($parse['data']['data']);ksort($parse['data']['rs']);
   
   $key = $reed_solomon_dec($parse['key']['data'], $parse['key']['rs'], $last['count'], $keylen, true);
   if(!$key){return false;}
