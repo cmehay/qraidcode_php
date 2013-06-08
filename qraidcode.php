@@ -964,7 +964,7 @@ function get_file_type($picture, $option='--mime-type'){
   //trigger_error('ici');
   $mime =  stream_get_contents($pipes[1]);
   fclose($pipes[1]); 
-  //trigger_error('ici');trigger_error($decoded);
+  trigger_error($mime);
   $stderr = stream_get_contents($pipes[2]);
   //trigger_error('ici');
   fclose($pipes[2]);
