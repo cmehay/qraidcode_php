@@ -1,6 +1,16 @@
 <?php
 //fonctions génériques
 
+function rrmdir($dir) {
+    foreach(glob($dir . '/*') as $file) {
+        if(is_dir($file))
+            rrmdir($file);
+        else
+            unlink($file);
+    }
+    rmdir($dir);
+}
+
 function getencodedata($data, $type) {
   if($type === 'file'){
     trigger_error(base64_decode(str_replace(' ','+',substr($data,strpos($data,",")+1))));
@@ -38,6 +48,8 @@ function get_array($var, $a=null, $b=null, $c=null, $d=null){
   }
   return null;
 }
+
+
 
 
 ?>

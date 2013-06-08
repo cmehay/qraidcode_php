@@ -35,6 +35,8 @@ function set_base($n){
   return false;
 }
 
+
+
 //générateur de table logarithmique de champs galois qui pète sa race
 
 function set_table() {
@@ -946,14 +948,79 @@ function qrencode($data){
 }
 
 function get_file_type($picture, $option='--mime-type'){
-  exec('echo "'.base64_encode($picture).'" | base64 -d | file '.$option.' -b -', $mime, $return);
-  if($return != 0 || !$mime){
+  $descriptorspec = array(
+    0 => array("pipe", "r"),  // // stdin est un pipe où le processus va lire
+    1 => array("pipe", "w"),  // stdout est un pipe où le processus va écrire
+    2 => array("pipe", "w") // stderr est un fichier
+  );
+   $process = proc_open('file '.$option.' -b -', $descriptorspec, $pipes, '/var/www/bin', null);
+  
+  if (!is_resource($process)) {
+    trigger_error('not ressource');
+    return false;
+  }
+  fwrite($pipes[0], $picture);
+  fclose($pipes[0]);
+  //trigger_error('ici');
+  $mime =  stream_get_contents($pipes[1]);
+  fclose($pipes[1]); 
+  //trigger_error('ici');trigger_error($decoded);
+  $stderr = stream_get_contents($pipes[2]);
+  //trigger_error('ici');
+  fclose($pipes[2]);
+  if(proc_close($process) != 0){
+ 
+    trigger_error($stderr);
     return false;  
   }
   $mime = explode('/', $mime[0]);
-  if($mime[0] !== 'image'){return false;};
+  if($mime[0] !== 'image' && $mime[1] !== 'pdf'){return false;};
   return $mime[1];
+
+
+  //exec('echo "'.base64_encode($picture).'" | base64 -d | file '.$option.' -b -', $mime, $return);
+//   if($return != 0 || !$mime){
+//     return false;  
+//   }
+//   $mime = explode('/', $mime[0]);
+//   if($mime[0] !== 'image'){return false;};
+//   return $mime[1];
 }
+
+function pdf_extract($pdf){
+  $tmpdir = TMPDIR.'/pdfextract';
+  if(!is_dir($tmpdir)){
+    mkdir($tmpdir);
+  }
+  $descriptorspec = array(
+    0 => array("pipe", "r"),// stdin
+    1 => array("pipe", "w"),// stdout
+    2 => array("pipe", "w") // stderr
+  );
+  $process = proc_open(PDFIMAGES.' - ./pdfextract/', $descriptorspec, $pipes, TMPDIR, null);
+  if (!is_resource($process)) {
+    trigger_error('not ressource');
+    return false;
+  }
+  fwrite($pipes[0], $pdf);
+  fclose($pipes[0]);
+  $stderr = stream_get_contents($pipes[2]);
+  fclose($pipes[2]);
+  if(proc_close($process) != 0){
+    trigger_error($stderr);
+    return false;  
+  }
+  $files = array();
+  foreach(array_diff(scandir($tmpdir), array('..', '.')) as $value) {
+    if(is_file($tmpdir.'/'.$value)){
+      array_push($files, file_get_contents($tmpdir.'/'.$value));  
+      unlink($tmpdir.'/'.$value);
+    }
+  }
+  rrmdir($tmpdir);
+  return $files;
+}
+
 
 function qrdecode($picture){
   try {
@@ -1412,6 +1479,19 @@ function decode($images, $tmpdir){
   set_state('Read images');
   trigger_error('Read images');
   foreach($images as $value){
+    if(get_file_type($picture) == 'pdf'){
+      trigger_error('pdf');
+      $pictures = pdf_extract($picture);
+      if(is_array($pictures)){
+        foreach($pictures as $value){
+	  $return = qrdecode($value);
+	  if($return !== false){
+	    $qrdecode = array_merge($qrdecode, $return);
+	  };  
+        }
+      }
+      continue;
+    }
     $return = qrdecode($value);
     if($return !== false){
       $qrdecode = array_merge($qrdecode, $return);

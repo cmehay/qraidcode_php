@@ -10,6 +10,9 @@ define('QRENCODE', '/var/www/bin/src/qrencode/qrencode');
 //pngcrush
 define('PNGCRUSH', '/var/www/bin/src/pngcrush/pngcrush');
 
+//pdfimages
+define('PDFIMAGES', '/var/www/bin/src/xpdf/xpdf/pdfimages');
+
 //working dir
 define('WORKDIR', '../work/');
 
