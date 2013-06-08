@@ -849,7 +849,7 @@ function format_dec($data) {
       $return['crypted_length'] = $data[$next+4].$data[$next+5].$data[$next+6].$data[$next+7];
       //var_dump($return['crypted_length']);
       //clé
-      $return['key'] = substr(substr($data, $next+8), 0, -1);
+      $return['key'] = substr($data, $next+8);
       //trigger_error(bin2hex($return['key']));
     break;
     
@@ -889,7 +889,7 @@ function format_dec($data) {
       $return['crypted_length'] = $data[$next+4].$data[$next+5].$data[$next+6].$data[$next+7];
       //var_dump($return['crypted_length']);
       //clé
-      $return['key'] = substr(substr($data, $next+8), 0, -1);
+      $return['key'] = substr($data, $next+8);
     break;
       
   }
@@ -1060,7 +1060,7 @@ function qrdecode($picture){
   fwrite($pipes[0], $img);
   fclose($pipes[0]);
   //trigger_error('ici');
-  $decoded =  stream_get_contents($pipes[1]);
+  $decoded =  substr(stream_get_contents($pipes[1]), 0, -1);
   fclose($pipes[1]); 
   //trigger_error('ici');//trigger_error($decoded);
   $stderr = stream_get_contents($pipes[2]);
