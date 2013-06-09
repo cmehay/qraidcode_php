@@ -110,9 +110,9 @@ function expon($a, $e) {
 }
 
 function set_matrix($c, $l){
-//   if (isset($GLOBALS['matrix'])) {
-//     return $GLOBALS['matrix'];
-//   }
+  if (isset($GLOBALS['matrix'])) {
+    return $GLOBALS['matrix'];
+  }
   if(file_exists(MATRIX.$c.'/'.$l)){
     //var_dump('c bon');
     $GLOBALS['matrix'] = json_decode(bzdecompress(file_get_contents(MATRIX.$c.'/'.$l)), true);
@@ -944,12 +944,37 @@ function retreive_data($data){
 }
 
 function qrencode($data){
-  exec('echo "'.base64_encode($data).'" | base64 -d | "'.QRENCODE.'" -8 -s 1 -m 0 -o - | base64 -w 0', $qrcode, $return);
-  //var_dump(base64_encode($data));
-  if($return != 0 && !$qrcode){
+  $descriptorspec = array(
+    0 => array("pipe", "r"),  // // stdin est un pipe où le processus va lire
+    1 => array("pipe", "w"),  // stdout est un pipe où le processus va écrire
+    2 => array("pipe", "w") // stderr est un fichier
+  );
+  $process = proc_open('"'.QRENCODE.'" -8 -s 1 -m 0 -o -', $descriptorspec, $pipes, '/var/www/bin', null);
+  
+  if (!is_resource($process)) {
+    trigger_error('not ressource');
+    return false;
+  }
+  fwrite($pipes[0], $picture);
+  fclose($pipes[0]);
+  //trigger_error('ici');
+  $qrcode =  stream_get_contents($pipes[1]);
+  fclose($pipes[1]); 
+  //trigger_error($type);
+  $stderr = stream_get_contents($pipes[2]);
+  //trigger_error('ici');
+  fclose($pipes[2]);
+  if(proc_close($process) != 0){
+    trigger_error($stderr);
     return false;  
   }
-  return base64_decode($qrcode[0]);
+
+  //exec('echo "'.base64_encode($data).'" | base64 -d | "'.QRENCODE.'" -8 -s 1 -m 0 -o - | base64 -w 0', $qrcode, $return);
+  //var_dump(base64_encode($data));
+//   if($return != 0 && !$qrcode){
+//     return false;  
+//   }
+  return $qrcode;
 }
 
 function get_file_type($picture){
@@ -1072,8 +1097,7 @@ function qrdecode($picture){
   //trigger_error('ici');
   fclose($pipes[2]);
   if(proc_close($process) != 0){
- 
-    trigger_error($stderr);
+    //trigger_error($stderr);
     return false;  
   }
   $data = explode('QR-Code:', $decoded);
