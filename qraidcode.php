@@ -955,7 +955,7 @@ function qrencode($data){
     trigger_error('not ressource');
     return false;
   }
-  fwrite($pipes[0], $picture);
+  fwrite($pipes[0], $data);
   fclose($pipes[0]);
   //trigger_error('ici');
   $qrcode =  stream_get_contents($pipes[1]);
