@@ -27,7 +27,7 @@ function render($content){
 
 function html_about(){
   return 
- '<div id="title">About QRaidCODE</div>
+ '<div id="about-title">About QRaidCODE</div>
   <div id="question">What is QRaidCODE?</div>
   <div id="description">QRaidCODE is a system allowing to write data on multiple Qrcodes with parity which allows you to decode your data with a fraction of the qrcodes generated.</div>
   <div id="question">How it works?</div>
