@@ -51,6 +51,7 @@ a {
     
     line-height: @box_height;
     text-align: center;
+    width: 100%;
 }
 
 #first-step {
