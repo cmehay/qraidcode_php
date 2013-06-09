@@ -31,7 +31,7 @@ function html_about(){
   <div id="question">What is QRaidCODE?</div>
   <div id="description">QRaidCODE is a system allowing to write data on multiple Qrcodes with parity which allows you to decode your data with a fraction of the qrcodes generated.</div>
   <div id="question">How it works?</div>
-  <div id="description">The data are packed in binary contener and crypted, and for the paraity it use the same Reed-Solomon algorythm involved in RAID6.</div>
+  <div id="description">The data are packed in binary contener and crypted, and for the parity it use the same Reed-Solomon algorythm involved in RAID6.</div>
   <div id="question">Is this secure?</div>
   <div id="description">Yep, the data are encrypted and the key for the decryption is distributed on the Qrcodes, if someone found one of the qrcode, he will not be able to read the content, 
 			all qrcodes are needed to get the data and the encryption key.</div>
