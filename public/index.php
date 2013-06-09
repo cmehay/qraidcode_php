@@ -100,7 +100,8 @@ function index_page(){
   </div>        
   <div id="subtitle">IMPORTANT: this application is for demonstration purposes only. Do not use it for important or critical data.</div>
   <div id="footer">
-    <div><a href="/?action=about">About</div>
+    <div class="button">About</div>
+    <div class="bellow">'.html_about().'</div>
   </div>
   '
   );
