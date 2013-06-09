@@ -26,7 +26,7 @@ function render($content){
 }
 
 function html_about(){
-  return render(
+  return 
  '<div id="title">About QRaidCODE</div>
   <div id="question">What is QRaidCODE?</div>
   <div id="description">QRaidCODE is a system allowing to write data on multiple Qrcodes with parity which allows you to decode your data with a fraction of the qrcodes generated.</div>
@@ -53,7 +53,7 @@ function html_about(){
   <div id="description">I will publish more information about this project on <a href="https://goldy.furry.fr/">my blog</a>.</div>
   
   <div id="description">Please donate bitcoins to support this project if you like it : 1<span class="bold">Go1dy</span>1GRBAHbPUTu6xPaWPSqQPd4DzU2i</div>
-  ') ;
+  ' ;
 }
 
 function file_cb_getarchive(){
