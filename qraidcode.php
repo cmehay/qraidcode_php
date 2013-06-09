@@ -440,6 +440,7 @@ function reed_solomon_enc_8($array, $m){
   
   //print_r($table);
   for($i=0;$i<$chunklen;$i++) {
+  set_state('Compute Reed Solomon '.$i.'/'.$chunklen);
     //var_dump($i);
     for($y=0;$y<$m;$y++) {
       if(!isset($rs[$y])){
