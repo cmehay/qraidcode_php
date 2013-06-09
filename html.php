@@ -33,7 +33,7 @@ function html_about(){
   <div id="question">How it works?</div>
   <div id="description">The data are packed in binary contener and crypted, and for the parity it use the same Reed-Solomon algorythm involved in RAID6.</div>
   <div id="question">Is this secure?</div>
-  <div id="description">Yep, the data are encrypted and the key for the decryption is distributed on the Qrcodes, if someone found one of the qrcode, he will not be able to read the content, 
+  <div id="description">Yep, the data are encrypted and the encryption key is distributed on the Qrcodes, if someone found one of the qrcode, he will not be able to read the content, 
 			all qrcodes are needed to get the data and the encryption key.</div>
   <div id="question">How should I use the parity?</div>
   <div id="description">The parity allow you to get more qrcode than needed to decode your data. For instance, if you generate 10 qrcodes with data and 4 qrcodes with parity, 
