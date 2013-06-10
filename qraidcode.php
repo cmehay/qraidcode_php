@@ -1132,11 +1132,11 @@ function qrdecode($picture){
   //var_dump(base64_encode(base64_decode($data['source']['index']['symbol']['data']['@content'])));
   array_shift($data);
   foreach($data as $key => $value){
-    $data[$key]=base64_encode($value);
-    $length = strlen($data[$key]);
-    //fix the last char
-    $data[$key][$length-1] = '=';
-    $data[$key] = base64_decode($data[$key]);
+//     $data[$key]=base64_encode($value);
+//     $length = strlen($data[$key]);
+//     //fix the last char
+//     $data[$key][$length-1] = '=';
+//     $data[$key] = base64_decode($data[$key]);
     trigger_error(bin2hex($data[$key]));
   }
   //var_dump($data[1]);
