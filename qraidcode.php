@@ -286,7 +286,7 @@ function split_data($str, $n, $p){
     for($k=$s;$k<$s+$chunklen;$k++) {
       $data[$i] .=  $str[$k]; 
     }
-    trigger_error(bin2hex($data[i]));
+    trigger_error(bin2hex($data[$i]));
     //$data[$i]= substr($str, $s, $chunklen);
     //if($i === $n-1 && $lastchunklen < $chunklen){
       //remplie avec du vide normalement
