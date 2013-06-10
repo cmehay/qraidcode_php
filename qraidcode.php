@@ -921,11 +921,17 @@ function retreive_data($data){
     $parse['key'][$value['type']][$value['current']] = $value['key'];
   }
   //print_r($parse);
-  $chunks_num = count($parse['data']['data']);
+  if(isset($parse['data']['data'])){
+    $chunks_num = count($parse['data']['data']);
+  }else{
+    $chunks_num = 0;
+    $parse['data']['data'] = array();
+  }
   if(isset($parse['data']['rs'])){
     $rs_num = count($parse['data']['rs']);  
   }else {
     $rs_num = 0;  
+    $parse['data']['rs'] = array();
   }
   
   if($chunks_num + $rs_num < $last['count']){
