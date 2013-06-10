@@ -27,8 +27,7 @@ function render($content){
 
 function html_about(){
   return 
- '<div class="about-title">About QRaidCODE</div>
-  <div class="question">What is QRaidCODE?</div>
+ '<div class="question">What is QRaidCODE?</div>
   <div class="answer">QRaidCODE is a system allowing to write data on multiple Qrcodes with parity which allows you to decode your data with a fraction of the qrcodes generated.</div>
   <div class="question">How does it work?</div>
   <div class="answer">The data are packed and encrypted, the same Reed-Solomon algorythm involved in RAID6 is used for the parity system.</div>
