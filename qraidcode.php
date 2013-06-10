@@ -960,6 +960,7 @@ function retreive_data($data){
   if(!$data){return false;}
   $decrypted = decrypt_data($key, $data);
   if(hash('crc32', $decrypted, true) !== $last['checksum']){
+    trigger_error('bad checksum: '.hash('crc32', $decrypted, true).' !== '.$last['checksum']);
     return false;
   }
   return $decrypted;
