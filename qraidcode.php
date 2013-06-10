@@ -286,7 +286,7 @@ function split_data($str, $n, $p){
     for($k=$s;$k<$s+$chunklen;$k++) {
       $data[$i] .=  $str[$k]; 
     }
-    trigger_error(bin2hex($data[$i]));
+    //trigger_error(bin2hex($data[$i]));
     //$data[$i]= substr($str, $s, $chunklen);
     //if($i === $n-1 && $lastchunklen < $chunklen){
       //remplie avec du vide normalement
@@ -683,14 +683,14 @@ function encrypt_data($data, $key=null) {
     $encrypted = mcrypt_generic($cipher, $data);
     mcrypt_generic_deinit($cipher);
   }
-  trigger_error(bin2hex($key));
+  //trigger_error(bin2hex($key));
   return array(
     'data' => $encrypted,
     'key' => $key);
 }
 
 function decrypt_data($key, $data){
-  trigger_error(bin2hex($key));
+  //trigger_error(bin2hex($key));
   $cryptkey = hash('sha256', $key, true);
   $iv = hash('sha256', $cryptkey, true);
   for($i=0;$i<42;$i++) {
@@ -863,7 +863,7 @@ function format_dec($data) {
       //var_dump($return['crypted_length']);
       //clé
       $return['key'] = substr($data, $next+8);
-      trigger_error(bin2hex($return['key']));
+      //trigger_error(bin2hex($return['key']));
     break;
     
     
@@ -958,7 +958,11 @@ function retreive_data($data){
   if(!$key){return false;}
   $data = $reed_solomon_dec($parse['data']['data'], $parse['data']['rs'], $last['count'], array_shift(unpack('L', decrypt_data($key, $last['crypted_length']))), true);
   if(!$data){return false;}
-  return decrypt_data($key, $data);
+  $decrypted = decrypt_data($key, $data);
+  if(hash('crc32', $decrypted, true) !== $last['checksum']){
+    return false;
+  }
+  return $decrypted;
 }
 
 function qrencode($data){
@@ -1109,7 +1113,7 @@ function qrdecode($picture){
   fclose($pipes[0]);
   //trigger_error('ici');
   $decoded =  substr(stream_get_contents($pipes[1]), 0, -1);
-  trigger_error(bin2hex($decoded));
+  //trigger_error(bin2hex($decoded));
   //trigger_error(bin2hex(stream_get_contents($pipes[1])));
   fclose($pipes[1]); 
   //trigger_error('ici');//trigger_error($decoded);
@@ -1131,14 +1135,14 @@ function qrdecode($picture){
   //var_dump(base64_encode($data[2]));
   //var_dump(base64_encode(base64_decode($data['source']['index']['symbol']['data']['@content'])));
   array_shift($data);
-  foreach($data as $key => $value){
-//     $data[$key]=base64_encode($value);
-//     $length = strlen($data[$key]);
-//     //fix the last char
-//     $data[$key][$length-1] = '=';
-//     $data[$key] = base64_decode($data[$key]);
-    trigger_error(bin2hex($data[$key]));
-  }
+//   foreach($data as $key => $value){
+// //     $data[$key]=base64_encode($value);
+// //     $length = strlen($data[$key]);
+// //     //fix the last char
+// //     $data[$key][$length-1] = '=';
+// //     $data[$key] = base64_decode($data[$key]);
+//     trigger_error(bin2hex($data[$key]));
+//   }
   //var_dump($data[1]);
   
   return $data;
