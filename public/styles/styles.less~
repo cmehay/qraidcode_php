@@ -296,6 +296,10 @@ a {
     .gradient(hsla(0, 100%, 100%, 0), hsl(0, 100%, 100%));
   }
   .bellow{
+    .inner{
+      height:400px;
+      overflow:auto;
+    }
     height:0;
     background-color:white;
   }
