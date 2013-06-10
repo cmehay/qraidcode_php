@@ -427,6 +427,11 @@ function reed_solomon_enc_8($array, $m){
 //       $table[$key][$i]=expon($i+1, $key);  
 //     }
 //   }
+  //debug
+  foreach($array as $value){
+    trigger_error(bin2hex($value));  
+  }
+  
   $c = count($array['data']);
   if($c+$m > 256){return false;}
   $table=set_matrix($c, $m+$c);
