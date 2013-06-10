@@ -428,9 +428,9 @@ function reed_solomon_enc_8($array, $m){
 //     }
 //   }
   //debug
-  foreach($array['data'] as $value){
-    trigger_error(bin2hex($value));  
-  }
+//   foreach($array['data'] as $value){
+//     trigger_error(bin2hex($value));  
+//   }
   
   $c = count($array['data']);
   if($c+$m > 256){return false;}
@@ -472,7 +472,7 @@ function reed_solomon_enc_8($array, $m){
 function reed_solomon_dec_8($data, $rs, $chunks, $length=null, $build=false){
   //trigger_error($chunks);
   $c=$chunks;
-  if(count($data)> 0){
+  if(count($data) > 0){
     $chunklen = strlen($data[array_rand($data)]);
   }else{
     $chunklen = strlen($rs[array_rand($rs)]);
@@ -863,7 +863,7 @@ function format_dec($data) {
       //var_dump($return['crypted_length']);
       //clé
       $return['key'] = substr($data, $next+8);
-      //trigger_error(bin2hex($return['key']));
+      trigger_error(bin2hex($return['key']));
     break;
     
     
@@ -1109,6 +1109,8 @@ function qrdecode($picture){
   fclose($pipes[0]);
   //trigger_error('ici');
   $decoded =  substr(stream_get_contents($pipes[1]), 0, -1);
+  trigger_error($decoded);
+  trigger_error(stream_get_contents($pipes[1]));
   fclose($pipes[1]); 
   //trigger_error('ici');//trigger_error($decoded);
   $stderr = stream_get_contents($pipes[2]);
