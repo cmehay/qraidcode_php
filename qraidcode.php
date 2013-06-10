@@ -470,7 +470,7 @@ function reed_solomon_dec_8($data, $rs, $chunks, $length=null, $build=false){
   if(count($data)> 0){
     $chunklen = strlen($data[array_rand($data)]);
   }else{
-    $chunklen = strlen($data[array_rand($rs)]);
+    $chunklen = strlen($rs[array_rand($rs)]);
   }
   end($rs);$maxrs = key($rs);reset($rs);
   $l=$c+$maxrs+1;
