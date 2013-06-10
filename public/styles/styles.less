@@ -5,8 +5,17 @@
 @box_width_inverse: @box_width/-1;
 @slide_duration: 1000ms;
 
+@font-face{
+  font-family: djvumono;
+  src: url('styles/fonts/DejaVuSansMono.ttf');
+}
+@font-face{
+  font-family: djvumonobold;
+  src: url('styles/fonts/DejaVuSansMono-Bold.ttf');
+}
+
 * {
-  font-family: monospace;
+  font-family: djvumono;
 }
 
 a {
@@ -44,6 +53,7 @@ a {
 
 .bold{
   font-weight:bold;
+  font-family: djvumonobold;
 }
 
 .millieu{

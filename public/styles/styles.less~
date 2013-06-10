@@ -5,6 +5,15 @@
 @box_width_inverse: @box_width/-1;
 @slide_duration: 1000ms;
 
+@font-face{
+  font-family: djvumono;
+  src: url('styles/fonts/DejaVuSansMono.ttf');
+}
+@font-face{
+  font-family: djvumonobold;
+  src: url('styles/fonts/DejaVuSansMono-Bold.ttf');
+}
+
 * {
   font-family: monospace;
 }
@@ -293,6 +302,7 @@ a {
   position:fixed;
   bottom:0;
   width:100%;
+  z-index:15;
   .button{
     .gradient(hsla(0, 100%, 100%, 0), hsl(0, 100%, 100%));
   }
