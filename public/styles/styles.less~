@@ -293,7 +293,7 @@ a {
   position:fixed;
   bottom:0;
   .button{
-    .gradient(hsl(0, 100%, 100%), hsla(0, 100%, 100%, 0));
+    .gradient(hsla(0, 100%, 100%, 0), hsl(0, 100%, 100%));
   }
   .bellow{
     height:0;
