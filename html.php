@@ -48,7 +48,7 @@ function html_about(){
   <div class="question">Would you want to thank someone?</div>
   <div class="answer">You do well in speaking of it. I would like to thank <a href="http://web.eecs.utk.edu/~plank/">James S. Plank</a> for his papers on Galois fields and Reed-Solomon algorythm, 
 			<a href="http://fukuchi.org/">Kentaro Fukuchi</a> for his tool <a href="http://fukuchi.org/works/qrencode/">qrencode</a> and for kindly sending me a useful patch for <a href="http://sourceforge.net/apps/mediawiki/zbar/index.php">zbarimg</a>, 
-			and my boyfriend who helped me to understand how to compute matrsix and for proofread my english.</div>
+			and my boyfriend who helped me to understand how to compute matrix and for proofread my english.</div>
   
   <div class="answer">I will publish more informations about this project on <a href="https://goldy.furry.fr/">my blog</a>.</div>
   

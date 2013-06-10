@@ -538,6 +538,16 @@
     $('.decode .filesize').attr('data-size', cursize);
   }
   
+  priv.slidefooter = function(){
+    var height1 = $('#footer.bellow').height();
+    var height2 = $('#footer.bellow.inner').height();
+    if(height1 == height2){
+      $('#footer.bellow').height(0);
+      return true
+    }
+    $('#footer.bellow').height(height2);
+  }
+  
   machin.onready = function(){
     $('#encode').click(function(){
       machin.firstslide('encode');
@@ -583,6 +593,7 @@
     $('input.desc').change(function(){
       priv.switchclick('input[name=optiontitle]', !$(this).is(':checked'));
     });
+    $('#footer.button').click(priv.slidefooter);
   };
   
   window.machin = machin; 
