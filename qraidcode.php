@@ -1139,7 +1139,7 @@ function qrdecode($picture){
     $data[$key] = base64_decode($data[$key]);
   }
   //var_dump($data[1]);
-  trigger_error($data);
+  trigger_error(bin2hex($data));
   return $data;
 }
 
