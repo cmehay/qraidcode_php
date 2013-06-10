@@ -958,9 +958,12 @@ function retreive_data($data){
   if(!$key){return false;}
   $data = $reed_solomon_dec($parse['data']['data'], $parse['data']['rs'], $last['count'], array_shift(unpack('L', decrypt_data($key, $last['crypted_length']))), true);
   if(!$data){return false;}
+  trigger_error(bin2hex($data));
+  trigger_error(bin2hex($key));
   $decrypted = decrypt_data($key, $data);
+  trigger_error($decrypted);
   if(hash('crc32', $decrypted, true) !== $last['checksum']){
-    trigger_error('bad checksum: '.hash('crc32', $decrypted, true).' !== '.$last['checksum']);
+    trigger_error('bad checksum: '.hash('crc32', $decrypted, false).' !== '.bin2hex($last['checksum']));
     return false;
   }
   return $decrypted;
