@@ -336,7 +336,7 @@
   }
   
   priv.slidedecode1 = function(){
-    if($('.filesize').attr('data-size') > maxlength_decode || $('.filesize').attr('data-size') == 0){
+    if($('.decode .filesize').attr('data-size') > maxlength_decode || $('.decode .filesize').attr('data-size') == 0){
       return false
     }
     priv.next1('second-step', true);
