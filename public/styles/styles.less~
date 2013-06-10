@@ -301,13 +301,13 @@ a {
       height:400px;
       overflow:auto;
       .question{
-	margin-top:2em;
+	margin-top:4em;
 	margin-left:1em;
       }
       .answer{
 	margin-top:1.5em;
-	margin-left:5em;
-	width:10em;
+	margin-left:4em;
+	width:30em;
       }
     }
     height:0;
