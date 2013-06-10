@@ -1108,7 +1108,7 @@ function qrdecode($picture){
   fwrite($pipes[0], $img);
   fclose($pipes[0]);
   //trigger_error('ici');
-  $decoded =  substr(stream_get_contents($pipes[1]), 0, -1);
+  $decoded =  stream_get_contents($pipes[1]);
   trigger_error(bin2hex($decoded));
   trigger_error(bin2hex(stream_get_contents($pipes[1])));
   fclose($pipes[1]); 
