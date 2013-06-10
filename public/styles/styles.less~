@@ -31,6 +31,7 @@ a {
   position: relative;
   border: 1px dashed black;
   overflow: hidden;
+  .user-select(none);
 }
 
 .hidden {
@@ -288,3 +289,15 @@ a {
   .transition(opacity 400ms linear);
 }
 
+#footer{
+  position:fixed;
+  bottom:0;
+  .button{
+    .gradient(hsl(0, 100%, 100%), hsla(0, 100%, 100%, 0));
+  }
+  .bellow{
+    height:0;
+    padding:10px;
+    background-color:white;
+  }
+}
