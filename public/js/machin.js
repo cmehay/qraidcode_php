@@ -593,7 +593,7 @@
     $('input.desc').change(function(){
       priv.switchclick('input[name=optiontitle]', !$(this).is(':checked'));
     });
-    $('#footer.button').click(priv.slidefooter);
+    $('#footer .button').click(priv.slidefooter);
   };
   
   window.machin = machin; 

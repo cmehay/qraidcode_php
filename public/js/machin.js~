@@ -540,7 +540,7 @@
   
   priv.slidefooter = function(){
     var height1 = $('#footer .bellow').height();
-    var height2 = $('#footer .bellow.inner').height();
+    var height2 = $('#footer .bellow .inner').height();
     if(height1 == height2){
       $('#footer .bellow').height(0);
       return true
