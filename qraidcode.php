@@ -467,7 +467,11 @@ function reed_solomon_enc_8($array, $m){
 function reed_solomon_dec_8($data, $rs, $chunks, $length=null, $build=false){
   //trigger_error($chunks);
   $c=$chunks;
-  $chunklen = strlen($data[array_rand($data)]);
+  if(count($data)> 0){
+    $chunklen = strlen($data[array_rand($data)]);
+  }else{
+    $chunklen = strlen($data[array_rand($rs)]);
+  }
   end($rs);$maxrs = key($rs);reset($rs);
   $l=$c+$maxrs+1;
   //trigger_error($l);
@@ -926,12 +930,14 @@ function retreive_data($data){
   }else{
     $chunks_num = 0;
     $parse['data']['data'] = array();
+    $parse['key']['data'] = array();
   }
   if(isset($parse['data']['rs'])){
     $rs_num = count($parse['data']['rs']);  
   }else {
     $rs_num = 0;  
     $parse['data']['rs'] = array();
+    $parse['key']['rs'] = array();
   }
   
   if($chunks_num + $rs_num < $last['count']){
