@@ -297,7 +297,6 @@ a {
   }
   .bellow{
     height:0;
-    padding:10px;
     background-color:white;
   }
 }
