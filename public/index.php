@@ -103,7 +103,7 @@ function index_page(){
   
   <div id="footer">
     <div class="button">About</div>
-    <div class="bellow"><div class="inner"'.html_about().'</div></div>
+    <div class="bellow"><div class="inner">'.html_about().'</div></div>
   </div>
   '
   );
