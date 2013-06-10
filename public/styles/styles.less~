@@ -53,7 +53,7 @@ a {
 
 .bold{
   font-weight:bold;
-  font-family: djvumonobold;
+  font-family: monospace;
 }
 
 .millieu{
