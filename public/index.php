@@ -75,7 +75,7 @@ function index_page(){
 	<div class="description">Set how many qrcodes you want</div>
 	<div class="option"><div class="first">Data:</div><input class="range chunks" name="chunks" type="range" value="0" max="0" min="0" step="1" /><div class="second chunks"></div></div>
 	<div class="option"><div class="first">Parity:</div><input class="range rs" type="range" name="rs" value="0" max="0" min="0" step="1" /><div class="second rs"></div></div>
-	<div class="description">You will get <span id="datapartotal"></span> qrcodes and you will need at less <span id="datatotal"></span> qrcodes to decode your data</div>
+	<div class="description">You will get <span id="datapartotal"></span> qrcodes and you will need at least <span id="datatotal"></span> qrcodes to decode your data</div>
 	<div class="description newblock">Options:</div>
 	<div class="option2"><label><input type="checkbox" name="checkbox[count]" /> Print numerotation</label></div>
 	<div class="option2"><label><input type="checkbox" name="checkbox[total]" /> Print how many qrcodes are required to decode the data</label></div>
