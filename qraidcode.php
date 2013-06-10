@@ -1137,9 +1137,10 @@ function qrdecode($picture){
     //fix the last char
     $data[$key][$length-1] = '=';
     $data[$key] = base64_decode($data[$key]);
+    trigger_error(bin2hex($data[$key]));
   }
   //var_dump($data[1]);
-  trigger_error(bin2hex($data));
+  
   return $data;
 }
 
