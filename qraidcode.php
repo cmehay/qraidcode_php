@@ -428,7 +428,7 @@ function reed_solomon_enc_8($array, $m){
 //     }
 //   }
   //debug
-  foreach($array as $value){
+  foreach($array['data'] as $value){
     trigger_error(bin2hex($value));  
   }
   
