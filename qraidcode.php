@@ -909,6 +909,30 @@ function format_dec($data) {
   return $return;
 }
 
+function crop_key($array, $keylen, $chunks){
+  $base=base();
+  $modulo=$keylen % $chunks;
+  if($modulo != 0){
+    $add = $chunks - $modulo;
+  }else {
+    $add = 0;  
+  }
+  //test le multiple de la longueur des chunks
+  $chunklen=($keylen+$add)/$chunks;
+  if($chunklen % ($base/8) !== 0){
+    $more = (($base/8) - ($chunklen % ($base/8)));
+    $add += $more * $chunks;
+    $chunklen += $more;
+  }
+  
+  foreach($array as $key => $value){
+    $array[$key] = substr($value, 0, $chunklen);
+    trigger_error($array[$key]);
+  }
+  return $array;
+}
+
+
 function retreive_data($data){
   foreach($data as $value) {
     if(!isset($last)){
@@ -951,6 +975,9 @@ function retreive_data($data){
   $reed_solomon_dec = 'reed_solomon_dec_'.base();
   
   $keylen = key_size($last['count']);
+  //crop_key
+  $parse['key']['data'] = crop_key($parse['key']['data']);
+  $parse['key']['rs'] = crop_key($parse['key']['rs']);
   ksort($parse['key']['data']);ksort($parse['key']['rs']);
   ksort($parse['data']['data']);ksort($parse['data']['rs']);
   
@@ -1139,14 +1166,14 @@ function qrdecode($picture){
   //var_dump(base64_encode($data[2]));
   //var_dump(base64_encode(base64_decode($data['source']['index']['symbol']['data']['@content'])));
   array_shift($data);
-  foreach($data as $key => $value){
-    $data[$key]=base64_encode($value);
-    $length = strlen($data[$key]);
-    //fix the last char
-    $data[$key][$length-1] = '=';
-    $data[$key] = base64_decode($data[$key]);
-    trigger_error(bin2hex($data[$key]));
-  }
+//   foreach($data as $key => $value){
+// //     $data[$key]=base64_encode($value);
+// //     $length = strlen($data[$key]);
+// //     //fix the last char
+// //     $data[$key][$length-1] = '=';
+// //     $data[$key] = base64_decode($data[$key]);
+//     trigger_error(bin2hex($data[$key]));
+//   }
   //var_dump($data[1]);
   
   return $data;
