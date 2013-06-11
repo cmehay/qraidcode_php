@@ -976,8 +976,8 @@ function retreive_data($data){
   
   $keylen = key_size($last['count']);
   //crop_key
-  $parse['key']['data'] = crop_key($parse['key']['data']);
-  $parse['key']['rs'] = crop_key($parse['key']['rs']);
+  $parse['key']['data'] = crop_key($parse['key']['data'], $keylen, $last['count']);
+  $parse['key']['rs'] = crop_key($parse['key']['rs'], $keylen, $last['count']);
   ksort($parse['key']['data']);ksort($parse['key']['rs']);
   ksort($parse['data']['data']);ksort($parse['data']['rs']);
   
