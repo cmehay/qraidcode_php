@@ -27,7 +27,7 @@ function json_cb_get_encode_data(){
   if($raw === false){
     json_error();
   }
-  
+
   if($_GET['name'] != ''){
     if(is_array($_GET['name'])){
       return json_error();
@@ -38,7 +38,7 @@ function json_cb_get_encode_data(){
   }
   $length = strlen($raw);
   if($length > MAXINPUT || $length == 0){
-    return json_error('badsize');  
+    return json_error('badsize');
   }
   $min = ceil($length / MAXDATA);
   if($min > MAXQRCODES){
@@ -54,7 +54,7 @@ function json_cb_get_encode_data(){
       'maxrs' => MAXQRCODES - $min,
       'minrs' => 0,
       'size' => $length
-  )); 
+  ));
 }
 
 function json_cb_get_encode_option(){
@@ -70,7 +70,7 @@ function json_cb_get_encode_option(){
   if($size < MINSIZE || $size > MAXSIZE){
     return json_error();
   }
-  
+
   if(($_SESSION['datalength'] / $_POST['chunks']) > MAXDATA){
     return json_error();
   }
@@ -78,15 +78,15 @@ function json_cb_get_encode_option(){
   if(!is_null(get_array($_POST, 'checkbox', 'desc')) && isset($_POST['optiontitle'])){
     $title = (string) $_POST['optiontitle'];
   }
-  
+
   $return = encode($_SESSION['data'], $_SESSION['sha1'], $_POST['chunks'], $_POST['rs'], $_POST['size']*10, !is_null(get_array($_POST, 'checkbox', 'count')), !is_null(get_array($_POST, 'checkbox', 'total')), $title);
-  
+
   if($return !== true){
     return json_error(array(
         'msg' => $return
     ));
   }
-  
+
   return json_valid();
 }
 
@@ -104,33 +104,26 @@ function json_cb_send_decode(){
   sleep(2);
   $raw = getencodedata($_POST[$_GET['num']], 'file');
   if($raw == false){
-    return json_error('file error');  
+    return json_error('file error');
   }
   if (!isset($_SESSION['decode_size'])) {
-    $_SESSION['decode_size'] = 0;  
+    $_SESSION['decode_size'] = 0;
   }
   $_SESSION['decode_size'] += strlen($raw);
   if($_SESSION['decode_size'] > MAXDECODE){
     return json_error('Too much data ><');
   }
   $_SESSION['decode_img'][$_GET['num']] = $raw;
-  //trigger_error(count($_SESSION['decode_img']));
   session_write_close();
   return json_valid();
 }
 
 function json_cb_get_decode() {
   sleep(2);
-  $_SESSION['sha1'] = sha1(gen_key(32)); 
+  $_SESSION['sha1'] = sha1(gen_key(32));
   $return = decode($_SESSION['decode_img'], $_SESSION['sha1']);
   if($return !== true){
     return json_error($return);
   }
   return json_valid();
 }
-
-
-
-
-
-?>

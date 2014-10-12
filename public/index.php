@@ -12,11 +12,7 @@ require TFPDF;
 
 delete_old();
 
-
-//trigger_error(print_r($_POST, true));
-
 function parse() {
-
   if(isset($_GET['action'])){
     if (isset($_GET['mod'])){
       $mod=$_GET['mod'];
@@ -24,13 +20,11 @@ function parse() {
     if(!is_array($mod) && !is_array($_GET['action'])){
       $callback=$mod.'_cb_'.$_GET['action'];
       if(function_exists($callback)){
-	    return $callback();
+      return $callback();
       }else(trigger_error($callback.' is not callable'));
     }
   }
-  
   return index_page();
-
 }
 
 function index_page(){
@@ -41,7 +35,7 @@ function index_page(){
     <div id="wait">Please wait...</div>
     <div id="first-step">
 	<div class="left button" id="encode">Encode</div>
-	<div class="right button" id="decode">Decode</div>      
+	<div class="right button" id="decode">Decode</div>
     </div>
     <div id="second-step">
       <div class="encode">
@@ -92,15 +86,15 @@ function index_page(){
       </div>
     </div>
     <div id="fourth-step">
-      <div class="encode"> 
+      <div class="encode">
 	<div class="link"><a href="?mod=file&action=getpdf">Download your qrcodes</a></div>
-	<div class="prev">'.htmlentities('<-- prev').'</div>	
+	<div class="prev">'.htmlentities('<-- prev').'</div>
       </div>
-    </div>  
-  </div>        
+    </div>
+  </div>
   <div id="subtitle">IMPORTANT: this application is for demonstration purpose only. Do not use it for important or critical data. Few bugs could remain.</div>
   <div id="subtitle">1<span class="bold">Go1dy</span>1GRBAHbPUTu6xPaWPSqQPd4DzU2i</div>
-  
+
   <div id="footer">
     <div class="button">About</div>
     <div class="bellow"><div class="inner">'.html_about().'</div></div>
@@ -109,8 +103,4 @@ function index_page(){
   );
 }
 
-
 echo(parse());
-
-
-?>

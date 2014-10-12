@@ -2,16 +2,16 @@
 //conf
 
 //zbarimg path
-define('ZBARIMG', '/var/www/bin/zbarimg');
+define('ZBARIMG', 'zbarimg');
 
 //qrencode path
-define('QRENCODE', '/var/www/bin/src/qrencode/qrencode');
+define('QRENCODE', 'qrencode');
 
 //pngcrush
-define('PNGCRUSH', '/var/www/bin/src/pngcrush/pngcrush');
+define('PNGCRUSH', 'pngcrush');
 
 //pdfimages
-define('PDFIMAGES', '/var/www/bin/src/poppler/utils/pdfimages');
+define('PDFIMAGES', 'pdfimages');
 
 //working dir
 define('WORKDIR', '../work/');
@@ -32,7 +32,7 @@ define('MATRIX', '../matrix/');
 define('PNGDIR', '../png/');
 
 //tfpdf
-define('TFPDF', '/var/www/tfpdf/tfpdf.php');
+define('TFPDF', '/var/www/tfpdf/src/tfpdf.php');
 
 //statefile
 define('STATEFILE', 'state');
@@ -53,7 +53,7 @@ define('MAXINPUT', 300000);
 define('MAXDECODE', 20000000);
 
 //max qrcodes
-define('MAXQRCODES', 150);
+define('MAXQRCODES', 256);
 
 //qrcode size
 define('MINSIZE', 40);
@@ -67,7 +67,7 @@ define('TIMEOUT', 300);
 
 $_SESSION['conf'] = array(
     'scripts' => array(
-	'js/less.js',
+    'js/less.js',
         'js/jquery.js',
         'js/html5slider.js',
         'js/machin.js'
@@ -75,5 +75,3 @@ $_SESSION['conf'] = array(
     'lang' => 'en',
     'title' => 'QRaidCODE'
 )
-
-?>
