@@ -74,4 +74,4 @@ $_SESSION['conf'] = array(
     ),
     'lang' => 'en',
     'title' => 'QRaidCODE'
-)
+);
