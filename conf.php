@@ -32,7 +32,7 @@ define('MATRIX', '../matrix/');
 define('PNGDIR', '../png/');
 
 //tfpdf
-define('TFPDF', '/var/www/tfpdf/src/tfpdf.php');
+define('TFPDF', '/var/www/tfpdf/src/tFPDF.php');
 
 //statefile
 define('STATEFILE', 'state');
