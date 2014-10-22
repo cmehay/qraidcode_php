@@ -868,7 +868,7 @@ function pdf_extract($pdf) {
       unlink($tmpdir . '/' . $value);
     }
   }
-  rrmdir($tmpdir);
+  //rrmdir($tmpdir);
   return $files;
 }
 
