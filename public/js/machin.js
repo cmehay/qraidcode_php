@@ -2,25 +2,25 @@
   "use strict";
   var machin = {};
   var priv = {};
-  var i;  
+  var i;
   priv.int = false;
   //config
-  var maxlength_encode = 300000;
-  var maxlength_decode = 20000000;
+  var maxlength_encode = window.maxlength_encode;
+  var maxlength_decode = window.maxlength_decode;
   var slide_duration = 1000;
-  var maxqrcodes = 150;
+  var maxqrcodes = window.maxqrcodes;
   var wait_def = 'Please wait...';
   var pdf_icon = 'styles/img/pdf-icon.png';
-  
+
 
   priv.intform = function(int){
-    return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
+    return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-  
+
   priv.setwaitdef = function(){
     $('#wait').html(wait_def);
   }
-  
+
   machin.firstslide = function(truc){
     var corresp = {
       'encode':'decode',
@@ -31,13 +31,13 @@
     $('.'+corresp[truc]).css('display', 'none');
     $('#second-step').css('right', '0px');
   };
-  
+
   priv.selectactive = function(from){
     //console.log(from);
     var corresp = {
       'file-encode':'text-encode',
       'text-encode':'file-encode'
-    };    
+    };
     $('#'+corresp[from]).prop("disabled", true);
     $('#'+from).prop("disabled", false);
     $('#'+from).focus();
@@ -45,9 +45,9 @@
     $('#'+from).parent().css('background-color', 'white');
     $('#'+from).prev().css('pointer-events', 'none');
     $('#'+corresp[from]).prev().css('pointer-events', 'all');
-    
+
   };
-  
+
   machin.prev = function(from){
     var corresp = {
       'second-step':'first-step',
@@ -60,7 +60,7 @@
     $('#wait').css('opacity', 0);
     priv.setwaitdef();
   };
-  
+
   priv.next1 = function(from, wait){
     priv.setwaitdef();
     var corresp = {
@@ -74,9 +74,9 @@
     }
     $('#'+corresp[from]).css('right', '0px');
   }
-  
+
   priv.next2 = function(from){
-    
+
     var corresp = {
       'second-step':'third-step',
       'third-step':'fourth-step',
@@ -85,7 +85,7 @@
     setTimeout(function(){$('#'+corresp[from]).css('right', '0px');}, 110);
     priv.setwaitdef();
   }
-  
+
   priv.filesize = function(files, maxsize){
     if( typeof files === 'string' ) {
     return false;
@@ -109,7 +109,7 @@
     //console.log(priv.filename);
     return size;
   };
-  
+
   //http://stackoverflow.com/questions/2848462/count-bytes-in-textarea-using-javascript
   priv.textsizebytes = function(string){
     var utf8length = 0;
@@ -127,7 +127,7 @@
     }
     return utf8length;
  }
- 
+
   priv.readsendfile = function(id){
     //console.log('et là');
     var file = document.getElementById(id).files[0];
@@ -138,14 +138,14 @@
     };
     setTimeout(function(){
       console.log('avantdernier');
-      $('#'+id).filter(function(){  
+      $('#'+id).filter(function(){
 	filereader.readAsDataURL(this.files[0]);
 	//$(this).dequeue();
 	console.log('dernier');
       });
     },slide_duration);
   }
-  
+
   priv.checkencode1 = function(){
     if($('#file-encode').is(':disabled') && !$('#text-encode').is('.invalid')){
 	return {'data':'data='+encodeURIComponent($('#text-encode').val()), 'type':'text'};
@@ -158,25 +158,25 @@
 // 	  priv.ajax_encode1('data='+event.target.result, 'file');
 // 	};
 //  	$('#file-encode').queue(function(){
-//  	  
+//
 //  	  filereader.readAsDataURL(this.files[0]);
 //  	});
  	return {'data':'file-encode', 'type':'file'};
     }
     return false;
   };
-  
+
   priv.checkdecode = function(){
-    
+
   }
-  
+
   priv.fail = function(msg, prev){
     $('#wait').html(msg);
     setTimeout(function(){
       machin.prev(prev);
     }, 500);
   };
-  
+
   priv.setencodevalue = function(json){
     $('.range.chunks').attr('min', json.minqr);
     $('.range.chunks').attr('max', json.maxqr);
@@ -190,7 +190,7 @@
     priv.display_chunks();
     priv.display_rs();
   }
-  
+
   priv.ajax_encode1 = function(data, type, name){
     var sendname = '';
     if(typeof name != 'undefined'){
@@ -220,7 +220,7 @@
       priv.fail('Error occured :( try again', 'third-step');
     });
   }
-  
+
   priv.ajax_encode2 = function(data){
     $.ajax({
       url:'?mod=json&action=get_encode_option',
@@ -243,7 +243,7 @@
       priv.fail('Error occured :( try again', 'fourth-step');
     });
   }
-  
+
   priv.getstatus = function(){
     $.ajax({
       url:'?mod=json&action=get_status',
@@ -253,7 +253,7 @@
       $('#wait').html(json.msg);
     })
   }
-  
+
   priv.ajax_decode2 = function(){
     $.ajax({
       url:'?mod=json&action=get_decode',
@@ -275,14 +275,14 @@
       priv.fail('Error occured :( try again', 'third-step');
     });
   }
-  
+
   priv.getimgdata = function(int){
     if($('.thumbnail[name='+int+']').is($('.pdf'))){
       return $('.thumbnail[name='+int+']').attr('data-base64');
     }
     return $('.thumbnail[name='+int+']').attr('src');
   }
-  
+
   priv.ajax_decode1 = function(int){
     var total = priv.currents_images.length;
     $('#wait').html('Uploading '+(int+1)+'/'+total);
@@ -305,7 +305,7 @@
       priv.fail('Error occured :( try again', 'third-step');
     });
   }
-  
+
   priv.slideencode1 = function(){
     var content = priv.checkencode1();
     console.log(content);
@@ -324,7 +324,7 @@
       }
     },slide_duration);
   }
-  
+
   priv.slideencode2 = function(){
     priv.next1('third-step', true);
     setTimeout(function(){
@@ -334,7 +334,7 @@
       },1000);
     },slide_duration);
   }
-  
+
   priv.slidedecode1 = function(){
     if($('.decode .filesize').attr('data-size') > maxlength_decode || $('.decode .filesize').attr('data-size') == 0){
       return false
@@ -347,13 +347,13 @@
 	console.log(priv.currents_images);
       });
       $('.thumbnail').queue(function() {
-	
+
 	priv.ajax_decode1(0);
 	$(this).dequeue();
       });
     }, 1000);
   }
-  
+
   priv.display_filesize = function(file){
     var filesize = priv.filesize(file, maxlength_encode);
     if(filesize == false){
@@ -364,7 +364,7 @@
     $('.filesize').html(priv.intform(filesize)+' bytes');
     $('#file-encode').removeClass('invalid');
   }
-  
+
   priv.display_images = function(files){
     //console.log('');
     //var filesize = priv.filesize(files, maxlength_decode);
@@ -383,7 +383,7 @@
       }
       filereader.readAsDataURL(file);
       filereader.thissize = file.size;
-    }    
+    }
     setTimeout(function(){
       priv.rangetachambre(false);
       setTimeout(priv.rangetachambre, 400);
@@ -401,7 +401,7 @@
     $('.display-images').css('z-index', 0);
 
   }
-  
+
   priv.add_thumb = function(image, size){
     var num = 0;
     var base64 = null;
@@ -420,13 +420,13 @@
       priv.rm_thumb(this);
     });
   }
-  
+
   priv.rm_thumb = function(that){
     console.log('dafuk?');
     $(that).remove();
     priv.rangetachambre();
   }
-  
+
   priv.display_textlength = function(text){
     var textsize = priv.textsizebytes(text);
     if(textsize > maxlength_encode){
@@ -442,7 +442,7 @@
     $('.textsize').html(priv.intform((maxlength_encode - textsize))+' bytes remaining');
     $('#text-encode').removeClass('invalid');
   }
-  
+
   priv.display_chunks = function(){
     var data=$('.range.chunks').val();
     $('.second.chunks').html(data);
@@ -455,24 +455,24 @@
     $('#datapartotal').html(parseInt(data) + parseInt(rs));
     $('#datatotal').html(data);
   }
-  
+
   priv.display_rs = function(){
     var data=$('.range.chunks').val();
     var rs=$('.range.rs').val();
     $('.second.rs').html(rs);
     $('#datapartotal').html(parseInt(data)+parseInt(rs));
-    $('#datatotal').html(data);   
+    $('#datatotal').html(data);
   }
-  
+
   priv.display_size = function(){
     var cur=$('.range.size').val();
     $('.second.size').html(cur+' cm');
   }
-  
+
   priv.switchclick = function(to, active){
     $(to).prop("disabled", active);
   }
-  
+
   priv.rangetachambre = function(display){
     var each = [];
     var count = $('.thumbnail').length;
@@ -525,7 +525,7 @@
       that.css('max-width', block.width);
       //position
       console.log('heigth '+that.height());
-      console.log('width '+that.width()); 
+      console.log('width '+that.width());
       that.css('top', Math.floor(top+((block.height - that.height())/2)));that.css('left', Math.floor(left+((block.width - that.width())/2)));
       left = left + block.width+(margin*2);
       if(display !== false){
@@ -537,7 +537,7 @@
     $('.decode .filesize').html(priv.intform(cursize)+' bytes');
     $('.decode .filesize').attr('data-size', cursize);
   }
-  
+
   priv.slidefooter = function(){
     var height1 = $('#footer .bellow').height();
     var height2 = $('#footer .bellow .inner').height();
@@ -547,7 +547,7 @@
     }
     $('#footer .bellow').height(height2);
   }
-  
+
   machin.onready = function(){
     $('#encode').click(function(){
       machin.firstslide('encode');
@@ -573,7 +573,7 @@
     $('#third-step .encode .next').click(function(){
       priv.slideencode2();
     });
-    
+
     $('#file-encode').change(function(){
       priv.display_filesize(this.files);
     });
@@ -595,8 +595,8 @@
     });
     $('#footer .button').click(priv.slidefooter);
   };
-  
-  window.machin = machin; 
+
+  window.machin = machin;
 })();
 
 

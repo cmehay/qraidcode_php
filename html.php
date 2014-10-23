@@ -19,6 +19,12 @@ function render($content){
       <link rel="stylesheet" href="styles/normalize.css">
       <link rel="stylesheet/less" type="text/css" href="styles/styles.less" />
       <script type="text/javascript">function cur_lang(){return "'.$_SESSION['conf']['lang'].'";}</script>
+      <script type="text/javascript">(function(){
+        window.maxqrcodes = '.MAXQRCODES.';
+        window.maxlength_encode = '.MAXINPUT.';
+        window.maxlength_decode = '.MAXDECODE.';
+      })()
+      </script>
       '.$script_var.'
     </head>';
   $body='<body><div id="whole">'.$content.'</div> </body></html>';
