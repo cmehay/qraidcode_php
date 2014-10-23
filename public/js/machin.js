@@ -587,9 +587,9 @@
       priv.display_textlength($(this).val());
     });
     priv.display_size();
-    $('.range.size').change(priv.display_size);
-    $('.range.chunks').change(priv.display_chunks);
-    $('.range.rs').change(priv.display_rs);
+    $('.range.size').on("change mousemove", priv.display_size);
+    $('.range.chunks').on("change mousemove", priv.display_chunks);
+    $('.range.rs').on("change mousemove", priv.display_rs);
     $('input.desc').change(function(){
       priv.switchclick('input[name=optiontitle]', !$(this).is(':checked'));
     });
