@@ -33,7 +33,7 @@
   };
 
   priv.selectactive = function(from){
-    //console.log(from);
+    ////console.log(from);
     var corresp = {
       'file-encode':'text-encode',
       'text-encode':'file-encode'
@@ -55,7 +55,7 @@
       'fourth-step':'third-step'
     };
     $('#'+from).css('right', '-700px');
-    console.log(corresp[from]);
+    //console.log(corresp[from]);
     $('#'+corresp[from]).css('right', '0px');
     $('#wait').css('opacity', 0);
     priv.setwaitdef();
@@ -96,17 +96,17 @@
     var filescontent = [];
     for(i=0;i<nb;i++){
       size += files[i].size;
-      //console.log(files[i]);
+      ////console.log(files[i]);
       //filescontent.push(reader.readAsDataURL(files[i]));
       //filescontent.push('caca');
     }
-    //console.log(nb);
-    //console.log(size);
+    ////console.log(nb);
+    ////console.log(size);
     if((size > maxsize) || (size == 0)){
       return false;
     }
     priv.filename = files[0].name;
-    //console.log(priv.filename);
+    ////console.log(priv.filename);
     return size;
   };
 
@@ -129,19 +129,19 @@
  }
 
   priv.readsendfile = function(id){
-    //console.log('et là');
+    ////console.log('et là');
     var file = document.getElementById(id).files[0];
     var filereader = new FileReader();
     filereader.onload = function (event) {
-      //console.log('là');
+      ////console.log('là');
       priv.ajax_encode1('data='+event.target.result, 'file', priv.filename);
     };
     setTimeout(function(){
-      console.log('avantdernier');
+      //console.log('avantdernier');
       $('#'+id).filter(function(){
 	filereader.readAsDataURL(this.files[0]);
 	//$(this).dequeue();
-	console.log('dernier');
+	//console.log('dernier');
       });
     },slide_duration);
   }
@@ -194,10 +194,10 @@
   priv.ajax_encode1 = function(data, type, name){
     var sendname = '';
     if(typeof name != 'undefined'){
-      console.log('dafuq?');
+      //console.log('dafuq?');
       sendname = encodeURIComponent(name);
     }
-    console.log(sendname);
+    //console.log(sendname);
     $.ajax({
         url: '?mod=json&action=get_encode_data&type='+type+'&name='+sendname,
         type: 'POST',
@@ -207,8 +207,8 @@
         //contentType: false,
 	dataType: 'json'
     }).done(function(json){
-	console.log(json);
-	//console.log(json.error);
+	//console.log(json);
+	////console.log(json.error);
 	if(json.error == true){
 	  priv.fail(json.msg, 'third-step');
 	  return false;
@@ -230,7 +230,7 @@
     }).done(function(json){
       clearInterval(priv.ajaxrefresh);
       if(json.error == true){
-	console.log('fail là');
+	//console.log('fail là');
 	priv.fail(json.msg, 'fourth-step');
 	clearInterval(priv.ajaxrefresh)
 	return false;
@@ -238,7 +238,7 @@
       priv.next2('third-step');
       clearInterval(priv.ajaxrefresh)
     }).fail(function(){
-      console.log('fail ici');
+      //console.log('fail ici');
       clearInterval(priv.ajaxrefresh);
       priv.fail('Error occured :( try again', 'fourth-step');
     });
@@ -308,14 +308,14 @@
 
   priv.slideencode1 = function(){
     var content = priv.checkencode1();
-    console.log(content);
+    //console.log(content);
     if(content == false){
       return false;
     }
     priv.next1('second-step', true);
     setTimeout(function(){
       if(content['type'] == 'file'){
-	//console.log('ici');
+	////console.log('ici');
 	priv.readsendfile(content['data']);
       }
       else{
@@ -344,7 +344,7 @@
       priv.currents_images = [];
       $('.thumbnail').each(function(){
 	priv.currents_images.push($(this).attr('name'));
-	console.log(priv.currents_images);
+	//console.log(priv.currents_images);
       });
       $('.thumbnail').queue(function() {
 
@@ -366,19 +366,19 @@
   }
 
   priv.display_images = function(files){
-    //console.log('');
+    ////console.log('');
     //var filesize = priv.filesize(files, maxlength_decode);
 
     for(i=0;i<files.length;i++){
       var file = files[i];
-      //console.log(file.type);
+      ////console.log(file.type);
       if(!file.type.match('image') && !file.type.match('pdf')){
-	//console.log('fail');
+	////console.log('fail');
         continue;
       }
       var filereader = new FileReader();
       filereader.onload = function(even){
-	//console.log('ok');
+	////console.log('ok');
 	priv.add_thumb(even.target.result, this.thissize);
       }
       filereader.readAsDataURL(file);
@@ -416,13 +416,13 @@
     }
     $('<img class="thumbnail '+classs+'" name="'+num+'" src="'+image+'" data-size="'+size+'" data-base64="'+base64+'"/>').appendTo('.display-images');
     $('.thumbnail').click(function(){
-      console.log('dadafuk?');
+      //console.log('dadafuk?');
       priv.rm_thumb(this);
     });
   }
 
   priv.rm_thumb = function(that){
-    console.log('dafuk?');
+    //console.log('dafuk?');
     $(that).remove();
     priv.rangetachambre();
   }
@@ -492,7 +492,7 @@
     $('.thumbnail').each(function(){
       each.push($(this).attr('name'));
     });
-    //console.log(block.height);
+    ////console.log(block.height);
     var top = margin;
     var left = margin;
     for(i=0;i<count;i++){
@@ -502,21 +502,21 @@
 	seuilck = seuil+seuilck;
       }
       var that = $('.thumbnail[name='+each[i]+']');
-      console.log('.thumbnail[name='+each[i]+']');
-      console.log(that);
-      console.log(that[0].naturalHeight);
+      //console.log('.thumbnail[name='+each[i]+']');
+      //console.log(that);
+      //console.log(that[0].naturalHeight);
       var cur = {
 	'height': that[0].naturalHeight,
 	'width': that[0].naturalWidth
       }
-      console.log(cur);
+      //console.log(cur);
 //       if(cur.height > cur.width){
-// 	//console.log(block.width * (cur.height/cur.width));
+// 	////console.log(block.width * (cur.height/cur.width));
 // 	that.css('height', block.height);
 // 	//that.css('width', block.width * (cur.height/cur.width));
 // 	that.css('width', '');
 //       }else{
-// 	//console.log(block.height * (cur.width/cur.height));
+// 	////console.log(block.height * (cur.width/cur.height));
 // 	that.css('width', block.width);
 // 	//that.css('height', block.height * (cur.width/cur.height));
 // 	that.css('height', '');
@@ -524,8 +524,8 @@
       that.css('max-height', block.height);
       that.css('max-width', block.width);
       //position
-      console.log('heigth '+that.height());
-      console.log('width '+that.width());
+      //console.log('heigth '+that.height());
+      //console.log('width '+that.width());
       that.css('top', Math.floor(top+((block.height - that.height())/2)));that.css('left', Math.floor(left+((block.width - that.width())/2)));
       left = left + block.width+(margin*2);
       if(display !== false){
