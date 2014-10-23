@@ -68,7 +68,7 @@ define('TIMEOUT', 300);
 $_SESSION['conf'] = array(
     'scripts' => array(
     'js/less.js',
-        'js/jquery.js',
+        'js/jquery-2.1.1.min.js',
         'js/html5slider.js',
         'js/machin.js'
     ),
