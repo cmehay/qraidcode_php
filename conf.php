@@ -47,7 +47,7 @@ define('BLACKLIST', '../blacklist.json');
 define('MICROSLEEP', 100000);
 
 //max input size
-define('MAXINPUT', 740096);
+define('MAXINPUT', 737205);
 
 //max image decode
 define('MAXDECODE', 20000000);
