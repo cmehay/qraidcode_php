@@ -491,17 +491,27 @@ function inverse($matrix) {
 }
 
 function gen_key($chunks) {
-  if ($chunks < 32) {
-    return openssl_random_pseudo_bytes(32);
-  }
-  return openssl_random_pseudo_bytes($chunks);
+  // if ($chunks < 32) {
+  //   return openssl_random_pseudo_bytes(32);
+  // }
+  // All qrcodes has 32 bits of key
+  return openssl_random_pseudo_bytes($chunks * 32);
 }
 
-function key_size($chunks) {
-  if ($chunks < 32) {
-    return 32;
+function key_size($chunks, $version) {
+  switch ($version) {
+    case 1:
+      if ($chunks < 32) {
+        return 32;
+      }
+      return $chunks;
+      break;
+
+    case 3:
+      // All qrcodes has 32 bits of key
+      return $chunks * 32;
+      break;
   }
-  return $chunks;
 }
 
 function encrypt_data($data, $key = null) {
@@ -547,12 +557,14 @@ function format_enc($ver, $type, $count, $cur, $data, $length, $checksum, $key, 
     $add = 2;
   }
   $basetoversion = array(
-    8 => 1,
-    16 => 2
+  // version 1 is obsolete
+  //8 => 1,
+    8 => 3,
+    16 => 2,
   );
   switch ($basetoversion[$ver]) {
-    case 1:
-      //version 1
+    case 3:
+      //version 3
       $struct = array(
         //version + type
         0 => pack('C', $basetoversion[$ver] * 10 + $add),
@@ -610,8 +622,10 @@ function format_enc($ver, $type, $count, $cur, $data, $length, $checksum, $key, 
 
 function format_dec($data) {
   $version = floor(array_shift(unpack('C', $data[0])) / 10);
+  $return['version'] = $version;
   switch ($version) {
     case 1:
+    case 3:
       //version 1
       $typecode = array_shift(unpack('C', $data[0])) - ($version * 10);
       if ($typecode == 1) {
@@ -698,6 +712,7 @@ function retreive_data($data) {
       $last['checksum']       = $value['checksum'];
       $last['count']          = $value['count'];
       $last['crypted_length'] = $value['crypted_length'];
+      $last['version']        = $value['version'];
     } else {
       if ($last['checksum'] !== $value['checksum'] || $last['count'] !== $value['count'] || $last['crypted_length'] !== $value['crypted_length']) {
         //reject this chunk
@@ -725,7 +740,7 @@ function retreive_data($data) {
     return false;
   }
   $reed_solomon_dec     = 'reed_solomon_dec_' . base();
-  $keylen               = key_size($last['count']);
+  $keylen               = key_size($last['count'], $last['version']);
   //crop_key
   $parse['key']['data'] = crop_key($parse['key']['data'], $keylen, $last['count']);
   $parse['key']['rs']   = crop_key($parse['key']['rs'], $keylen, $last['count']);
