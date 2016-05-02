@@ -779,7 +779,7 @@ function qrencode($data) {
       "w"
     ) // stderr est un fichier
   );
-  $process = proc_open('"' . QRENCODE . '" -8 -s 1 -m 0 -o -', $descriptorspec, $pipes, null, null);
+  $process = proc_open('"' . QRENCODE . '" -8 -t SVG -m 0 -o -', $descriptorspec, $pipes, null, null);
   if (!is_resource($process)) {
     trigger_error('not ressource');
     return false;
@@ -1084,8 +1084,8 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
           $pdf->Image(TMPDIR . '/' . 'title.png', $offsetx + $titleoffsetx, $offsety + $titleoffsety, 0, $titley);
         }
         //ajouter le qrcode
-        file_put_contents(TMPDIR . '/' . $current . '.png', $qrcodes[$current]);
-        $pdf->Image(TMPDIR . '/' . $current . '.png', $offsetx + $margin, $offsety + $margin, 0, $size - ($margin * 2));
+        file_put_contents(TMPDIR . '/' . $current . '.svg', $qrcodes[$current]);
+        $pdf->ImageSVG(TMPDIR . '/' . $current . '.svg', $offsetx + $margin, $offsety + $margin, 0, $size - ($margin * 2));
         unlink(TMPDIR . '/' . $current . '.png');
         $qrcodes[$current];
         $current++;
