@@ -878,7 +878,7 @@ function pdf_extract($pdf) {
 
   for ($i = 0; $i < $numPages; $i++) {
       $imagick->setIteratorIndex($i); // Sélectionne la page courante
-      $outputPath = $tmpdir . '/pdf_converted_page_'($i + 1) . '.png';
+      $outputPath = $tmpdir . '/pdf_converted_page_' . ($i + 1) . '.png';
       $imagick->writeImage($outputPath); // Sauvegarde l'image de la page courante
   }
 
