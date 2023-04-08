@@ -1095,7 +1095,7 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
         }
       }
     }
-    $pdf->Output(TMPDIR . '/' . $sha1, 'F');
+    $pdf->Output(TMPDIR . '/' . $sha1 . '.pdf', 'F');
   }
   catch (Exception $e) {
     trigger_error('TCPDF causes exception: ' . $e->getMessage());
@@ -1203,7 +1203,7 @@ function encode($data, $sha1, $datachunks, $datars, $size, $printnum = false, $p
   } else {
     $_SESSION['filename'] = $sha1;
   }
-  $_SESSION['pdf'] = TMPDIR . '/' . $sha1;
+  $_SESSION['pdf'] = TMPDIR . '/' . $sha1 . '.pdf';
   session_write_close();
   set_state('Encrypt data');
   usleep(MICROSLEEP);

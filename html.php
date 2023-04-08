@@ -83,6 +83,6 @@ function file_cb_getpdf(){
     return 'File error :(';
   }
   header('Content-type: application/pdf');
-  header('Content-Disposition: attachment; filename="'.urlencode('qraidcode_'.$_SESSION['filename']).'.pdf"');
+  header('Content-Disposition: attachment; filename="'.urlencode('qraidcode_'.$_SESSION['filename']).'"');
   return $file;
 }
