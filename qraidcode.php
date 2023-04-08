@@ -1054,17 +1054,17 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
     $titlesize = getimagesize(TMPDIR . '/' . 'title.png');
 
     if (($titlesize[0] / $titlesize[1]) * ($innermargin) > ($size)) {
-      $titlex = ($size - $innermargin / 2) - 1;
+      $titlex = ($size - $innermargin / 2);
       $titley = ($titlesize[1] / $titlesize[0]) * $titlex;
     } else {
-      $titley = $innermargin / 1.5 - 1;
+      $titley = $innermargin / 1.5;
       $titlex = ($titlesize[0] / $titlesize[1]) * $titley;
     }
     $titleoffsetx = round(($size - $titlex) / 2);
     $titleoffsety = round(($size - $innermargin) + (($innermargin - $titley) / 2));
   }
   //num offset
-  $numsize   = $innermargin / 2 - 1;
+  $numsize   = $innermargin / 2;
   $numoffset = ($innermargin - $numsize) / 2;
   //required offset
   if ($required) {
