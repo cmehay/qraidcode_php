@@ -1071,7 +1071,7 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
     $reqnumsize        = getimagesize(PNGDIR . $nbdata . '.png');
     $reqsizey          = round($innermargin / 3);
     $reqsizex          = round(($reqsize[0] / $reqsize[1]) * $reqsizey);
-    $reqoffsetx        = round(($size - ($margin / 4)) - $reqsizex);
+    $reqoffsetx        = round(($size - ($innermargin / 4)) - $reqsizex);
     $reqoffsety        = round(($innermargin - $reqsizey) / 2);
     $requirednumoffset = round(($reqnumsize[0] / $reqnumsize[1]) * $reqsizey) + 2;
   }
@@ -1107,7 +1107,7 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
         }
         // Add the QR code
         file_put_contents(TMPDIR . '/' . $current . '.svg', $qrcodes[$current]);
-        $pdf->ImageSVG(TMPDIR . '/' . $current . '.svg', $offsetx + $innermargin, $offsety + $innermargin, 0, $size - ($margin * 2));
+        $pdf->ImageSVG(TMPDIR . '/' . $current . '.svg', $offsetx + $innermargin, $offsety + $innermargin, 0, $size - ($innermargin * 2));
         unlink(TMPDIR . '/' . $current . '.svg');
         $qrcodes[$current];
         $current++;
