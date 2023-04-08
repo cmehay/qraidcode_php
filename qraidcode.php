@@ -1095,7 +1095,8 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
         }
       }
     }
-    $pdf->Output(TMPDIR . '/' . $sha1 . '.pdf', 'F');
+    $abs_path = realpath(dirname(__FILE__) . '/' . TMPDIR);
+    $pdf->Output(abs_path . '/' . $sha1 . '.pdf', 'F');
   }
   catch (Exception $e) {
     trigger_error('TCPDF causes exception: ' . $e->getMessage());
