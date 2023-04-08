@@ -1086,7 +1086,7 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
         // Add the QR code
         file_put_contents(TMPDIR . '/' . $current . '.svg', $qrcodes[$current]);
         $pdf->ImageSVG(TMPDIR . '/' . $current . '.svg', $offsetx + $margin, $offsety + $margin, 0, $size - ($margin * 2));
-        unlink(TMPDIR . '/' . $current . '.png');
+        unlink(TMPDIR . '/' . $current . '.svg');
         $qrcodes[$current];
         $current++;
         $offsetx += $size;
