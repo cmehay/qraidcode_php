@@ -31,8 +31,8 @@ define('MATRIX', '../matrix/');
 //png dir
 define('PNGDIR', '../png/');
 
-//tfpdf
-define('TFPDF', '/var/www/tfpdf/src/tFPDF.php');
+//tcpdf
+define('TCPDF', '/var/www/tcpdf/tcpdf.php');
 
 //statefile
 define('STATEFILE', 'state');

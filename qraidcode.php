@@ -779,7 +779,7 @@ function qrencode($data) {
       "w"
     ) // stderr est un fichier
   );
-  $process = proc_open('"' . QRENCODE . '" -8 -t SVG -m 0 -o -', $descriptorspec, $pipes, null, null);
+  $process = proc_open('"' . QRENCODE . '" -8 -s 1 -m 0 -o -', $descriptorspec, $pipes, null, null);
   if (!is_resource($process)) {
     trigger_error('not ressource');
     return false;
@@ -1054,11 +1054,11 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
     $requirednumoffset = round(($reqnumsize[0] / $reqnumsize[1]) * $reqsizey) + 2;
   }
   try {
-    $pdf = new tFPDF('P', 'mm', 'A4');
+    $pdf = new TCPDF('P', 'mm', 'A4');
     $pdf->SetDrawColor(0);
     $current = 0;
     for ($page = 0; $page < $pagesnb; $page++) {
-      $pdf->addPage();
+      $pdf->AddPage();
       $offsetx = $initx;
       $offsety = $inity;
       $xqrnb   = $incx;
@@ -1068,24 +1068,24 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
           $offsety += $size;
           $xqrnb += $incx;
         }
-        //dessine le cadre
+        // Draw the frame
         $pdf->Rect($offsetx, $offsety, $size, $size);
-        //ajoute le numéro du qrcode
+        // Add the QR code number
         if ($num) {
-          $pdf->Image(PNGDIR . ($current + 1) . '.png', $offsetx + $numoffset, $offsety + $numoffset, 0, $numsize);
+          $pdf->Image(PNGDIR . ($current + 1) . '.png', $offsetx + $numoffset, $offsety + $numoffset, 0, $numsize, 'PNG');
         }
-        //indique le nombre de requis
+        // Indicate the required number
         if ($required) {
-          $pdf->Image(PNGDIR . 'required.png', $offsetx + $reqoffsetx, $offsety + $reqoffsety, 0, $reqsizey);
-          $pdf->Image(PNGDIR . $nbdata . '.png', $offsetx + $reqoffsetx - $requirednumoffset, $offsety + $reqoffsety, 0, $reqsizey);
+          $pdf->Image(PNGDIR . 'required.png', $offsetx + $reqoffsetx, $offsety + $reqoffsety, 0, $reqsizey, 'PNG');
+          $pdf->Image(PNGDIR . $nbdata . '.png', $offsetx + $reqoffsetx - $requirednumoffset, $offsety + $reqoffsety, 0, $reqsizey, 'PNG');
         }
-        //ajoute le titre
+        // Add the title
         if (isset($titlesize)) {
-          $pdf->Image(TMPDIR . '/' . 'title.png', $offsetx + $titleoffsetx, $offsety + $titleoffsety, 0, $titley);
+          $pdf->Image(TMPDIR . '/' . 'title.png', $offsetx + $titleoffsetx, $offsety + $titleoffsety, 0, $titley, 'PNG');
         }
-        //ajouter le qrcode
-        file_put_contents(TMPDIR . '/' . $current . '.svg', $qrcodes[$current]);
-        $pdf->ImageSVG(TMPDIR . '/' . $current . '.svg', $offsetx + $margin, $offsety + $margin, 0, $size - ($margin * 2));
+        // Add the QR code
+        file_put_contents(TMPDIR . '/' . $current . '.png', $qrcodes[$current]);
+        $pdf->Image(TMPDIR . '/' . $current . '.png', $offsetx + $margin, $offsety + $margin, 0, $size - ($margin * 2), 'PNG');
         unlink(TMPDIR . '/' . $current . '.png');
         $qrcodes[$current];
         $current++;
@@ -1095,10 +1095,10 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
         }
       }
     }
-    $pdf->Output(TMPDIR . '/' . $sha1);
+    $pdf->Output(TMPDIR . '/' . $sha1, 'F');
   }
   catch (Exception $e) {
-    trigger_error('fpdf causes exception: ' . $e->getMessage());
+    trigger_error('TCPDF causes exception: ' . $e->getMessage());
     return false;
   }
   return true;
