@@ -1052,12 +1052,13 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
   if (!is_null($name)) {
     text_to_png($name, 'title', TMPDIR);
     $titlesize = getimagesize(TMPDIR . '/' . 'title.png');
-    if (($titlesize[0] / $titlesize[1]) * ($innermargin / 2) > ($size - $innermargin)) {
+
+    if (($titlesize[0] / $titlesize[1]) * ($innermargin) > ($size - $innermargin)) {
       $titlex = ($size - $innermargin) - 1;
-      $titley = ($titlesize[1] / $titlesize[0]) * $titlex - 1;
+      $titley = ($titlesize[1] / $titlesize[0]) * $titlex;
     } else {
       $titley = $innermargin / 2 - 1;
-      $titlex = ($titlesize[0] / $titlesize[1]) * $titley - 1;
+      $titlex = ($titlesize[0] / $titlesize[1]) * $titley;
     }
     $titleoffsetx = round(($size - $titlex) / 2);
     $titleoffsety = round(($size - $innermargin) + (($innermargin - $titley) / 2));
