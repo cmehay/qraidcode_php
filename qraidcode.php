@@ -870,7 +870,7 @@ function pdf_extract($pdf) {
   // Convertie également les pages individuellements
   $imagick = new Imagick();
   $imagick->setResolution(300, 300); // Définit la résolution en DPI
-  $imagick->readImage($pdf);
+  $imagick->readImageBlob($pdf);
   $imagick->setImageFormat('png');
   $imagick->transformImageColorspace(Imagick::COLORSPACE_GRAY); // Convertit en niveaux de gris
 
