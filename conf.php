@@ -56,7 +56,7 @@ define('MAXDECODE', 20000000);
 define('MAXQRCODES', 255);
 
 //qrcode size
-define('MINSIZE', 40);
+define('MINSIZE', 10);
 define('MAXSIZE', 190);
 
 //maxdata per qrcodes

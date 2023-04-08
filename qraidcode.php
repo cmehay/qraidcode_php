@@ -779,7 +779,7 @@ function qrencode($data) {
       "w"
     ) // stderr est un fichier
   );
-  $process = proc_open('"' . QRENCODE . '" -t SVG -m 0 -o -', $descriptorspec, $pipes, null, null);
+  $process = proc_open('"' . QRENCODE . '" -8 -t SVG -m 0 -o -', $descriptorspec, $pipes, null, null);
   if (!is_resource($process)) {
     trigger_error('not ressource');
     return false;
@@ -866,6 +866,25 @@ function pdf_extract($pdf) {
     trigger_error($stderr);
     return false;
   }
+
+  // Convertie également les pages individuellements
+  $imagick = new Imagick();
+  $imagick->setResolution(300, 300); // Définit la résolution en DPI
+  $imagick->readImage($pdf);
+  $imagick->setImageFormat('png');
+  $imagick->transformImageColorspace(Imagick::COLORSPACE_GRAY); // Convertit en niveaux de gris
+
+  $numPages = $imagick->getNumberImages(); // Récupère le nombre de pages dans le PDF
+
+  for ($i = 0; $i < $numPages; $i++) {
+      $imagick->setIteratorIndex($i); // Sélectionne la page courante
+      $outputPath = $tmpdir . '/pdf_converted_page_'($i + 1) . '.png';
+      $imagick->writeImage($outputPath); // Sauvegarde l'image de la page courante
+  }
+
+  $imagick->clear();
+  $imagick->destroy();
+
   $files     = array();
   $hasharray = set_hash_init();
   foreach (array_diff(scandir($tmpdir), array(
@@ -874,7 +893,7 @@ function pdf_extract($pdf) {
   )) as $value) {
     if (is_file($tmpdir . '/' . $value)) {
       $content = file_get_contents($tmpdir . '/' . $value);
-      $hash    = hash('crc32', $content, false);
+      $hash    = hash('sha1', $content, false);
       if (isset($hasharray[$hash])) {
         continue;
       }
