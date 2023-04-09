@@ -1061,8 +1061,8 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
       $titley = ($titlesize[1] / $titlesize[0]) * $titlex;
     }
 
-    $titleoffsetx = round(($size - $titlex) / 2);
-    $titleoffsety = round(($size - $innermargin) + (($innermargin - $titley) / 2));
+    $titleoffsetx = ($size - $titlex) / 2;
+    $titleoffsety = ($size - $innermargin) + (($innermargin - $titley) / 2);
   }
   //num offset
   $numsize   = $innermargin / 2;
@@ -1071,11 +1071,11 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
   if ($required) {
     $reqsize           = getimagesize(PNGDIR . 'required.png');
     $reqnumsize        = getimagesize(PNGDIR . $nbdata . '.png');
-    $reqsizey          = round($innermargin / 2);
-    $reqsizex          = round(($reqsize[0] / $reqsize[1]) * $reqsizey);
-    $reqoffsetx        = round(($size - ($innermargin / 4)) - $reqsizex);
-    $reqoffsety        = round(($innermargin - $reqsizey) / 2);
-    $requirednumoffset = round(($reqnumsize[0] / $reqnumsize[1]) * $reqsizey) + 2;
+    $reqsizey          = $innermargin / 2;
+    $reqsizex          = ($reqsize[0] / $reqsize[1]) * $reqsizey;
+    $reqoffsetx        = ($size - ($innermargin / 4)) - $reqsizex;
+    $reqoffsety        = ($innermargin - $reqsizey) / 2;
+    $requirednumoffset = ($reqnumsize[0] / $reqnumsize[1]) * $reqsizey;
   }
   try {
     $pdf = new TCPDF('P', 'mm', 'A4');
