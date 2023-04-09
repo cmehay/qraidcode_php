@@ -99,7 +99,6 @@ function json_cb_get_status(){
 }
 
 function json_cb_send_decode(){
-  sleep(2);
   $raw = getencodedata($_POST[$_GET['num']], 'file');
   if($raw == false){
     return json_error('file error');
