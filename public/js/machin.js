@@ -348,8 +348,8 @@
       });
       $('.thumbnail').queue(function() {
 
-	priv.ajax_decode1(0);
-	$(this).dequeue();
+	      priv.ajax_decode1(0);
+	      $(this).dequeue();
       });
     }, 1000);
   }
