@@ -1046,8 +1046,8 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
   $initx       = floor(($x - ($xqrnb * $size)) / 2);
   $inity       = floor(($y - ($yqrnb * $size)) / 2);
   $innermargin = 10; // by 2
-  if ($size < 40) {
-    $innermargin = $size / 4;
+  if ($size < 30) {
+    $innermargin = $size / 3;
   }
   if (!is_null($name)) {
     text_to_png($name, 'title', TMPDIR);
