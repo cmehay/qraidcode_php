@@ -1094,6 +1094,12 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
         }
         // Draw the frame
         $pdf->Rect($offsetx, $offsety, $size, $size);
+
+        // Add the QR code
+        file_put_contents(TMPDIR . '/' . $current . '.svg', $qrcodes[$current]);
+        $pdf->ImageSVG(TMPDIR . '/' . $current . '.svg', $offsetx + $innermargin, $offsety + $innermargin, 0, $size - ($innermargin * 2));
+        unlink(TMPDIR . '/' . $current . '.svg');
+
         // Add the QR code number
         if ($num) {
           $pdf->Image(PNGDIR . ($current + 1) . '.png', $offsetx + $numoffset, $offsety + $numoffset, 0, $numsize, 'PNG');
@@ -1107,10 +1113,7 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
         if (isset($titlesize)) {
           $pdf->Image(TMPDIR . '/' . 'title.png', $offsetx + $titleoffsetx, $offsety + $titleoffsety, 0, $titley, 'PNG');
         }
-        // Add the QR code
-        file_put_contents(TMPDIR . '/' . $current . '.svg', $qrcodes[$current]);
-        $pdf->ImageSVG(TMPDIR . '/' . $current . '.svg', $offsetx + $innermargin, $offsety + $innermargin, 0, $size - ($innermargin * 2));
-        unlink(TMPDIR . '/' . $current . '.svg');
+
         $qrcodes[$current];
         $current++;
         $offsetx += $size;
