@@ -293,13 +293,13 @@
       dataType: 'json'
     }).done(function(json){
       if(json.error){
-	priv.fail(msg, 'third-step');
+	      priv.fail(json.msg, 'third-step');
       }
       if(int+1 < total){
-	priv.ajax_decode1(int+1);
+	      priv.ajax_decode1(int+1);
       }else{
-	priv.ajaxrefresh=setInterval(function(){priv.getstatus()},1000);
-	priv.ajax_decode2();
+	      priv.ajaxrefresh=setInterval(function(){priv.getstatus()},1000);
+	      priv.ajax_decode2();
       }
     }).fail(function(){
       priv.fail('Error occured :( try again', 'third-step');
@@ -344,7 +344,7 @@
       priv.currents_images = [];
       $('.thumbnail').each(function(){
 	priv.currents_images.push($(this).attr('name'));
-	//console.log(priv.currents_images);
+	console.log(priv.currents_images);
       });
       $('.thumbnail').queue(function() {
 
