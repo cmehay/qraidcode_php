@@ -1059,6 +1059,7 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
     if ($titlex > ($size)) {
       $titlex = ($size - $innermargin / 2);
       $titley = ($titlesize[1] / $titlesize[0]) * $titlex;
+    }
 
     $titleoffsetx = round(($size - $titlex) / 2);
     $titleoffsety = round(($size - $innermargin) + (($innermargin - $titley) / 2));
