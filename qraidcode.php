@@ -1053,13 +1053,13 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
     text_to_png($name, 'title', TMPDIR);
     $titlesize = getimagesize(TMPDIR . '/' . 'title.png');
 
-    if (($titlesize[0] / $titlesize[1]) * ($innermargin) > ($size)) {
+    $titley = $innermargin / 1.5;
+    $titlex = ($titlesize[0] / $titlesize[1]) * $titley;
+
+    if ($titlex > ($size)) {
       $titlex = ($size - $innermargin / 2);
       $titley = ($titlesize[1] / $titlesize[0]) * $titlex;
-    } else {
-      $titley = $innermargin / 1.5;
-      $titlex = ($titlesize[0] / $titlesize[1]) * $titley;
-    }
+
     $titleoffsetx = round(($size - $titlex) / 2);
     $titleoffsety = round(($size - $innermargin) + (($innermargin - $titley) / 2));
   }
@@ -1070,7 +1070,7 @@ function pdf_create($qrcodes, $sha1, $nbdata, $size, $num = false, $required = f
   if ($required) {
     $reqsize           = getimagesize(PNGDIR . 'required.png');
     $reqnumsize        = getimagesize(PNGDIR . $nbdata . '.png');
-    $reqsizey          = round($innermargin / 3);
+    $reqsizey          = round($innermargin / 2);
     $reqsizex          = round(($reqsize[0] / $reqsize[1]) * $reqsizey);
     $reqoffsetx        = round(($size - ($innermargin / 4)) - $reqsizex);
     $reqoffsety        = round(($innermargin - $reqsizey) / 2);
