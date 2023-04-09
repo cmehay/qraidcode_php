@@ -98,7 +98,6 @@
       size += files[i].size;
       ////console.log(files[i]);
       //filescontent.push(reader.readAsDataURL(files[i]));
-      //filescontent.push('caca');
     }
     ////console.log(nb);
     ////console.log(size);
@@ -346,11 +345,7 @@
 	priv.currents_images.push($(this).attr('name'));
 	console.log(priv.currents_images);
       });
-      $('.thumbnail').queue(function() {
-
-	      priv.ajax_decode1(0);
-	      $(this).dequeue();
-      });
+      priv.ajax_decode1(0);
     }, 1000);
   }
 
